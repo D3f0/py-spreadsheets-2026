@@ -1,10 +1,9 @@
 project:
   type: website
   output-dir: _site
-
+  render:
+    - slides.qmd
 website:
   title: "Teaching Some Python to Your Spreadsheets"
   navbar: false
 
-render:
-  - slides.qmd

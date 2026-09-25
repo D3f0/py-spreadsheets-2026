@@ -31,6 +31,22 @@ $code-block-font-size: 0.72em;
   object-fit: contain;
 }
 
+.reveal .columns .follow-along-qr {
+  text-align: center;
+}
+
+.reveal .columns .follow-along-qr img.qrcode {
+  width: 100%;
+  height: auto;
+  max-height: none;
+}
+
+.reveal .columns .follow-along-qr p:last-child {
+  font-size: 0.45em;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+}
+
 .reveal .slides section.about-me {
   .columns {
     display: grid;

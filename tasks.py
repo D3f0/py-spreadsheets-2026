@@ -20,7 +20,7 @@ import shlex
 import shutil
 import os
 from pathlib import Path
-from typing import Annotated, cast
+from typing import Annotated, Union, cast
 
 import yaml
 from invoke_toolkit import Context, script, task
@@ -40,7 +40,9 @@ def _quarto_installed(ctx: Context):
 @task(aliases=["p"], pre=[_quarto_installed])
 def preview(
     ctx: Context,
-    port: Annotated[int, "Local preview port; 0 lets Quarto choose"] = 0,
+    port: Annotated[
+        Union[int, str], "Local preview port; 0 lets Quarto choose"
+    ] = "$PORT",
     host: Annotated[str, "Interface on which to serve the preview"] = "127.0.0.1",
     no_browser: Annotated[bool, "Do not open the preview in a browser"] = False,
 ) -> None:

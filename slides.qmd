@@ -35,10 +35,10 @@ execute:
   - Co-organized SciPy Latin America
   - PyCon Argentina and EuroPython speaker
 - 🚜 Former CTO at [Hello Tractor](https://hellotractor.com/)
-- 🧪 Software Engineer at IBM Research
+- 🧪 Software Engineer at IBM ~~Research~~ Software Innovation Lab
 - 🛰️ Worked on [foundational models for geospatial applications](https://www.earthdata.nasa.gov/news/nasa-ibm-openly-release-geospatial-ai-foundation-model-nasa-earth-observation-data)
 - 💬 Worked on [Flowpilot](https://research.ibm.com/projects/flowpilot), providing core features to different products and divisions
-- 💬 Currently working on [Datascape], a data harness for insight generation for enterprise data scale.
+- 💬 Currently working on [Datascape], a data harness for insight generation, enterprise data scale.
 :::
 
 :::
@@ -57,20 +57,30 @@ execute:
 
 <!-- Add links and QR codes for the slides, repository, and workshop materials. -->
 
+::: {.columns}
+::: {.column .follow-along-qr}
 
+[{{< rrqr https://d3f0.github.io/pycon-2026-teaching-spreadhseets-python/slides.html#/title-slide size=500 >}}](https://d3f0.github.io/pycon-2026-teaching-spreadhseets-python/slides.html#/title-slide){target="_blank"}
+
+[https://d3f0.github.io/pycon-2026-teaching-spreadhseets-python/slides.html#/title-slide](https://d3f0.github.io/pycon-2026-teaching-spreadhseets-python/slides.html#/title-slide){target="_blank"}
+
+:::
+::: {.column}
+
+:::
+:::
 
 ---
 
-# Should I attend this workshop?
+# What will I get from this workshop
 
 ---
 
 ::: {.incremental}
-- If you want to have full control over your the data in your spreadsheets
-- If you want have structure and tighter control over your speadsheets
-- If you want to personalize how you interact with your data in a Pythonic way
-- If you want to create hyper personalized applications arround spreadsheets
-  with AI.
+- Lear about options to have full control over your spreadsheets.
+- Understand how to have typed columns in a spreadhseets.
+- Create formulas with Python syntax.
+- Build hyper personalized spreadsheets based applications with AI and agents.
 :::
 
 ---
