@@ -10,3 +10,5 @@ slides_files/
 .envrc
 .envrc.local
 hermes/
+.zed/
+.vscode/

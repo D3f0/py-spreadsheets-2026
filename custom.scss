@@ -31,6 +31,10 @@ $code-block-font-size: 0.72em;
   object-fit: contain;
 }
 
+.reveal .columns.follow-along-columns {
+  column-gap: min(4vw, 3em);
+}
+
 .reveal .columns .follow-along-qr {
   text-align: center;
 }

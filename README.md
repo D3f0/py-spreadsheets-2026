@@ -135,26 +135,8 @@ direnv exec . uv run tasks.py update-models
 The task writes `caddy/models.html`, which is linked from the landing page. It never embeds the API key in the generated HTML. Models are filtered to `:free` entries with at least 64K context and advertised tool support.
 
 
-### Dev Container
+<!--### Dev Container
 
 Open this repository with the **Dev Containers: Reopen in Container** command in VS Code or another Dev Container client. The client attaches to the dedicated `devcontainer` Compose service, mounts the repository at `/workspace`, and starts Caddy, Grist, marimo, and the `webui` service alongside it. The development container includes Python, `uv`, and Quarto.
 
-All published ports bind to `127.0.0.1`. The setup disables marimo token authentication and uses development-only Grist defaults, so it is intended only for local use and must not be exposed directly to a network.
-
-
-## Services for the workshop 🐳
-
-### Grist
-
-This is the spreadhseet with Python formulas.
-
-URL
-
-
-### Marimo:
-
-This is the reactive notebook.
-
-URL:
-
-### Hermes
+All published ports bind to `127.0.0.1`. The setup disables marimo token authentication and uses development-only Grist defaults, so it is intended only for local use and must not be exposed directly to a network.-->

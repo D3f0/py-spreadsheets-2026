@@ -3,24 +3,22 @@
 # requires-python = ">=3.11"
 # dependencies = [
 #     "invoke-toolkit>=0.0.59",
-#     "pyyaml>=6.0",
 # ]
 # ///
 """Development tasks for the workshop slides."""
 
-from __future__ import annotations
-
 import json
+import os
 import re
-import urllib.request
-from urllib.parse import unquote, urlsplit
-from html import escape
-from datetime import date
 import shlex
 import shutil
-import os
+import urllib.request
+from datetime import date
+from html import escape
+import webbrowser
 from pathlib import Path
 from typing import Annotated, Union, cast
+from urllib.parse import unquote, urlsplit
 
 import yaml
 from invoke_toolkit import Context, script, task
@@ -62,6 +60,13 @@ def render(ctx: Context) -> None:
     command = ["quarto", "render", str(SLIDES), "--to", "revealjs"]
     with ctx.cd(ROOT):
         ctx.run(shlex.join(command))
+
+
+@task(aliases=["o"])
+def open_slides(ctx: Context, port: str | int = ""):
+    """Open the browser in a particular port (for slide preview)"""
+    port = port if port else os.getenv("PORT", 0)
+    webbrowser.open(f"http://localhost:{port}")
 
 
 def _service_urls() -> dict[str, str]:

@@ -57,16 +57,29 @@ execute:
 
 <!-- Add links and QR codes for the slides, repository, and workshop materials. -->
 
-::: {.columns}
+::: {.columns .follow-along-columns}
 ::: {.column .follow-along-qr}
 
-[{{< rrqr https://d3f0.github.io/pycon-2026-teaching-spreadhseets-python/slides.html#/title-slide size=500 >}}](https://d3f0.github.io/pycon-2026-teaching-spreadhseets-python/slides.html#/title-slide){target="_blank"}
+[{{< rrqr https://d3f0.github.io/pycon-2026-teaching-spreadhseets-python/slides.html size=500 >}}](https://d3f0.github.io/pycon-2026-teaching-spreadhseets-python/slides.html#/title-slide){target="_blank"}
 
-[https://d3f0.github.io/pycon-2026-teaching-spreadhseets-python/slides.html#/title-slide](https://d3f0.github.io/pycon-2026-teaching-spreadhseets-python/slides.html#/title-slide){target="_blank"}
+[https://d3f0.github.io/pycon-2026-teaching-spreadhseets-python/slides.html](https://d3f0.github.io/pycon-2026-teaching-spreadhseets-python/slides.html){target="_blank"}
 
 :::
 ::: {.column}
+**👈🏽 Slides**
 
+**👇 🐳 Docker to follow along**
+
+```
+gh repo clone \
+D3f0
+```
+
+<!-- You can also clone the repo with:
+```shell
+gh repo clone D3f0/pycon-2026-teaching-spreadhseets-python
+````
+-->
 :::
 :::
 
@@ -77,10 +90,18 @@ execute:
 ---
 
 ::: {.incremental}
-- Lear about options to have full control over your spreadsheets.
-- Understand how to have typed columns in a spreadhseets.
-- Create formulas with Python syntax.
-- Build hyper personalized spreadsheets based applications with AI and agents.
+- Manage column types in Python types (`int`, `list`, `datetime` and more)
+- Create formulas with Python syntax
+- Create relationships between tables in your spreadhseets
+- Build applications out of spreadhseets
+<!-- have full contorl over youd data ? -->
+:::
+
+::: {.notes}
+
+Also, Grist allows self hosting, so we can have private data that
+we fully own.
+
 :::
 
 ---
@@ -92,12 +113,19 @@ execute:
 ## A spreadsheet or a database
 
 ::: {.incremental}
-- Grist is an Open Source (and Self Hostable) spreadsheet
-  that uses Python **data types** for columns. The SaaS version of it lives in [https://getgrist.com](https://getgirst.com)
-- It stores everything as a SQLite database that is easy to share.
-- And when we put a `=` we can start typing python
-- Row and column formatting or styling can be wirtten asso with Python
-- Has some
+- Grist is an Open Source spreadsheet engine, that we can run:
+    - locally
+    - in the cloud or homelab
+    - as a SaaS (like Google Docs) [https://getgrist.com](https://getgirst.com)
+- It stores everything as a SQLite database that is easy to share and backup.
+- The visualization of the data can be customized, also know as Custom Widgets.
+
+:::
+
+::: {.notes}
+
+Talk about the SMVE (check if time allows)
+
 :::
 
 ---
@@ -145,7 +173,7 @@ flowchart TB
     linkStyle default stroke:#607d8b,stroke-width:2px;
 ```
 
-## Workshop services
+## How we're going to try out Grist
 
 ```{mermaid}
 %%{init: {
@@ -160,28 +188,28 @@ flowchart TB
   }
 }}%%
 flowchart TB
-    Caddy["Caddy<br/><b>localhost:8000 → :80</b>"]
-    Grist["Grist<br/><b>localhost:8484 → :8484</b>"]
-    Marimo["Marimo<br/><b>localhost:8081 → :8080</b>"]
-    WebUI["Hermes WebUI<br/><b>localhost:4096 → :8787</b>"]
-    Hermes["Hermes<br/><b>:8642 internal</b>"]
+    subgraph ServiceRow["Services and ports"]
+        direction LR
+        Caddy["Caddy<br/><b>localhost:8000 → :80</b>"]
+        Marimo["Marimo<br/><b>localhost:8081 → :8080</b>"]
+        Grist["Grist<br/><b>localhost:8484 → :8484</b>"]
+        WebUI["Hermes WebUI<br/><b>localhost:4096 → :8787</b>"]
+        Hermes["Hermes<br/><b>:8642 internal</b>"]
+        Caddy ~~~ Marimo ~~~ Grist ~~~ WebUI
+        WebUI -->|"HTTP API"| Hermes
+    end
 
-    WebUI -->|"HTTP API"| Hermes
+    subgraph MountRow["Volumes and bind mounts · labels show consumers"]
+        direction LR
+        CaddyFiles["<b>Caddy files · RO</b><br/>Caddy → /srv · Caddyfile"]
+        Workspace["<b>Workspace bind</b><br/>Marimo + WebUI → /workspace"]
+        GristData[("<b>grist-data</b><br/>Grist → /persist")]
+        HermesData[("<b>hermes-data</b><br/>Hermes → /opt/data<br/>WebUI → ~/.hermes")]
+        HermesSource[("<b>hermes-agent-src</b><br/>Hermes → /opt/hermes<br/>WebUI → agent · RO")]
+        CaddyFiles ~~~ Workspace ~~~ GristData ~~~ HermesData ~~~ HermesSource
+    end
 
-    CaddyFiles["<b>Caddy files · read-only</b><br/>./caddy → /srv<br/>Caddyfile → /etc/caddy/Caddyfile"]
-    Workspace["<b>Workspace bind</b><br/>. → /workspace"]
-    GristData[("<b>grist-data</b><br/>Grist: /persist")]
-    HermesData[("<b>hermes-data</b><br/>Hermes: /opt/data<br/>WebUI: ~/.hermes")]
-    HermesSource[("<b>hermes-agent-src</b><br/>Hermes: /opt/hermes<br/>WebUI: ~/.hermes/hermes-agent · RO")]
-
-    Caddy --- CaddyFiles
-    Grist --- GristData
-    Marimo --- Workspace
-    WebUI --- Workspace
-    WebUI --- HermesData
-    Hermes --- HermesData
-    WebUI --- HermesSource
-    Hermes --- HermesSource
+    ServiceRow ~~~ MountRow
 
     classDef service fill:#d9eef7,stroke:#1f5d78,color:#17324d,stroke-width:2.5px;
     classDef agent fill:#e2def5,stroke:#5b4b8a,color:#2f2850,stroke-width:2.5px;
@@ -215,6 +243,26 @@ Working in Grist is organized in this way:
 ## A grist Spreadsheets
 
 ![Main Spreadsheets View](./img/main-grist-screen.png)
+
+---
+
+## Our first column
+
+We will be using the date data type in Grist.
+
+---
+
+## First Python formula
+
+We'd like to highlight the rows that are in the past.
+
+
+
+---
+
+## Hiding columns
+
+
 
 ---
 
@@ -264,6 +312,7 @@ In Grist settings we can jump in directly into the API Console.
 ---
 
 <!-- Show `gry` -->
+
 ---
 
 ---
@@ -288,6 +337,8 @@ In Grist settings we can jump in directly into the API Console.
 ---
 
 # Closing words
+
+---
 
 ::: {.incremental}
 - The level of control
