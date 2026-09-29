@@ -16,6 +16,8 @@ format:
     footer: "Teaching Some Python to Your Spreadsheets"
 execute:
   enabled: false
+filters:
+  - diagrams
 ---
 
 ## Welcome {.center}
