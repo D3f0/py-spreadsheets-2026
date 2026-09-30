@@ -18,6 +18,10 @@ execute:
   enabled: false
 filters:
   - diagrams
+lightbox:
+  match: auto
+  effect: zoom
+  loop: false
 ---
 
 ## Welcome {.center}
@@ -47,7 +51,7 @@ filters:
 
 ::: {.column width="40%"}
 
-![](img/Teaching%20your%20spreadsheets%20sone%20pytho%203.png){fig-alt="A cartoon Python writing a spreadsheet formula with a fountain pen"}
+![](img/Teaching%20your%20spreadsheets%20sone%20pytho%203.png){.nolightbox .no-shadow fig-alt="A cartoon Python writing a spreadsheet formula with a fountain pen"}
 
 :::
 
@@ -70,7 +74,7 @@ filters:
 ::: {.column}
 **👈🏽 Slides**
 
-**👇🏽 🐳 Docker to follow along**
+**👇🏽 🐳 & ** [![](img/tilt-favicon.ico){.inline-icon .nolightbox width=32 style="vertical-align: text-bottom;"}](https://docs.tilt.dev/install.html){target="_blank"} **run the workshop**
 
 ```{.shell code-line-numbers="false"}
 gh repo clone \
@@ -84,7 +88,7 @@ gh repo clone \
 
 ---
 
-## The material 
+![[The workshop code at http://localhost:10350](http://localhost:10350)](./img/tilt.png)
 
 ---
 
@@ -93,8 +97,6 @@ gh repo clone \
 ---
 
 # What will I get from this workshop
-
-
 
 ---
 
@@ -123,10 +125,12 @@ gh repo clone \
 
 ::: {.fragment}
 
-- Grist is a modern relational spreadsheet. It combines the flexibility of a spreadsheet with the robustness of a database. It can run:
+- Grist is a modern relational spreadsheet. It combines the flexibility of a spreadsheet with the robustness of a database.
+
+  It can run:
     - locally (docker or desktop)
     - in the cloud or homelab
-    - as a SaaS (like Google Docs) [https://getgrist.com](https://getgirst.com)
+    - like Google Docs at [https://getgrist.com](https://getgrist.com)
 :::
 
 ::: {.fragment}
@@ -193,10 +197,6 @@ flowchart TB
     linkStyle default stroke:#607d8b,stroke-width:2px;
 ```
 
-## Our workshop setup
-
-
-
 ## UI Structure
 
 Working in Grist is organized in this way:
@@ -213,9 +213,9 @@ Working in Grist is organized in this way:
 
 <!-- Source: https://www.youtube.com/watch?v=X7BnmstKnAQ  -->
 
-## A grist Spreadsheets
+## The welcome screen
 
-![Main Spreadsheets View](./img/main-grist-screen.png)
+![Main Spreadsheets View](./img/main-grist-screen.png){.r-stretch}
 
 ---
 
@@ -235,7 +235,7 @@ Working in Grist is organized in this way:
 
 ## First Table
 
-![A table with some typed columns](./img/first_table.png)
+![A table with some typed columns](./img/first_table.png){.r-stretch}
 
 ---
 
@@ -360,6 +360,11 @@ DATEDIF($Start, NOW(), 'D')
 
 :::
 
+---
+
+## Adding a second table
+
+Let's use a second ~~sheet~~ table, and ~~link~~ have a Foreign Key to our main table.
 
 
 ---
@@ -382,6 +387,7 @@ From the author panel (right side on the `Table` tab, on the bottom)
 
 :::
 
+
 :::
 
 
@@ -391,7 +397,43 @@ From the author panel (right side on the `Table` tab, on the bottom)
 
 ## Styling columns
 
-TBD
+
+::: {.columns}
+
+
+::: {.column width=30%}
+
+::: {.fragment}
+#### Column styling
+
+![](./img/conditional_style.png)
+:::
+
+:::
+
+::: {.column width=30%}
+
+
+::: {.fragment}
+#### Row styling
+
+![](./img/rwo-style.png)
+
+:::
+
+:::
+
+::: {.column width=30%}
+
+::: {.fragment}
+#### Creating a formula
+
+![](./img/style_formulas_example.png)
+:::
+:::
+:::
+
+
 
 ---
 
@@ -413,7 +455,7 @@ it is the calendar
 
 ::: {.column}
 
-![](./img/widget-type)
+![](./img/widget-type.png)
 
 
 :::
@@ -446,13 +488,13 @@ This configuration can be modified later in the creator panel.
 
 ## Custom Widgets (cont.)
 
-![](./img/full_calendar.png)
+![](./img/full_calendar.png){.r-stretch}
 
 ---
 
 ## More widgets to explore (or create)
 
-![](./img/more-widgets.png)
+![](./img/more-widgets.png){.r-stretch}
 
 ---
 
@@ -490,11 +532,36 @@ This configuration can be modified later in the creator panel.
 
 ## Getting the account's API key
 
-In Grist settings we can jump in directly into the API Console.
+To get the user's API key, this is in the [user settings](http://localhost:8484/account/developer){target=_blank}.
 
 ![](./img/api_key.png)
 
-[link](http://localhost:8484/account/developer)
+---
+
+<!-- API access screenshots -->
+
+::: {.columns}
+
+::: {.column}
+
+![](./img/api_document_1.png){.fofu}
+
+
+:::
+
+::: {.column}
+
+![](./img/api_document_2.png)
+
+![](./img/api_document_rest.png)
+
+:::
+
+:::
+
+---
+
+## A CLI client for the API
 
 ---
 
@@ -507,7 +574,7 @@ In Grist settings we can jump in directly into the API Console.
 
 ## Creating user accounts
 
-- User accounts are emails that end in `@@serviceaccounts.invalid`
+- User accounts are emails that end in `@serviceaccounts.invalid`
 
 ---
 
@@ -533,6 +600,11 @@ In Grist settings we can jump in directly into the API Console.
 ## Connecting through MCP
 
 <!-- MCP server options, official, Python and JavaScript one -->
+
+[`mcp-server-grist`](https://github.com/nic01asFr/mcp-server-grist){target=blank_} is a MCP server written in Python. It allows AI applications like Claude, IBM Bob, Codex, pi, OpenClaw, Hermes, etc. to connect to the Grist API.
+
+This is not as powerful as
+
 
 ---
 

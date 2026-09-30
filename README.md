@@ -15,6 +15,10 @@ reactive notebooks.
 For closing we will interact with it using MCP and PyGrister, and evaluate how to prevent our AI harnesses (Claude,Codex,pi,etc)
 goint to creative with our data.
 
+## Presentation images
+
+Block images in `slides.qmd` open in a full-viewport lightbox and have a subtle slide-level shadow. Add the `.nolightbox` class to images that must remain static, or to images already used as navigation links. Lightbox images scale within the viewport so small screenshots remain legible without overflowing.
+
 ## Local development environment
 
 The workshop services run together with Docker Compose. Install Docker Desktop or another Docker installation with Compose v2, then start the environment from the repository root:

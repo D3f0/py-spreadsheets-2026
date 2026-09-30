@@ -1,0 +1,396 @@
+---
+title: "Teaching Some Python to Your Spreadsheets"
+subtitle: "Grist, Python, SQLite, APIs, and safer agents"
+author: "Nahuel Defossé"
+format:
+  revealjs:
+    toc: false
+    slide-number: true
+    transition: slide
+    code-copy: true
+    code-overflow: wrap
+    highlight-style: a11y
+    theme:
+      - solarized
+      - custom.scss
+    footer: "Teaching Some Python to Your Spreadsheets"
+execute:
+  enabled: false
+---
+
+## Welcome {.center}
+
+<!-- Add the event, date, and a one-sentence promise for the workshop. -->
+
+---
+
+## About me {.about-me}
+
+::: {.columns}
+
+::: {.column width="60%"}
+
+::: {.incremental}
+- 🐍 Pythonista with 18 years of experience 🇦🇷 🧉
+  - Co-organized SciPy Latin America
+  - PyCon Argentina and EuroPython speaker
+- 🚜 Former CTO at [Hello Tractor](https://hellotractor.com/)
+- 🧪 Software Engineer at IBM Research
+- 🛰️ Worked on [foundational models for geospatial applications](https://www.earthdata.nasa.gov/news/nasa-ibm-openly-release-geospatial-ai-foundation-model-nasa-earth-observation-data)
+- 💬 Worked on [Flowpilot](https://research.ibm.com/projects/flowpilot), providing core features to different products and divisions
+- 💬 Currently working on [Datascape], a data harness for insight generation for enterprise data scale.
+:::
+
+:::
+
+::: {.column width="40%"}
+
+![](img/Teaching%20your%20spreadsheets%20sone%20pytho%202.png){fig-alt="A cartoon Python writing a spreadsheet formula with a fountain pen"}
+
+:::
+
+:::
+
+---
+
+## Follow along
+
+<!-- Add links and QR codes for the slides, repository, and workshop materials. -->
+
+---
+
+# The plan {.section-title}
+
+TBD
+
+---
+
+## What we will build
+
+<!-- Show the finished workflow: Grist UI → formulas → API/SQL → webhook → notebook/CLI/MCP. -->
+
+
+---
+
+## Workshop map
+
+<!-- Present the five sections and identify the hands-on checkpoints. -->
+
+---
+
+## Before we begin
+
+<!-- List required software, local ports, repository setup, and expected Python familiarity. -->
+- Spreadsheets
+- API for Spreadsheets
+- MCP for Spreadsheets
+
+---
+
+## Start Grist locally
+
+<!-- Add the Docker command and a quick readiness check. -->
+One of the most straightforward ways to run Grist is with `docker`, but if we don't have Docker
+installed we can also try the `.devcontainer` setup on this repo.
+
+
+
+---
+
+# Meet Grist {.section-title}
+
+---
+
+## What is Grist?
+
+<!-- Explain the open-source, hosted-or-self-hosted spreadsheet in one sentence. -->
+
+---
+
+## Spreadsheet or database?
+
+<!-- Contrast the visible spreadsheet model with structured tables and typed columns. -->
+
+---
+
+## A document is data
+
+<!-- Introduce the fact that a Grist document is a portable SQLite file. -->
+
+---
+
+## Tour the interface
+
+<!-- Add a labeled screenshot of tables, views, widgets, and the formula editor. -->
+
+---
+
+## Tables and records
+
+<!-- Connect familiar rows and columns to records, fields, references, and types. -->
+
+---
+
+## Views and widgets
+
+<!-- Demonstrate two views over the same data and one useful widget. -->
+
+---
+
+## Checkpoint: explore
+
+<!-- Give participants a short task to inspect the starter document and identify its tables. -->
+
+---
+
+# Formulas grow up {.section-title}
+
+---
+
+## Your first formula
+
+<!-- Start with a small computed column whose result is visually obvious. -->
+
+---
+
+## Familiar Excel syntax
+
+<!-- Show the simplest spreadsheet-style expression supported by the example. -->
+
+---
+
+## Now use Python
+
+![](img/python-spreadsheet.webp){.remove-white fig-alt="A cartoon Python writing a spreadsheet formula with a fountain pen" fig-align="center"}
+
+<!-- Rewrite or extend the formula using readable Python syntax. -->
+
+---
+
+## The current record
+
+<!-- Explain how a formula accesses values from its own record. -->
+
+---
+
+## Follow references
+
+<!-- Show a formula that traverses a reference to another table. -->
+
+---
+
+## Collections and lookups
+
+<!-- Introduce lookup patterns without turning this into an API reference. -->
+
+---
+
+## Formula trade-offs
+
+<!-- Cover readability, recalculation, shared logic, and when code belongs elsewhere. -->
+
+---
+
+## Checkpoint: calculate
+
+<!-- Ask participants to add one Python formula and validate it against sample rows. -->
+
+---
+
+# Under the grid {.section-title}
+
+---
+
+## Open the SQLite file
+
+<!-- Show how to obtain and inspect the portable Grist document safely. -->
+
+---
+
+## What is stored where?
+
+<!-- Point out user tables versus Grist metadata and internal structures. -->
+
+---
+
+## Query with SQL
+
+<!-- Add one read-only query that answers a useful workshop question. -->
+
+---
+
+## SQLite is an implementation detail
+
+<!-- Explain which direct-file operations are safe for exploration and which writes should use Grist. -->
+
+---
+
+# Leave the browser {.section-title}
+
+---
+
+## Meet the API
+
+<!-- Introduce authentication, document/table identifiers, and the records endpoint. -->
+
+---
+
+## Read records with Python
+
+<!-- Add a compact requests or client example and show the returned shape. -->
+
+---
+
+## Make a controlled change
+
+<!-- Demonstrate one explicit update and immediately verify its observable result. -->
+
+---
+
+## Failures are data too
+
+<!-- Cover invalid records, authorization failures, and actionable error output. -->
+
+---
+
+## Checkpoint: call the API
+
+<!-- Ask participants to read, filter, and update a designated practice record. -->
+
+---
+
+# Reactive workflows {.section-title}
+
+---
+
+## Why a reactive notebook?
+
+<!-- Connect live spreadsheet changes to inspectable, reproducible Python analysis. -->
+
+---
+
+## Load Grist data
+
+<!-- Add the first notebook cell that reads the workshop table. -->
+
+---
+
+## Transform and display
+
+<!-- Add a small reactive transformation with a visible table or chart. -->
+
+---
+
+## Detect changes
+
+<!-- Explain polling versus event-driven updates and when each is sufficient. -->
+
+---
+
+## Webhooks
+
+<!-- Diagram the Grist → webhook receiver → notebook or service flow. -->
+
+---
+
+## Design for retries
+
+<!-- Prompt for idempotency, event identity, ordering, and duplicate delivery considerations. -->
+
+---
+
+# Tools for humans and agents {.section-title}
+
+---
+
+## Meet PyGrister
+
+<!-- Introduce the CLI and show how it complements the browser and API. -->
+
+---
+
+## Inspect from the terminal
+
+<!-- Add the commands used to list documents, tables, and selected records. -->
+
+---
+
+## Script a repeatable task
+
+<!-- Turn one manual operation into a reviewable CLI command or shell workflow. -->
+
+---
+
+## Grist through MCP
+
+<!-- Explain what the uvx-based MCP server exposes to an AI harness. -->
+
+---
+
+## Connect your harness
+
+<!-- Add the MCP configuration for the harnesses used in the workshop. -->
+
+---
+
+## Ask before acting
+
+<!-- Contrast read-only exploration with mutations that require explicit approval. -->
+
+---
+
+## When agents get creative
+
+<!-- Add one concrete unsafe interpretation of a spreadsheet-editing request. -->
+
+---
+
+## Guardrails that matter
+
+<!-- Cover least privilege, scoped tools, previews, validation, and reversible changes. -->
+
+---
+
+## A safer change loop
+
+<!-- Diagram: inspect → propose diff → validate → approve → apply → verify. -->
+
+---
+
+## Checkpoint: constrain the agent
+
+<!-- Ask participants to design or apply a policy for one potentially destructive request. -->
+
+---
+
+# Put it together {.section-title}
+
+---
+
+## End-to-end workflow
+
+<!-- Revisit the opening diagram with each implemented component highlighted. -->
+
+---
+
+## Choose the right interface
+
+<!-- Compare UI, formulas, SQLite, API, webhook, notebook, CLI, and MCP by use case. -->
+
+---
+
+## Three things to remember
+
+<!-- Add the three durable lessons you want participants to retain. -->
+
+---
+
+## Keep exploring
+
+<!-- Add links for Grist, API docs, PyGrister, the MCP server, and notebook examples. -->
+
+---
+
+## Thank you & questions {.center}
+
+<!-- Add contact details and the final slides/repository QR codes. -->
