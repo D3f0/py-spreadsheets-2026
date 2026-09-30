@@ -43,6 +43,7 @@ def preview(
     ] = "$PORT",
     host: Annotated[str, "Interface on which to serve the preview"] = "127.0.0.1",
     no_browser: Annotated[bool, "Do not open the preview in a browser"] = False,
+    kill_others: Annotated[bool, "Kill other servers in the same port"] = True,
 ) -> None:
     """Render and serve the Reveal.js deck with live reload."""
     command = f"""
@@ -50,6 +51,9 @@ def preview(
         {f"--port {port}" if port else ""} \
         {"--no-browser" if no_browser else ""}
         """
+    if kill_others:
+        ctx.run(f"lsof -i :{port} | tail -n1 | awk '{{print $2}}' | xargs kill -9")
+
     with ctx.cd(ROOT):
         ctx.run(command, pty=True)
 
