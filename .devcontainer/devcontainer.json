@@ -1,0 +1,9 @@
+{
+  "name": "PyCon 2026 Teaching Spreadsheets some Python",
+  "dockerComposeFile": "../compose.yaml",
+  "service": "devcontainer",
+  "runServices": ["caddy", "grist", "marimo", "webui", "devcontainer"],
+  "workspaceFolder": "/workspace",
+  "shutdownAction": "stopCompose",
+  "remoteUser": "vscode"
+}

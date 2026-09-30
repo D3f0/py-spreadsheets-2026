@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PyCon 2026 - Teaching Spreadsheets Python</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 800px;
+            width: 100%;
+            padding: 40px;
+        }
+        
+        h1 {
+            color: #2d3748;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        
+        .subtitle {
+            color: #718096;
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 1.1rem;
+        }
+        
+        .services {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .service-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 12px;
+            padding: 25px;
+            text-decoration: none;
+            color: white;
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .service-card.grist {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+        
+        .service-card.marimo {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+        
+        .service-card.hermes {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+        }
+        
+        .service-name {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .service-description {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            line-height: 1.4;
+        }
+        
+        .service-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+        
+        .status {
+            display: inline-block;
+            padding: 4px 12px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-top: auto;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            color: #718096;
+            font-size: 0.9rem;
+        }
+        
+        .info-box {
+            background: #f7fafc;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            margin-bottom: 30px;
+            border-radius: 4px;
+        }
+        
+        .info-box p {
+            color: #4a5568;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🐍 PyCon 2026 Workshop</h1>
+        <p class="subtitle">Teaching Your Spreadsheets Some Python</p>
+        
+        <div class="info-box">
+            <p><strong>Welcome!</strong> This workshop explores the intersection of spreadsheets and Python. Access the services below to get started.</p>
+        </div>
+        
+        <div class="services">
+            <a href="http://localhost:8484" class="service-card grist" target="_blank">
+                <div class="service-icon">📊</div>
+                <div class="service-name">Grist</div>
+                <div class="service-description">
+                    Modern spreadsheet with Python formulas and API access
+                </div>
+                <div class="status">Port 8484</div>
+            </a>
+            
+            <a href="http://localhost:8081" class="service-card marimo" target="_blank">
+                <div class="service-icon">📓</div>
+                <div class="service-name">Marimo</div>
+                <div class="service-description">
+                    Reactive Python notebooks for data exploration
+                </div>
+                <div class="status">Port 8081</div>
+            </a>
+            
+            <a href="http://localhost:4096" class="service-card hermes" target="_blank">
+                <div class="service-icon">🤖</div>
+                <div class="service-name">Hermes WebUI</div>
+                <div class="service-description">
+                    hermes-webui browser chat, models, sessions, and workspace
+                </div>
+                <div class="status">Port 4096 · No auth (demo)</div>
+            </a>
+            <a href="/models.html" class="service-card" target="_blank">
+                <div class="service-icon">🧠</div>
+                <div class="service-name">Free Models</div>
+                <div class="service-description">
+                    OpenRouter models compatible with Hermes
+                </div>
+                <div class="status">Live catalog</div>
+            </a>
+
+        </div>
+        
+        <footer>
+            <p>All services running locally via Docker Compose</p>
+            <p style="margin-top: 10px; font-size: 0.8rem;">
+                Need help? Check the <a href="https://github.com" style="color: #667eea;">README.md</a>
+            </p>
+        </footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Star meter</title>
+  <script src="http://127.0.0.1:8484/grist-plugin-api.js"></script>
+  <style>
+    :root { color-scheme: light dark; }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      font-family: system-ui, sans-serif;
+      color: #18212f;
+      background: radial-gradient(circle at 50% 25%, #fff8db 0, #f5f7fa 52%, #e7ebf0 100%);
+    }
+    .card {
+      padding: 34px 42px;
+      text-align: center;
+      border: 1px solid #d7dde5;
+      border-radius: 20px;
+      background: rgb(255 255 255 / 86%);
+      box-shadow: 0 18px 50px rgb(32 45 68 / 15%);
+    }
+    h1 { margin: 0 0 20px; font-size: 18px; letter-spacing: .08em; text-transform: uppercase; }
+    #star-meter { display: flex; gap: 10px; }
+    .star {
+      padding: 0;
+      border: 0;
+      color: #a9b1bd;
+      background: transparent;
+      font-size: clamp(42px, 8vw, 72px);
+      line-height: 1;
+      cursor: pointer;
+      transition: color 120ms ease, transform 120ms ease;
+    }
+    .star:hover, .star:focus-visible { color: #e8ac1a; transform: translateY(-3px); outline: none; }
+    .star--active { color: #f6c445; text-shadow: 0 4px 18px rgb(246 196 69 / 40%); }
+    #rating-value { margin: 18px 0 0; font-weight: 700; }
+    .hint { margin: 6px 0 0; color: #687386; font-size: 13px; }
+    @media (prefers-color-scheme: dark) {
+      body { color: #f7fafc; background: radial-gradient(circle at 50% 25%, #303849 0, #171923 58%, #10131a 100%); }
+      .card { border-color: #3c4658; background: rgb(26 31 43 / 88%); box-shadow: 0 18px 50px rgb(0 0 0 / 32%); }
+      .star { color: #586174; }
+      .hint { color: #a0aec0; }
+    }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <h1>Rating</h1>
+    <div id="star-meter" aria-label="Rating"></div>
+    <p id="rating-value">Select a row to rate</p>
+    <p class="hint">Click a star to update the selected record</p>
+  </main>
+  <script type="module" src="./star-meter.js"></script>
+</body>
+</html>
