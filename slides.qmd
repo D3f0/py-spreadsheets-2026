@@ -361,7 +361,7 @@ Let's use a second ~~sheet~~ table, and ~~link~~ have a Foreign Key to our main 
 
 ---
 
-## Adding a reference column
+## Adding a reference column 
 
 
 
@@ -435,6 +435,7 @@ return "📦" * count
 
 ---
 
+<!--
 ## Computed / Helper Columns can be hidden 🙈
 
 
@@ -465,24 +466,17 @@ From the author panel (right side on the `Table` tab, on the bottom)
 
 
 ::: {.columns}
-
-
 ::: {.column width=30%}
-
 ::: {.fragment}
 #### Column styling
 
 ![](./img/conditional_style.png)
 :::
-
 :::
 
 ::: {.column width=30%}
-
-
 ::: {.fragment}
 #### Row styling
-
 ![](./img/rwo-style.png)
 
 :::
@@ -499,6 +493,7 @@ From the author panel (right side on the `Table` tab, on the bottom)
 :::
 :::
 
+-->
 
 
 ---
@@ -652,12 +647,7 @@ GRIST_TEAM_SITE=docs
 
 ## gry - listing workspaces
 
-
-
 ::: {.fragment}
-
-
-
 
 ```
 $ gry ws list
@@ -695,6 +685,7 @@ $ gry ws see -w 3
 
 ## gry - listing tables
 
+::: {.service-account-output}
 ```
 gry table list -d q5aBBVtSotFo
 ┏━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -715,8 +706,9 @@ gry table list -d q5aBBVtSotFo
 │             │ recordCardViewSectionRef: 6 │
 └─────────────┴─────────────────────────────┘
 ```
+:::
 
----
+--- 
 
 ## gry - running SQL
 
@@ -744,24 +736,80 @@ gry sql 'select id, Activity, Start, Category from Events' -d q5aBBVtSotFo
 
 ## Creating service accounts
 
+::: {.fragment }
+```
+gry sacc new --label sacc 2026-12-31
+Done. Id: 2 (key: 6a4e9e39ceb0161bbbd5971089e215647191db97)
+```
+:::
+
+::: {.fragment}
+👆 that's the new API key for that service account, and should replace `GRIST_API_KEY`
+:::
+
+::: {.fragment .service-account-output}
+```
+gry sacc see 2
+┏━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ key         ┃ value                                                        ┃
+┡━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│ id          │ 2                                                            │
+│ login       │ bd86cf79-4abc-44db-af9d-68b5070cfa14@serviceaccounts.invalid │
+│ label       │ sacc                                                         │
+│ description │                                                              │
+│ expires     │ 2026-12-31T00:00:00.000Z                                     │
+│ valid key   │ True                                                         │
+└─────────────┴──────────────────────────────────────────────────────────────┘
+```
+:::
+
+---
+
+## Key has no access
+
+```
+GRIST_API_KEY=6a4e9e39ceb0161bbbd5971089e215647191db97 gry ws list
+Error! Status: 403
+{'error': 'access denied'}
+```
 
 ---
 
 ## Inviting the service account to the document
 
+![](./img/adding_users.png)
+
+--- 
+
+## Using our service account
+
+![](./img/adding_users_2.png)
+
 
 ---
 
-## Using it with gry
+## Setting fine grained permissions
 
-
----
-
-## What about a notebook/script
+![](./img/access_rules.png)
 
 ---
 
-<!-- Show `gry` -->
+## Trying again with `gry`
+
+```
+GRIST_API_KEY=6a4e9e39ceb0161bbbd5971089e215647191db97 gry ws list
+┏━━━━┳━━━━━━┳━━━━━━━┳━━━━━━━┳━━━━━━┓
+┃ id ┃ name ┃ owner ┃ email ┃ docs ┃
+┡━━━━╇━━━━━━╇━━━━━━━╇━━━━━━━╇━━━━━━┩
+│ 3  │ Home │ Null  │       │ 1    │
+└────┴──────┴───────┴───────┴──────┘
+```
+
+---
+
+# Using Notebooks
+
+We can import `GristApi` from `pygrister.api`.
 
 ---
 
@@ -777,8 +825,10 @@ gry sql 'select id, Activity, Start, Category from Events' -d q5aBBVtSotFo
 
 [`mcp-server-grist`](https://github.com/nic01asFr/mcp-server-grist){target=blank_} is a MCP server written in Python. It allows AI applications like Claude, IBM Bob, Codex, pi, OpenClaw, Hermes, etc. to connect to the Grist API.
 
-This is not as powerful as
+This is not the official MCP that lives in `https://<yoursite>.getgrist.com/mcp` for the
+commercial version, so authentication will use the same API KEYs instead of OAauth2.
 
+---
 
 ---
 
@@ -786,10 +836,8 @@ This is not as powerful as
 
 ---
 
-# Closing words
+# Thank you
 
----
-
-::: {.incremental}
-- The level of control
+::: {.fragment}
+**Questions?**
 :::

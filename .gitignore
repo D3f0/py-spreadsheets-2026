@@ -9,6 +9,7 @@ slides_files/
 **/*.quarto_ipynb
 .envrc
 .envrc.local
+.env.mcp
 hermes/
 .zed/
 .vscode/
