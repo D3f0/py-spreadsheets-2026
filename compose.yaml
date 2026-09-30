@@ -82,7 +82,8 @@ services:
       - gateway
       - run
     environment:
-      OPENROUTER_API_KEY: ${OR_API_KEY:?Load OR_API_KEY with direnv before starting Compose}
+      OPENROUTER_API_KEY: ${OPENROUTER_API_KEY:?Set OPENROUTER_API_KEY in .env before starting Compose}
+      GRIST_API_KEY: ${GRIST_API_KEY:?Set GRIST_API_KEY in .env before starting Compose}
       API_SERVER_ENABLED: "true"
       API_SERVER_HOST: 0.0.0.0
       API_SERVER_PORT: "8642"
@@ -105,7 +106,7 @@ services:
   webui:
     image: ghcr.io/nesquena/hermes-webui:latest
     environment:
-      OPENROUTER_API_KEY: ${OR_API_KEY:?Load OR_API_KEY with direnv before starting Compose}
+      OPENROUTER_API_KEY: ${OPENROUTER_API_KEY:?Set OPENROUTER_API_KEY in .env before starting Compose}
       HERMES_HOME: /home/hermeswebui/.hermes
       HERMES_API_URL: http://hermes:8642
       HERMES_WEBUI_GATEWAY_BASE_URL: http://hermes:8642
@@ -145,5 +146,7 @@ services:
 
 volumes:
   grist-data:
+    name: pycon-2026-teaching-spreadhseets-python_grist-data
+    external: true
   hermes-data:
   hermes-agent-src:

@@ -100,12 +100,14 @@ gh repo clone \
 
 ::: {.incremental}
 - Create a small application with spreadsheets for a simple calendar.
-- Use Python for the columns
-- Add some formulas, with Python!
-- Create more than one ~~sheet~~, table!
-- Go beyond the UI into API access and MCP
+- Define tables and their relationships
+- Customizing how they present information
+- Use Python (and Excel functions) in formulas
+- Accessing data over the API with different levels of access
+- Accessing data over the CLI
+- Interacting with the database through MCP in an Agent
 
-<!-- have full contorl over youd data ? -->
+
 :::
 
 ::: {.notes}
@@ -116,10 +118,11 @@ gh repo clone \
 ---
 
 # Grist
+A relational spreadsheet
 
 ---
 
-## A relational spreadsheet
+## What is grist?
 
 ::: {.fragment}
 
@@ -164,7 +167,7 @@ Talk about the SMVE (check if time allows)
 flowchart TB
     subgraph TopRow[" "]
         direction LR
-        UI["Spreadsheet UI"]
+        UI["Spreadsheet UI 👈🏽"]
         OfficialMCP["Official MCP"]
     end
 
@@ -175,9 +178,9 @@ flowchart TB
     Formulas --> Engine
     Engine <--> API["Grist REST API"]
 
-    API <--> CLI["gry (cli)"]
-    API <--> Notebook["Python notebook"]
-    API <--> MCP["OSS MCP"]
+    API <--> CLI["gry (cli) 👈🏽"]
+    API <--> Notebook["Python notebook 👈🏽"]
+    API <--> MCP["OSS MCP 👈🏽"]
 
     classDef ui fill:#e4f1f8,stroke:#24557a,color:#263238,stroke-width:2px,font-size:25px;
     classDef python fill:#fff0c9,stroke:#8b4b00,color:#263238,stroke-width:2px,font-size:25px;
@@ -204,7 +207,7 @@ Working in Grist is organized in this way:
   - {{< fa folder-open >}} A workspace, this is like folders and contain documents
     - {{< fa file-lines >}} Documents
       - {{< fa database >}} Database
-      - {{< fa table-columns >}} Pages, views and other presentation data
+      - {{< fa table-columns >}} Pages (tabs), views, widgets, 🐍 formulas
 
 :::
 

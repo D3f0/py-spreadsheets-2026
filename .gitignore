@@ -17,3 +17,5 @@ docs/superpowers
 docs/2026-*.md
 docs/2026-*.html
 layouts/file.slides.json
+resources/
+screenshots/

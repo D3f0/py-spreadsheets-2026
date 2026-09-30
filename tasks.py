@@ -131,12 +131,12 @@ def open_service(
 @task(aliases=["hermes"])
 def setup_hermes(
     ctx: Context,
-    model: Annotated[str, "OpenRouter model ID"] = "qwen/qwen3.8-27b:free",
+    model: Annotated[str, "OpenRouter model ID"] = "deepseek/deepseek-v4.1-flash",
 ) -> None:
-    """Configure Hermes from OR_API_KEY and restart the Compose services."""
-    if not os.environ.get("OR_API_KEY"):
+    """Configure Hermes from OPENROUTER_API_KEY and restart Compose services."""
+    if not os.environ.get("OPENROUTER_API_KEY"):
         ctx.rich_exit(
-            "Load OR_API_KEY with direnv before running this task.", exit_code=1
+            "Set OPENROUTER_API_KEY in .env before running this task.", exit_code=1
         )
     if not model:
         ctx.rich_exit("A model ID is required.", exit_code=1)
@@ -174,6 +174,34 @@ def setup_hermes(
                 ]
             )
         )
+        mcp_config = json.dumps(
+            {
+                "enabled": True,
+                "command": "uvx",
+                "args": ["--with", "fastmcp<3", "mcp-server-grist"],
+                "env": {
+                    "GRIST_API_KEY": "${GRIST_API_KEY}",
+                    "GRIST_API_URL": "http://grist:8484/api",
+                },
+                "connect_timeout": 60,
+                "timeout": 120,
+            }
+        )
+        ctx.run(
+            shlex.join(
+                [
+                    *compose,
+                    "run",
+                    "--rm",
+                    "--no-deps",
+                    "hermes",
+                    "config",
+                    "set",
+                    "mcp_servers.grist",
+                    mcp_config,
+                ]
+            )
+        )
         ctx.run(shlex.join([*compose, "up", "-d", "hermes", "webui"]))
     ctx.print(f"Hermes configured for OpenRouter model: {model}")
 
@@ -181,10 +209,10 @@ def setup_hermes(
 @task(aliases=["models"])
 def update_models(ctx: Context) -> None:
     """Fetch free OpenRouter models and generate the Caddy model catalog page."""
-    api_key = os.environ.get("OR_API_KEY")
+    api_key = os.environ.get("OPENROUTER_API_KEY")
     if not api_key:
         ctx.rich_exit(
-            "Load OR_API_KEY with direnv before running this task.", exit_code=1
+            "Set OPENROUTER_API_KEY in .env before running this task.", exit_code=1
         )
 
     request = urllib.request.Request(

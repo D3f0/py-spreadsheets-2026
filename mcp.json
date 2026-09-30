@@ -1,0 +1,21 @@
+{
+  "mcpServers": {
+    "grist-server": {
+      "disabled": false,
+      "timeout": 60,
+      "type": "stdio",
+      "command": "direnv",
+      "args": [
+        "exec",
+        ".",
+        "uvx",
+        "--with",
+        "fastmcp<3",
+        "mcp-server-grist"
+      ],
+      "env": {
+        "GRIST_API_URL": "http://localhost:8484/api"
+      }
+    }
+  }
+}

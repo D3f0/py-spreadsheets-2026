@@ -1,4 +1,4 @@
-# Copy this file to .envrc, replace the placeholder, then run:
+# Copy this file to .envrc, then run:
 #   direnv allow
-# Keep .envrc local; never commit provider keys.
-export OR_API_KEY="replace-with-your-openrouter-api-key"
+# Service credentials belong in the ignored .env file, which .envrc loads below.
+dotenv_if_exists .env

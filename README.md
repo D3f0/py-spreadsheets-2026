@@ -27,27 +27,42 @@ The workshop services run together with Docker Compose. Install Docker Desktop o
 docker compose up -d --build
 ```
 
-Compose reads the OpenRouter credential from the local `.envrc` through the `OR_API_KEY` environment variable and passes it to both Hermes containers as `OPENROUTER_API_KEY`. `.envrc` is intentionally ignored; copy `.envrc.example` to `.envrc`, add your own key, and load it with direnv before starting Compose:
+Compose reads `OPENROUTER_API_KEY` from the ignored project-root `.env` and passes it unchanged to both Hermes containers. Add the key to `.env` before starting Compose:
+
+```dotenv
+OPENROUTER_API_KEY=replace-with-your-openrouter-api-key
+```
+
+Docker Compose reads `.env` automatically. For shell tasks, `.envrc` loads the same file when direnv is available:
 
 ```bash
-cp .envrc.example .envrc
 direnv allow
-direnv exec . docker compose up -d
+docker compose up -d
 ```
 
 The Hermes WebUI uses the configured Hermes Agent gateway and provides model selection in its settings. Authentication is intentionally disabled because this is a loopback-only demo; keep the published port local. WebUI and Hermes state is persisted in the `hermes-data` volume.
 
-With `OR_API_KEY` loaded, configure Hermes without the interactive wizard:
+With `OPENROUTER_API_KEY` set in `.env`, configure Hermes without the interactive wizard:
 
 ```bash
 direnv exec . uv run tasks.py setup-hermes
 ```
 
-This stops the Hermes services, writes the OpenRouter provider and default free model into the persisted Hermes configuration, and starts the services again. To choose another model from the generated catalog:
+This stops the Hermes services, writes the OpenRouter provider and model into the persisted Hermes configuration, adds the Grist MCP stdio server, and starts the services again. The MCP subprocess runs inside the Hermes container with `uvx`; it reaches Grist at `http://grist:8484/api` and receives `GRIST_API_KEY` from the ignored host `.env` through the Hermes container environment. The default model is `deepseek/deepseek-v4.1-flash`. To choose another model:
 
 ```bash
 direnv exec . uv run tasks.py setup-hermes --model cohere/north-mini-code:free
 ```
+
+Verify MCP discovery and its read-only Grist connection:
+
+```bash
+docker compose exec hermes hermes mcp test grist
+docker compose exec hermes hermes chat --oneshot --format stream-json \
+  -q 'Use the Grist MCP tool list_organizations exactly once. Do not modify anything.'
+```
+
+Hermes reads MCP servers from `/opt/data/config.yaml`; the project-root `mcp.json` configures host-side MCP clients and is not loaded by Hermes.
 
 The task does not perform Portal registration or OAuth; it is intentionally hands-off only for API-key-based OpenRouter setup.
 
@@ -82,7 +97,7 @@ Both containers mount the same `hermes-data` Docker volume, but at different pat
 
 These paths expose the same profile. Its principal files are `config.yaml` for non-secret settings, `.env` for provider keys and other secrets, `auth.json` for OAuth credentials, and `state.db` plus the `sessions/`, `memories/`, `skills/`, and `logs/` directories for persistent application state.
 
-The profile's `.env` is therefore `/opt/data/.env` in the gateway and `/home/hermeswebui/.hermes/.env` in the WebUI. It is distinct from the host-side `./.envrc`, which supplies `OR_API_KEY` to Compose. This repository does not require a Compose `./.env` file.
+The profile's `.env` is therefore `/opt/data/.env` in the gateway and `/home/hermeswebui/.hermes/.env` in the WebUI. It is distinct from the ignored host-side `./.env`, which supplies `OPENROUTER_API_KEY` to Compose and shell tasks.
 
 To inspect the profile through the gateway container:
 
