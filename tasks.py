@@ -271,7 +271,12 @@ def _ensure_tilt_installed(ctx: Context, fail: bool = False):
         else:
             ctx.print_error("tilt not found")
 
-@task(pre=[Task(_ensure_tilt_installed), ])
+
+@task(
+    pre=[
+        Task(_ensure_tilt_installed),
+    ]
+)
 def up(ctx: Context) -> None:
     """Shortcut for tilt up"""
     ctx.run("tilt up", pty=True)

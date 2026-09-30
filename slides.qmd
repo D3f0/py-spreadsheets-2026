@@ -62,9 +62,9 @@ filters:
 ::: {.columns .follow-along-columns}
 ::: {.column .follow-along-qr}
 
-[{{< rrqr https://d3f0.github.io/pycon-2026-teaching-spreadhseets-python/slides.html size=500 >}}](https://d3f0.github.io/pycon-2026-teaching-spreadhseets-python/slides.html#/title-slide){target="_blank"}
+[{{< rrqr https://github.com/D3f0/py-spreadsheets-2026/slides.html size=500 >}}](https://github.com/D3f0/py-spreadsheets-2026/slides.html#/title-slide){target="_blank"}
 
-[https://d3f0.github.io/pycon-2026-teaching-spreadhseets-python/slides.html](https://d3f0.github.io/pycon-2026-teaching-spreadhseets-python/slides.html){target="_blank"}
+[https://github.com/D3f0/py-spreadsheets-2026/slides.html](https://d3f0.github.io/pycon-2026-teaching-spreadhseets-python/slides.html){target="_blank"}
 
 :::
 ::: {.column}
@@ -98,7 +98,7 @@ gh repo clone \
 - Create a small application with spreadsheets for a simple calendar.
 - Use Python for the columns
 - Add some formulas, with Python!
-- Create more than one ~~sheet~~, table! 
+- Create more than one ~~sheet~~, table!
 - Go beyond the UI into API access and MCP
 
 <!-- have full contorl over youd data ? -->
@@ -115,20 +115,20 @@ gh repo clone \
 
 ---
 
-## A spreadsheet or a database
+## A relational spreadsheet
 
 ::: {.fragment}
 
-- Grist is an Open Source spreadsheet engine, that we can run:
-    - locally
+- Grist is a modern relational spreadsheet. It combines the flexibility of a spreadsheet with the robustness of a database. It can run:
+    - locally (docker or desktop)
     - in the cloud or homelab
     - as a SaaS (like Google Docs) [https://getgrist.com](https://getgirst.com)
-::: 
+:::
 
 ::: {.fragment}
 - It stores everything as a SQLite database that is easy to share and backup
 :::
-  
+
 ::: {.notes}
 
 Talk about the SMVE (check if time allows)
@@ -302,7 +302,7 @@ Let's create a our first formula to compute how many days we have before the col
 ::: {.column}
 
 ```{.python}
-$Start - TODAY() 
+$Start - TODAY()
 ```
 
 :::

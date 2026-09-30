@@ -1,11 +1,10 @@
 load('ext://uibutton', 'cmd_button')
 
-# Apply the repository environment to every Compose service when it exists.
-if os.path.exists('.envrc'):
-    watch_file('.envrc')
-    docker_compose('compose.yaml', env_file='.envrc')
-else:
-    docker_compose('compose.yaml')
+# Compose reads project variables from .env; .envrc is a shell script and
+# must not be passed as Docker Compose's dotenv file.
+if os.path.exists('.env'):
+    watch_file('.env')
+docker_compose('compose.yaml')
 dc_resource(
     'caddy',
     links=[link('http://127.0.0.1:8000', 'Landing Page')],
