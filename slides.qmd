@@ -70,17 +70,21 @@ filters:
 ::: {.column}
 **👈🏽 Slides**
 
-**👇 🐳 Docker to follow along**
+**👇🏽 🐳 Docker to follow along**
 
 ```{.shell code-line-numbers="false"}
 gh repo clone \
   D3f0/py-spreadhseets-2026 \
-  && uv run tasks.py launch
+  && uv run tasks.py up
 ```
 
 
 :::
 :::
+
+---
+
+## The material 
 
 ---
 
@@ -189,55 +193,8 @@ flowchart TB
     linkStyle default stroke:#607d8b,stroke-width:2px;
 ```
 
-## How we're going to try out Grist
+## Our workshop setup
 
-```{mermaid}
-%%{init: {
-  "theme": "base",
-  "flowchart": {"curve": "linear", "htmlLabels": true, "nodeSpacing": 34, "rankSpacing": 42, "diagramPadding": 4},
-  "themeVariables": {
-    "background": "#fdf6e3",
-    "primaryTextColor": "#17324d",
-    "lineColor": "#6b7c83",
-    "fontFamily": "system-ui, sans-serif",
-    "fontSize": "21px"
-  }
-}}%%
-flowchart TB
-    subgraph ServiceRow["Services and ports"]
-        direction LR
-        Caddy["Caddy<br/><b>localhost:8000 → :80</b>"]
-        Marimo["Marimo<br/><b>localhost:8081 → :8080</b>"]
-        Grist["Grist<br/><b>localhost:8484 → :8484</b>"]
-        WebUI["Hermes WebUI<br/><b>localhost:4096 → :8787</b>"]
-        Hermes["Hermes<br/><b>:8642 internal</b>"]
-        Caddy ~~~ Marimo ~~~ Grist ~~~ WebUI
-        WebUI -->|"HTTP API"| Hermes
-    end
-
-    subgraph MountRow["Volumes and bind mounts · labels show consumers"]
-        direction LR
-        CaddyFiles["<b>Caddy files · RO</b><br/>Caddy → /srv · Caddyfile"]
-        Workspace["<b>Workspace bind</b><br/>Marimo + WebUI → /workspace"]
-        GristData[("<b>grist-data</b><br/>Grist → /persist")]
-        HermesData[("<b>hermes-data</b><br/>Hermes → /opt/data<br/>WebUI → ~/.hermes")]
-        HermesSource[("<b>hermes-agent-src</b><br/>Hermes → /opt/hermes<br/>WebUI → agent · RO")]
-        CaddyFiles ~~~ Workspace ~~~ GristData ~~~ HermesData ~~~ HermesSource
-    end
-
-    ServiceRow ~~~ MountRow
-
-    classDef service fill:#d9eef7,stroke:#1f5d78,color:#17324d,stroke-width:2.5px;
-    classDef agent fill:#e2def5,stroke:#5b4b8a,color:#2f2850,stroke-width:2.5px;
-    classDef bind fill:#ffe6ad,stroke:#a85d00,color:#4d3300,stroke-width:2.5px;
-    classDef volume fill:#dcecc5,stroke:#55752b,color:#294214,stroke-width:2.5px;
-    class Caddy,Grist,Marimo service;
-    class Hermes,WebUI agent;
-    class CaddyFiles,Workspace bind;
-    class GristData,HermesData,HermesSource volume;
-    linkStyle default stroke:#6b7c83,stroke-width:2.5px;
-    linkStyle 0 stroke:#5b4b8a,stroke-width:3px;
-```
 
 
 ## UI Structure

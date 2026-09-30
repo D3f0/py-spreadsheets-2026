@@ -73,6 +73,8 @@ services:
       timeout: 5s
       retries: 12
       start_period: 10s
+    environment:
+      GRIST_SELF_MANAGED_HOME: http://grist:8484
 
   hermes:
     image: nousresearch/hermes-agent:latest

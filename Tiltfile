@@ -4,7 +4,7 @@ load('ext://uibutton', 'cmd_button')
 # must not be passed as Docker Compose's dotenv file.
 if os.path.exists('.env'):
     watch_file('.env')
-docker_compose('compose.yaml')
+docker_compose('compose.tilt.yaml')
 dc_resource(
     'caddy',
     links=[link('http://127.0.0.1:8000', 'Landing Page')],
@@ -20,19 +20,9 @@ dc_resource(
 )
 dc_resource(
     'marimo',
+    new_name='Marimo Notebook',
     labels=['Part-2-marimo'],
     links=[link('http://127.0.0.1:8081', 'Marimo Notebook')],
-)
-dc_resource(
-    'webui',
-    new_name='Hermes WebUI',
-    labels=['Part-3-Hermes'],
-    links=[link('http://127.0.0.1:4096', 'Hermes WebUI')],
-)
-dc_resource(
-    'hermes',
-    new_name='Hermes Backend',
-    labels=['Part-3-Hermes'],
 )
 
 cmd_button(
@@ -51,23 +41,14 @@ cmd_button(
 )
 cmd_button(
     name='open-marimo',
-    resource='marimo',
+    resource='Marimo Notebook',
     argv=['open', 'http://127.0.0.1:8081'],
     text='Open',
     icon_name='notebook',
-)
-cmd_button(
-    name='open-hermes-webui',
-    resource='Hermes WebUI',
-    argv=['open', 'http://127.0.0.1:4096'],
-    text='Open',
-    icon_name='web',
 )
 
 config.set_enabled_resources([
     'caddy',
     'Grist Spreadsheet',
-    'marimo',
-    'Hermes Backend',
-    'Hermes WebUI',
+    'Marimo Notebook',
 ])
