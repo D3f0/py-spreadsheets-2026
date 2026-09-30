@@ -1,5 +1,3 @@
-name: pycon-2026-teaching-spreadsheets-python
-
 services:
   caddy:
     image: caddy:2.8-alpine
@@ -75,6 +73,8 @@ services:
       start_period: 10s
     environment:
       GRIST_SELF_MANAGED_HOME: http://grist:8484
+    env_file:
+      - .env
 
   hermes:
     image: nousresearch/hermes-agent:latest

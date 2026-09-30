@@ -1,21 +1,15 @@
 import marimo
 
 __generated_with = "0.24.0"
-app = marimo.App(width="medium", layout_file="layouts/file.slides.json")
+app = marimo.App(width="medium")
 
 
 @app.cell
 def _():
-    from invoke_toolkit import run
-    import pygrister
+    from pygrister.api import GristApi
+    import marimo as mo
 
-    return (run,)
-
-
-@app.cell
-def _(run):
-    run('ls')
-    return
+    return GristApi, mo
 
 
 @app.cell
@@ -32,13 +26,6 @@ def _(os):
     }
     grist_env
     return
-
-
-@app.cell
-def _():
-    from pygrister.api import GristApi
-
-    return (GristApi,)
 
 
 @app.cell
@@ -61,13 +48,13 @@ def _(g):
 
 @app.cell
 def _(g):
-    g.list_records(doc_id="q5aBBVtSotFo4YJdVuoLoD", table_id="Table1")
-    return
+    _, data = g.list_records(doc_id="q5aBBVtSotFo4YJdVuoLoD", table_id="Events")
+    return (data,)
 
 
 @app.cell
-def _(g):
-    (a,b), _ = g.list_records(doc_id="q5aBBVtSotFo4YJdVuoLoD", table_id="Table1")
+def _(data, mo):
+    mo.ui.table(data)
     return
 
 

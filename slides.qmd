@@ -1,6 +1,6 @@
 ---
 title: "Teaching Some Python to Your Spreadsheets"
-subtitle: "Grist, Python, SQLite, APIs, and safer agents"
+subtitle: "A hands-on journey through Grist, SQLite, APIs, and AI agents"
 author: "Nahuel Defossé"
 format:
   revealjs:
@@ -200,7 +200,7 @@ flowchart TB
 
 ## UI Structure
 
-Working in Grist is organized in this way:
+The UI is organized around a tree/breadcrumb structure:
 
 ::: {.incremental}
 - {{< fa globe >}} A site (each user has his/hers)
@@ -222,7 +222,7 @@ Working in Grist is organized in this way:
 
 ## Creating a calendar style application
 
-{{< fa table-cells >}} For this we will create a few columns in a table
+{{< fa table >}} For this we will create a few columns in a table
 
 ::: {.incremental}
 - Activity
@@ -406,7 +406,7 @@ Let's use a second ~~sheet~~ table, and ~~link~~ have a Foreign Key to our main 
 ::: {.fragment}
 
 
-Let's look for the Attachments from the events table in a formula in events.
+{{< fa table >}} Events {{< fa arrow-left >}} {{< fa table >}} Attachments
 
 ```
 Attachments.lookupRecords(Event=$id)
@@ -497,9 +497,13 @@ From the author panel (right side on the `Table` tab, on the bottom)
 -->
 
 
----
 
-## Custom Widgets {.smaller}
+# Presentation 
+Custom widgets
+
+--- 
+
+::: {.smaller}
 
 Grist supports custom widgets, an example of one that comes with
 it is the calendar
@@ -519,6 +523,8 @@ it is the calendar
 
 ![](./img/widget-type.png)
 
+
+:::
 
 :::
 
@@ -554,10 +560,19 @@ This configuration can be modified later in the creator panel.
 
 ---
 
-## More widgets to explore (or create)
+## More widgets to explore 
 
 ![](./img/more-widgets.png){.r-stretch}
 
+---
+
+## Custom Widgets
+
+- Customs CSS, HTML and JS can be stored in Grist itself.
+- If they are mean to be re-used in many documents, it's recommended to 
+  host these resources in a common place.
+- A coding AI agent/harness with good planning can create engaging UIs
+  
 ---
 
 <!--
@@ -588,7 +603,7 @@ This configuration can be modified later in the creator panel.
 
 <!-- TODO: Examples from https://support.getgrist.com/examples/ -->
 
-# Accessing your data over the API
+# API Access
 
 ---
 
@@ -646,7 +661,7 @@ GRIST_TEAM_SITE=docs
 
 ---
 
-## gry - listing workspaces
+## gry - listing workspaces 
 
 ::: {.fragment}
 
@@ -795,7 +810,7 @@ Error! Status: 403
 
 ---
 
-## Trying again with `gry`
+## Service account now has access
 
 ```
 GRIST_API_KEY=6a4e9e39ceb0161bbbd5971089e215647191db97 gry ws list
@@ -809,8 +824,31 @@ GRIST_API_KEY=6a4e9e39ceb0161bbbd5971089e215647191db97 gry ws list
 ---
 
 # Using Notebooks
+Or scripts
 
-We can import `GristApi` from `pygrister.api`.
+---
+
+## Marimo
+
+::: {.incremental}
+- Marimo is a modern Python notebook centered around the idea of reproducibility
+- The notebooks are not `.ipynb` format (JSON) but `.py`
+- A notebook can also be a script, a test suite and an application.
+:::
+
+::: {.fragment}
+![](./img/marimo_1.png)
+:::
+
+---
+
+### Grist access from Marimo
+
+- We can import `GristApi` from `pygrister.api`.
+
+---
+
+
 
 ---
 
@@ -834,6 +872,9 @@ commercial version, so authentication will use the same API KEYs instead of OAau
 ---
 
 ## Using Hermes
+
+Hermes is a popular agent that build its own memory. Has connectors for many
+messaging platforms {{< fa whatsapp >}} {{< fa telegram >}}
 
 ---
 
