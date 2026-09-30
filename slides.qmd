@@ -130,7 +130,7 @@ gh repo clone \
   It can run:
     - locally (docker or desktop)
     - in the cloud or homelab
-    - like Google Docs at [https://getgrist.com](https://getgrist.com)
+    - like Google Docs at [https://getgrist.com](https://getgrist.com){target=_blank}
 :::
 
 ::: {.fragment}
@@ -253,66 +253,38 @@ Let's create a our first formula to compute how many days we have before the col
 
 
 ::: {.fragment}
-
 ::: {.columns}
-
 ::: {.column}
-
 ```{.python}
 $Start - TODAY()
 ```
-
 :::
-
 ::: {.column}
-
 `
 datetime.timedelta(days=-3, seconds=45245, microseconds=577301)
 `
-
 :::
-
 :::
-
 ::: {.fragment}
-
-
 ::: {.columns}
-
 ::: {.column}
-
 ```{.python}
 from datetime import timedelta as td
 return (
   $Start - NOW()
 ) / td(days=1)
 ```
-
 :::
-
 ::: {.column}
-
 `2.458484637708333`
-
 :::
-
 :::
-
 :::
-
-
-
 :::
-
-
 
 ::: {.fragment}
-
-
 ::: {.columns}
-
 ::: {.column}
-
 ```{.python}
 from datetime import timedelta as td
 return int(
@@ -320,44 +292,25 @@ return int(
 ) / td(days=1)
 ```
 :::
-
 ::: {.column}
-
-2
-
+`2`
 :::
-
 :::
-
-
-
 :::
 
 
 
 ::: {.fragment}
-
-
 ::: {.columns}
-
 ::: {.column}
-
 ```python
 DATEDIF($Start, NOW(), 'D')
 ```
-
 :::
-
 ::: {.column}
-
-```
-3
-```
-
+`3`
 :::
-
 :::
-
 :::
 
 ---
@@ -366,6 +319,119 @@ DATEDIF($Start, NOW(), 'D')
 
 Let's use a second ~~sheet~~ table, and ~~link~~ have a Foreign Key to our main table.
 
+
+::: {.columns}
+::: {.column width=30%}
+::: {.fragment}
+![](./img/2nd_table_start.png)
+:::
+:::
+::: {.column width=70%}
+::: {.fragment}
+![](./img/2nd_table_2.png)
+:::
+:::
+:::
+
+
+---
+
+## Setting up some column types
+
+
+::: {.columns}
+
+::: {.column}
+
+**Markdown**
+
+![](./img/2nd_table_3.png)
+:::
+
+::: {.column}
+
+**Attachments**
+
+![](./img/2nd_table_4.png)
+
+:::
+
+:::
+
+
+---
+
+## Adding a reference column
+
+
+
+::: {.columns}
+
+::: {.column}
+
+::: {.fragment}
+
+
+![](./img/2nd_table.png)
+
+:::
+
+
+:::
+
+::: {.column}
+
+
+::: {.fragment}
+
+
+![](./img/2nd_table_fk.png)
+
+:::
+
+
+:::
+
+:::
+
+
+
+
+---
+
+## And lookups
+
+
+::: {.fragment}
+
+
+Let's look for the Attachments from the events table in a formula in events.
+
+```
+Attachments.lookupRecords(Event=$id)
+```
+
+:::
+
+
+
+::: {.fragment}
+
+Playing with the string repetitions
+```python
+count = len(Attachments.lookupRecords(Event=$id))
+
+return "📦" * count
+```
+
+:::
+
+
+---
+
+## Putting together views
+
+![](./img/linked_tables_with_formulas.png){class=fofo}
 
 ---
 
@@ -544,17 +610,21 @@ To get the user's API key, this is in the [user settings](http://localhost:8484/
 
 ::: {.column}
 
+::: {.fragment}
+
 ![](./img/api_document_1.png){.fofu}
 
+:::
 
 :::
 
 ::: {.column}
-
+::: {.fragment}
 ![](./img/api_document_2.png)
-
+:::
+::: {.fragment}
 ![](./img/api_document_rest.png)
-
+:::
 :::
 
 :::
@@ -563,28 +633,131 @@ To get the user's API key, this is in the [user settings](http://localhost:8484/
 
 ## A CLI client for the API
 
+`pygrister` is a Python library and a CLI for grist.
+
+It requires an URL and an API key, but more configuration can be passed.
+
+This in example `.env` we could use in our workshop repo:
+
+```shell
+GRIST_API_KEY=22...36
+GRIST_SELF_MANAGED=Y
+GRIST_SELF_MANAGED_HOME=http://localhost:8484
+GRIST_SELF_MANAGED_SINGLE_ORG=N
+GRIST_SERVER_PROTOCOL=http
+GRIST_TEAM_SITE=docs
+```
+
+---
+
+## gry - listing workspaces
+
+
+
+::: {.fragment}
+
+
+
+
+```
+$ gry ws list
+┏━━━━┳━━━━━━┳━━━━━━━┳━━━━━━━┳━━━━━━┓
+┃ id ┃ name ┃ owner ┃ email ┃ docs ┃
+┡━━━━╇━━━━━━╇━━━━━━━╇━━━━━━━╇━━━━━━┩
+│ 3  │ Home │ Null  │       │ 1    │
+└────┴──────┴───────┴───────┴──────┘
+```
+:::
+
+
+
+::: {.fragment}
+
+
+
+
+```
+$ gry ws see -w 3
+┏━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ key  ┃ value                                      ┃
+┡━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│ id   │ 3                                          │
+│ name │ Home                                       │
+│ team │ 3 - pycon-workshop                         │
+├──────┼────────────────────────────────────────────┤
+│ doc  │ q5aBBVtSotFo4YJdVuoLoD - Untitled document │
+└──────┴────────────────────────────────────────────┘
+```
+
+:::
+
+---
+
+## gry - listing tables
+
+```
+gry table list -d q5aBBVtSotFo
+┏━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ table id    ┃ metadata                    ┃
+┡━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│ Events      │ tableRef: 1                 │
+│             │ primaryViewId: 1            │
+│             │ summarySourceTable: 0       │
+│             │ onDemand: False             │
+│             │ rawViewSectionRef: 2        │
+│             │ recordCardViewSectionRef: 3 │
+├─────────────┼─────────────────────────────┤
+│ Attachments │ tableRef: 2                 │
+│             │ primaryViewId: 2            │
+│             │ summarySourceTable: 0       │
+│             │ onDemand: False             │
+│             │ rawViewSectionRef: 5        │
+│             │ recordCardViewSectionRef: 6 │
+└─────────────┴─────────────────────────────┘
+```
+
+---
+
+## gry - running SQL
+
+```
+gry sql 'select id, Activity, Start, Category from Events' -d q5aBBVtSotFo
+┏━━━━┳━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━┓
+┃ id ┃ Activity ┃ Start      ┃ Category         ┃
+┡━━━━╇━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━┩
+│ 2  │ PyCon    │ 1790920800 │ ["🎙️conference"] │
+└────┴──────────┴────────────┴──────────────────┘
+```
+
 ---
 
 ## Service Accounts
 
-- It's a bit dangerous to give full access to our documents to any automation
+::: {.incremental}
+
+- It's a bit dangerous to give full access to our documents to any automation with the user API key (GRIST_API_KEY)
 - Service Accounts are pseudo-users which can be given finer grained access to a a few tables
+- There's not UI for creating service accounts, but `gry` CLI comes handy.
+:::
 
 ---
 
-## Creating user accounts
+## Creating service accounts
 
-- User accounts are emails that end in `@serviceaccounts.invalid`
-
----
 
 ---
 
-## The `gry` CLI
+## Inviting the service account to the document
+
 
 ---
 
-## What about a notebook?
+## Using it with gry
+
+
+---
+
+## What about a notebook/script
 
 ---
 
@@ -593,7 +766,8 @@ To get the user's API key, this is in the [user settings](http://localhost:8484/
 ---
 
 
-# Using AI
+# Using grist MCP
+🤖
 
 ---
 

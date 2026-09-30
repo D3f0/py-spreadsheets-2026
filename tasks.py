@@ -231,7 +231,9 @@ code {{ word-break: break-all; }} .meta {{ color: #718096; }}
     ctx.print(f"Generated caddy/models.html with {len(models)} models")
 
 
-_MARKDOWN_IMAGE = re.compile(r"!\[[^\]]*\]\(\s*<?([^\s)>]+)>?")
+_MARKDOWN_IMAGE = re.compile(
+    r"!\[(?:[^\[\]]|\[[^\]]*\]\([^)]*\))*\]\(\s*<?([^\s)>]+)>?"
+)
 
 
 def _referenced_local_images() -> list[Path]:
@@ -265,6 +267,20 @@ def stage_images(ctx: Context) -> None:
     with ctx.cd(ROOT):
         ctx.run(shlex.join(command))
     ctx.print(f"Staged {len(images)} slide image(s)")
+
+
+@task()
+def unused_images(ctx: Context) -> None:
+    """List files in img/ that are not referenced by slides.qmd."""
+    referenced = set(_referenced_local_images())
+    unused = sorted(
+        path.relative_to(ROOT)
+        for path in (ROOT / "img").iterdir()
+        if path.is_file() and path.relative_to(ROOT) not in referenced
+    )
+
+    for path in unused:
+        ctx.print(path)
 
 
 def _ensure_tilt_installed(ctx: Context, fail: bool = False):

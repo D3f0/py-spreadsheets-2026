@@ -17,6 +17,10 @@ $code-block-font-size: 0.72em;
   overflow-wrap: anywhere;
 }
 
+.reveal #first-python-formula > .fragment + .fragment {
+  margin-top: 0.4em;
+}
+
 .reveal .slides section img:not(.qrcode):not(.inline-icon):not(.no-shadow) {
   border-radius: 0.12em;
   box-shadow:
@@ -83,6 +87,16 @@ $code-block-font-size: 0.72em;
   max-width: 100%;
   max-height: 52vh;
   object-fit: contain;
+}
+
+.reveal .slides img.reference-column-image {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  max-height: 500px;
+  object-fit: contain;
+  margin-inline: auto;
 }
 
 .reveal .columns.follow-along-columns {
