@@ -46,7 +46,7 @@
     "href": "slides.html#ui-structure",
     "title": "Teaching Some Python to Your Spreadsheets",
     "section": "UI Structure",
-    "text": "UI Structure\nWorking in Grist is organized in this way:\n\n A site (each user has his/hers)\n\n A workspace, this is like folders and contain documents\n\n Documents\n\n Database\n Pages (tabs), views, widgets, 🐍 formulas"
+    "text": "UI Structure\nThe UI is organized around a tree/breadcrumb structure:\n\n A site (each user has his/hers)\n\n A workspace, this is like folders and contain documents\n\n Documents\n\n Database\n Pages (tabs), views, widgets, 🐍 formulas"
   },
   {
     "objectID": "slides.html#the-welcome-screen",
@@ -133,11 +133,18 @@
     "text": "Custom Widgets (cont.)"
   },
   {
-    "objectID": "slides.html#more-widgets-to-explore-or-create",
-    "href": "slides.html#more-widgets-to-explore-or-create",
+    "objectID": "slides.html#more-widgets-to-explore",
+    "href": "slides.html#more-widgets-to-explore",
     "title": "Teaching Some Python to Your Spreadsheets",
-    "section": "More widgets to explore (or create)",
-    "text": "More widgets to explore (or create)"
+    "section": "More widgets to explore",
+    "text": "More widgets to explore"
+  },
+  {
+    "objectID": "slides.html#custom-widgets",
+    "href": "slides.html#custom-widgets",
+    "title": "Teaching Some Python to Your Spreadsheets",
+    "section": "Custom Widgets",
+    "text": "Custom Widgets\n\nCustoms CSS, HTML and JS can be stored in Grist itself.\nIf they are mean to be re-used in many documents, it’s recommended to host these resources in a common place.\nA coding AI agent/harness with good planning can create engaging UIs"
   },
   {
     "objectID": "slides.html#getting-the-accounts-api-key",
@@ -224,6 +231,13 @@
     "text": "Service account now has access\nGRIST_API_KEY=6a4e9e39ceb0161bbbd5971089e215647191db97 gry ws list\n┏━━━━┳━━━━━━┳━━━━━━━┳━━━━━━━┳━━━━━━┓\n┃ id ┃ name ┃ owner ┃ email ┃ docs ┃\n┡━━━━╇━━━━━━╇━━━━━━━╇━━━━━━━╇━━━━━━┩\n│ 3  │ Home │ Null  │       │ 1    │\n└────┴──────┴───────┴───────┴──────┘"
   },
   {
+    "objectID": "slides.html#marimo",
+    "href": "slides.html#marimo",
+    "title": "Teaching Some Python to Your Spreadsheets",
+    "section": "Marimo",
+    "text": "Marimo\n\nMarimo is a modern Python notebook centered around the idea of reproducibility\nThe notebooks are not .ipynb format (JSON) but .py\nA notebook can also be a script, a test suite and an application."
+  },
+  {
     "objectID": "slides.html#connecting-through-mcp",
     "href": "slides.html#connecting-through-mcp",
     "title": "Teaching Some Python to Your Spreadsheets",
@@ -235,6 +249,6 @@
     "href": "slides.html#using-hermes",
     "title": "Teaching Some Python to Your Spreadsheets",
     "section": "Using Hermes",
-    "text": "Using Hermes"
+    "text": "Using Hermes\nHermes is a popular agent that build its own memory. Has connectors for many messaging platforms"
   }
 ]

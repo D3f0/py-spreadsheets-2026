@@ -209,7 +209,7 @@
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title">Teaching Some Python to Your Spreadsheets</h1>
-  <p class="subtitle">Grist, Python, SQLite, APIs, and safer agents</p>
+  <p class="subtitle">A hands-on journey through Grist, SQLite, APIs, and AI agents</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -400,7 +400,7 @@ flowchart TB
 </section>
 <section id="ui-structure" class="slide level2">
 <h2>UI Structure</h2>
-<p>Working in Grist is organized in this way:</p>
+<p>The UI is organized around a tree/breadcrumb structure:</p>
 <ul>
 <li class="fragment"><i class="fa-solid fa-globe" aria-label="globe"></i> A site (each user has his/hers)
 <ul>
@@ -422,7 +422,7 @@ flowchart TB
 <img data-src="./img/main-grist-screen.png" class="r-stretch quarto-figure-center" alt="Main Spreadsheets View"><p class="caption">Main Spreadsheets View</p></section>
 <section id="creating-a-calendar-style-application" class="slide level2">
 <h2>Creating a calendar style application</h2>
-<p><i class="fa-solid fa-table-cells" aria-label="table-cells"></i> For this we will create a few columns in a table</p>
+<p><i class="fa-solid fa-table" aria-label="table"></i> For this we will create a few columns in a table</p>
 <ul>
 <li class="fragment">Activity</li>
 <li class="fragment"><i class="fa-solid fa-calendar-day" aria-label="calendar-day"></i> Start</li>
@@ -604,9 +604,6 @@ From the author panel (right side on the `Table` tab, on the bottom)
 :::
 
 -->
-</section>
-<section class="slide level2">
-
 </section></section>
 <section>
 <section id="presentation" class="title-slide slide level1 center">
@@ -638,10 +635,18 @@ From the author panel (right side on the `Table` tab, on the bottom)
 <h2>Custom Widgets (cont.)</h2>
 
 <img data-src="./img/full_calendar.png" class="r-stretch"></section>
-<section id="more-widgets-to-explore-or-create" class="slide level2">
-<h2>More widgets to explore (or create)</h2>
+<section id="more-widgets-to-explore" class="slide level2">
+<h2>More widgets to explore</h2>
 
 <img data-src="./img/more-widgets.png" class="r-stretch"></section>
+<section id="custom-widgets" class="slide level2">
+<h2>Custom Widgets</h2>
+<ul>
+<li>Customs CSS, HTML and JS can be stored in Grist itself.</li>
+<li>If they are mean to be re-used in many documents, it’s recommended to host these resources in a common place.</li>
+<li>A coding AI agent/harness with good planning can create engaging UIs</li>
+</ul>
+</section>
 <section class="slide level2">
 
 <!--
@@ -829,7 +834,28 @@ Error! Status: 403
 <section>
 <section id="using-notebooks" class="title-slide slide level1 center">
 <h1>Using Notebooks</h1>
-<p>We can import <code>GristApi</code> from <code>pygrister.api</code>.</p>
+<p>Or scripts</p>
+</section>
+<section id="marimo" class="slide level2">
+<h2>Marimo</h2>
+<ul>
+<li class="fragment">Marimo is a modern Python notebook centered around the idea of reproducibility</li>
+<li class="fragment">The notebooks are not <code>.ipynb</code> format (JSON) but <code>.py</code></li>
+<li class="fragment">A notebook can also be a script, a test suite and an application.</li>
+</ul>
+<div class="fragment">
+<p><a href="./img/marimo_1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-25"><img data-src="./img/marimo_1.png"></a></p>
+</div>
+</section>
+<section class="slide level2">
+
+<h3 id="grist-access-from-marimo">Grist access from Marimo</h3>
+<ul>
+<li>We can import <code>GristApi</code> from <code>pygrister.api</code>.</li>
+</ul>
+</section>
+<section class="slide level2">
+
 </section>
 <section class="slide level2">
 
@@ -850,6 +876,7 @@ Error! Status: 403
 </section>
 <section id="using-hermes" class="slide level2">
 <h2>Using Hermes</h2>
+<p>Hermes is a popular agent that build its own memory. Has connectors for many messaging platforms <i class="fa-solid fa-whatsapp" aria-label="whatsapp"></i> <i class="fa-solid fa-telegram" aria-label="telegram"></i></p>
 </section>
 <section class="slide level2">
 
