@@ -1,1 +1,1 @@
-Sitemap: git@work.github.com:D3f0/pycon-2026-teaching-spreadhseets-python.git/sitemap.xml
+Sitemap: git@work.github.com:D3f0/py-spreadsheets-2026.git/sitemap.xml

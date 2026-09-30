@@ -6,10 +6,14 @@
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-e0c8968379b9103dfe5dcf0fa5c1078e.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-3419ea62b3ca2d77d3d547f86109e84e.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-contrib/diagrams-0.2.0/diagrams.css" rel="stylesheet">
 <link href="site_libs/quarto-contrib/fontawesome6-6.7.2/all.min.css" rel="stylesheet">
-<link href="site_libs/quarto-contrib/fontawesome6-6.7.2/latex-fontsize.css" rel="stylesheet"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.8.25">
+<link href="site_libs/quarto-contrib/fontawesome6-6.7.2/latex-fontsize.css" rel="stylesheet">
+<script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.10.18">
 
   <meta name="author" content="Nahuel Defossé">
   <title>Teaching Some Python to Your Spreadsheets</title>
@@ -19,10 +23,16 @@
   <link rel="stylesheet" href="site_libs/revealjs/dist/reset.css">
   <link rel="stylesheet" href="site_libs/revealjs/dist/reveal.css">
   <style>
-    code{white-space: pre-wrap;}
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
     span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
     ul.task-list li input[type="checkbox"] {
@@ -30,8 +40,74 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #767676;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #767676;  padding-left: 4px; }
+    div.sourceCode
+      { color: #545454; background-color: #fefefe; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #545454; } /* Normal */
+    code span.al { color: #7928a1; } /* Alert */
+    code span.an { color: #696969; } /* Annotation */
+    code span.at { color: #a55a00; } /* Attribute */
+    code span.bn { color: #7928a1; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #d91e18; } /* ControlFlow */
+    code span.ch { color: #008000; } /* Char */
+    code span.cn { color: #d91e18; } /* Constant */
+    code span.co { color: #696969; } /* Comment */
+    code span.cv { color: #696969; font-style: italic; } /* CommentVar */
+    code span.do { color: #696969; font-style: italic; } /* Documentation */
+    code span.dt { color: #7928a1; } /* DataType */
+    code span.dv { color: #7928a1; } /* DecVal */
+    code span.er { color: #7928a1; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #a55a00; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #696969; } /* Information */
+    code span.kw { color: #d91e18; } /* Keyword */
+    code span.op { color: #00769e; } /* Operator */
+    code span.ot { color: #d91e18; } /* Other */
+    code span.pp { color: #7928a1; } /* Preprocessor */
+    code span.sc { color: #00769e; } /* SpecialChar */
+    code span.ss { color: #008000; } /* SpecialString */
+    code span.st { color: #008000; } /* String */
+    code span.va { color: #a55a00; } /* Variable */
+    code span.vs { color: #008000; } /* VerbatimString */
+    code span.wa { color: #696969; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-f77a3d348de514e77a446c0d72f8e9a6.css">
+  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-15e3346f1294be9a767e192b031067f6.css">
   <link href="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -138,7 +214,7 @@
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
 <div class="quarto-title-author-name">
-Nahuel Defossé 
+Nahuel Defossé
 </div>
 </div>
 </div>
@@ -165,53 +241,101 @@ Nahuel Defossé
 <li class="fragment">💬 Currently working on [Datascape], a data harness for insight generation, enterprise data scale.</li>
 </ul>
 </div><div class="column" style="width:40%;">
-<p><img data-src="img/Teaching your spreadsheets sone pytho 2.png" alt="A cartoon Python writing a spreadsheet formula with a fountain pen"></p>
+<p><img data-src="img/Teaching your spreadsheets sone pytho 3.png" class="nolightbox no-shadow" alt="A cartoon Python writing a spreadsheet formula with a fountain pen"></p>
 </div></div>
 </section>
 <section id="follow-along" class="slide level2">
 <h2>Follow along</h2>
 <!-- Add links and QR codes for the slides, repository, and workshop materials. -->
-<div class="columns">
-<div class="column">
-
+<div class="columns follow-along-columns">
+<div class="column follow-along-qr">
+<p><a href="https://github.com/D3f0/py-spreadsheets-2026/slides.html#/title-slide" target="_blank"><img data-src="slides_files/mediabag/aHR0cHM6Ly9naXRodWIuY29tL0QzZjAvcHktc3ByZWFkc2hlZXRzLTIwMjYvc2xpZGVzLmh0bWwyNTUyNTUyNTUwcXJjb2RlNzU0NjYyNTU3NTQ2NjI1NTQuMDEwMA==.svg" id="rrqr1" class="qrcode" width="100"></a></p>
+<p><a href="https://d3f0.github.io/pycon-2026-teaching-spreadhseets-python/slides.html" target="_blank">https://github.com/D3f0/py-spreadsheets-2026/slides.html</a></p>
 </div><div class="column">
-
+<p><strong>👈🏽 Slides</strong></p>
+<p><strong>👇🏽 🐳 &amp; </strong> <a href="https://docs.tilt.dev/install.html" target="_blank"><img data-src="img/tilt-favicon.ico" class="inline-icon nolightbox" style="vertical-align: text-bottom;" width="32"></a> <strong>run the workshop</strong></p>
+<pre class="shell"><code>gh repo clone \
+  D3f0/py-spreadhseets-2026 \
+  &amp;&amp; uv run tasks.py up</code></pre>
 </div></div>
 </section>
 <section class="slide level2">
 
-</section>
-<section>
-<section id="should-i-attend-this-workshop" class="title-slide slide level1 center">
-<h1>Should I attend this workshop?</h1>
-
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="./img/tilt.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="The workshop code at http://localhost:10350"><img data-src="./img/tilt.png" alt="The workshop code at http://localhost:10350"></a></p>
+<figcaption><a href="http://localhost:10350">The workshop code at http://localhost:10350</a></figcaption>
+</figure>
+</div>
 </section>
 <section class="slide level2">
 
+<p><a href="./img/562a7a03c4143.jpeg" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="./img/562a7a03c4143.jpeg"></a></p>
+</section>
+<section id="what-will-i-get-from-this-workshop" class="slide level2">
+<h2>What will I get from this workshop</h2>
 <ul>
-<li class="fragment">If you want to have full control over your the data in your spreadsheets</li>
-<li class="fragment">If you want have structure and tighter control over your speadsheets</li>
-<li class="fragment">If you want to personalize how you interact with your data in a Pythonic way</li>
-<li class="fragment">If you want to create hyper personalized applications arround spreadsheets with AI.</li>
+<li class="fragment">Create a small application with spreadsheets for a simple calendar.</li>
+<li class="fragment">Define tables and their relationships</li>
+<li class="fragment">Customizing how they present information</li>
+<li class="fragment">Use Python (and Excel functions) in formulas</li>
+<li class="fragment">Accessing data over the API with different levels of access</li>
+<li class="fragment">Accessing data over the CLI</li>
+<li class="fragment">Interacting with the database through MCP in an Agent</li>
 </ul>
+<aside class="notes">
+
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section class="slide level2">
 
-</section></section>
+</section>
 <section>
 <section id="grist" class="title-slide slide level1 center">
 <h1>Grist</h1>
-
+<p>A relational spreadsheet</p>
 </section>
-<section id="a-spreadsheet-or-a-database" class="slide level2">
-<h2>A spreadsheet or a database</h2>
+<section id="what-is-grist" class="slide level2">
+<h2>What is grist?</h2>
+<div class="fragment">
 <ul>
-<li class="fragment">Grist is an Open Source (and Self Hostable) spreadsheet that uses Python <strong>data types</strong> for columns. The SaaS version of it lives in <a href="https://getgirst.com">https://getgrist.com</a></li>
-<li class="fragment">It stores everything as a SQLite database that is easy to share.</li>
-<li class="fragment">And when we put a <code>=</code> we can start typing python</li>
-<li class="fragment">Row and column formatting or styling can be wirtten asso with Python</li>
-<li class="fragment">Has some</li>
+<li><p>Grist is a modern relational spreadsheet. It combines the flexibility of a spreadsheet with the robustness of a database.</p>
+<p>It can run:</p>
+<ul>
+<li>locally (docker or desktop)</li>
+<li>in the cloud or homelab</li>
+<li>like Google Docs at <a href="https://getgrist.com" target="_blank">https://getgrist.com</a></li>
+</ul></li>
 </ul>
+</div>
+<div class="fragment">
+<ul>
+<li>It stores everything as a SQLite database that is easy to share and backup</li>
+</ul>
+</div>
+<aside class="notes">
+<p>Talk about the SMVE (check if time allows)</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="grist-architecture" class="slide level2">
 <h2>Grist Architecture</h2>
@@ -236,87 +360,37 @@ Nahuel Defossé
   }
 }}%%
 flowchart TB
-    UI["Spreadsheet UI"] --&gt; Engine["Document engine&lt;br/&gt;(Node.js)"]
+    subgraph TopRow[" "]
+        direction LR
+        UI["Spreadsheet UI 👈🏽"]
+        OfficialMCP["Official MCP"]
+    end
+
+    UI --&gt; Engine["Document engine&lt;br/&gt;(Node.js)"]
+    OfficialMCP &lt;-.-&gt; Engine
     Engine &lt;--&gt; DB[("SQLite")]
-    Engine --&gt; Sandbox["Sandboxed Python"] --&gt; Formulas["Formulas"]
+    Engine --&gt; Sandbox["🐍 Sandboxed Python"] --&gt; Formulas["Formulas"]
     Formulas --&gt; Engine
     Engine &lt;--&gt; API["Grist REST API"]
 
-    API &lt;--&gt; Notebook["Python notebook"]
-    API &lt;--&gt; Gry["gry CLI"]
-    API &lt;-.-&gt; MCP["With MCP"]
-
+    API &lt;--&gt; CLI["gry (cli) 👈🏽"]
+    API &lt;--&gt; Notebook["Python notebook 👈🏽"]
+    API &lt;--&gt; MCP["OSS MCP 👈🏽"]
 
     classDef ui fill:#e4f1f8,stroke:#24557a,color:#263238,stroke-width:2px,font-size:25px;
     classDef python fill:#fff0c9,stroke:#8b4b00,color:#263238,stroke-width:2px,font-size:25px;
     classDef data fill:#edf3df,stroke:#5f6f36,color:#263238,stroke-width:2px,font-size:25px;
     classDef client fill:#dfeecf,stroke:#5f6f36,color:#263238,stroke-width:2px,font-size:25px;
-    classDef mcp fill:#fdf6e3,stroke:#5f6f36,color:#263238,stroke-width:2px,stroke-dasharray:6 4,font-size:25px;
-    class UI,Engine,API ui;
+    classDef terminal fill:#263238,stroke:#24557a,color:#fdf6e3,stroke-width:2px,font-family:monospace,font-size:25px;
+    classDef mcp fill:#fdf6e3,stroke:#5f6f36,color:#263238,stroke-width:2px, font-size:25px;
+    class UI,Engine,API,OfficialMCP ui;
     class Sandbox,Formulas python;
-    class Notebook,Gry client;
+    class Notebook client;
+    class CLI terminal;
     class DB data;
-    class MCP mcp;
+    class MCP client;
+    style TopRow fill:none,stroke:none;
     linkStyle default stroke:#607d8b,stroke-width:2px;
-</pre>
-</div>
-<p></p></figure><p></p>
-</div>
-</div>
-</div>
-</section>
-<section id="workshop-services" class="slide level2">
-<h2>Workshop services</h2>
-<div class="cell" data-reveal="true" data-layout-align="default">
-<div class="cell-output-display">
-<div>
-<p></p><figure class=""><p></p>
-<div>
-<pre class="mermaid mermaid-js">%%{init: {
-  "theme": "base",
-  "flowchart": {"curve": "linear", "htmlLabels": true, "nodeSpacing": 34, "rankSpacing": 42, "diagramPadding": 4},
-  "themeVariables": {
-    "background": "#fdf6e3",
-    "primaryTextColor": "#17324d",
-    "lineColor": "#6b7c83",
-    "fontFamily": "system-ui, sans-serif",
-    "fontSize": "21px"
-  }
-}}%%
-flowchart TB
-    Caddy["Caddy&lt;br/&gt;&lt;b&gt;localhost:8000 → :80&lt;/b&gt;"]
-    Grist["Grist&lt;br/&gt;&lt;b&gt;localhost:8484 → :8484&lt;/b&gt;"]
-    Marimo["Marimo&lt;br/&gt;&lt;b&gt;localhost:8081 → :8080&lt;/b&gt;"]
-    WebUI["Hermes WebUI&lt;br/&gt;&lt;b&gt;localhost:4096 → :8787&lt;/b&gt;"]
-    Hermes["Hermes&lt;br/&gt;&lt;b&gt;:8642 internal&lt;/b&gt;"]
-
-    WebUI --&gt;|"HTTP API"| Hermes
-
-    CaddyFiles["&lt;b&gt;Caddy files · read-only&lt;/b&gt;&lt;br/&gt;./caddy → /srv&lt;br/&gt;Caddyfile → /etc/caddy/Caddyfile"]
-    Workspace["&lt;b&gt;Workspace bind&lt;/b&gt;&lt;br/&gt;. → /workspace"]
-    GristData[("&lt;b&gt;grist-data&lt;/b&gt;&lt;br/&gt;Grist: /persist")]
-    HermesData[("&lt;b&gt;hermes-data&lt;/b&gt;&lt;br/&gt;Hermes: /opt/data&lt;br/&gt;WebUI: ~/.hermes")]
-    HermesSource[("&lt;b&gt;hermes-agent-src&lt;/b&gt;&lt;br/&gt;Hermes: /opt/hermes&lt;br/&gt;WebUI: ~/.hermes/hermes-agent · RO")]
-
-    Caddy --- CaddyFiles
-    Grist --- GristData
-    Marimo --- Workspace
-    WebUI --- Workspace
-    WebUI --- HermesData
-    Hermes --- HermesData
-    WebUI --- HermesSource
-    Hermes --- HermesSource
-
-    classDef service fill:#d9eef7,stroke:#1f5d78,color:#17324d,stroke-width:2.5px;
-    classDef agent fill:#e2def5,stroke:#5b4b8a,color:#2f2850,stroke-width:2.5px;
-    classDef bind fill:#ffe6ad,stroke:#a85d00,color:#4d3300,stroke-width:2.5px;
-    classDef volume fill:#dcecc5,stroke:#55752b,color:#294214,stroke-width:2.5px;
-    class Caddy,Grist,Marimo service;
-    class Hermes,WebUI agent;
-    class CaddyFiles,Workspace bind;
-    class GristData,HermesData,HermesSource volume;
-    linkStyle default stroke:#6b7c83,stroke-width:2.5px;
-    linkStyle 0 stroke:#5b4b8a,stroke-width:3px;
 </pre>
 </div>
 <p></p></figure><p></p>
@@ -328,69 +402,448 @@ flowchart TB
 <h2>UI Structure</h2>
 <p>Working in Grist is organized in this way:</p>
 <ul>
-<li class="fragment"><i class="fa-solid fa-globe" aria-label="globe"></i> A site (each user has his/hers)</li>
-<li class="fragment"><i class="fa-solid fa-folder-open" aria-label="folder-open"></i> A workspace, this is like folders and contain documents</li>
+<li class="fragment"><i class="fa-solid fa-globe" aria-label="globe"></i> A site (each user has his/hers)
+<ul>
+<li class="fragment"><i class="fa-solid fa-folder-open" aria-label="folder-open"></i> A workspace, this is like folders and contain documents
+<ul>
 <li class="fragment"><i class="fa-solid fa-file-lines" aria-label="file-lines"></i> Documents
 <ul>
 <li class="fragment"><i class="fa-solid fa-database" aria-label="database"></i> Database</li>
-<li class="fragment"><i class="fa-solid fa-table-columns" aria-label="table-columns"></i> Pages, views and other presentation data</li>
+<li class="fragment"><i class="fa-solid fa-table-columns" aria-label="table-columns"></i> Pages (tabs), views, widgets, 🐍 formulas</li>
+</ul></li>
+</ul></li>
 </ul></li>
 </ul>
 <!-- Source: https://www.youtube.com/watch?v=X7BnmstKnAQ  -->
 </section>
-<section id="a-grist-spreadsheets" class="slide level2">
-<h2>A grist Spreadsheets</h2>
+<section id="the-welcome-screen" class="slide level2">
+<h2>The welcome screen</h2>
 
-<img data-src="./img/main-grist-screen.png" class="r-stretch quarto-figure-center"><p class="caption">Main Spreadsheets View</p></section>
-<section id="column-types" class="slide level2">
-<h2>Column types</h2>
+<img data-src="./img/main-grist-screen.png" class="r-stretch quarto-figure-center" alt="Main Spreadsheets View"><p class="caption">Main Spreadsheets View</p></section>
+<section id="creating-a-calendar-style-application" class="slide level2">
+<h2>Creating a calendar style application</h2>
+<p><i class="fa-solid fa-table-cells" aria-label="table-cells"></i> For this we will create a few columns in a table</p>
+<ul>
+<li class="fragment">Activity</li>
+<li class="fragment"><i class="fa-solid fa-calendar-day" aria-label="calendar-day"></i> Start</li>
+<li class="fragment"><i class="fa-solid fa-calendar-check" aria-label="calendar-check"></i> End</li>
+<li class="fragment"><i class="fa-solid fa-toggle-on" aria-label="toggle-on"></i> All day</li>
+<li class="fragment"><i class="fa-solid fa-tag" aria-label="tag"></i> Category</li>
+</ul>
+</section>
+<section id="first-table" class="slide level2">
+<h2>First Table</h2>
+
+<img data-src="./img/first_table.png" class="r-stretch quarto-figure-center" alt="A table with some typed columns"><p class="caption">A table with some typed columns</p></section>
+<section id="code-view" class="slide level2">
+<h2>Code View</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="./img/code_view.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="The code view for that table"><img data-src="./img/code_view.png" alt="The code view for that table"></a></p>
+<figcaption>The code view for that table</figcaption>
+</figure>
+</div>
+</section>
+<section id="first-python-formula" class="slide level2 smaller">
+<h2>First Python formula</h2>
+<div class="fragment bigger">
+<p>Let’s create a our first formula to compute how many days we have before the column <code>$Start</code></p>
+</div>
+<div class="fragment">
 <div class="columns">
 <div class="column">
-<p><img data-src="./img/column.png"></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a aria-label="1"></a>$Start <span class="op">-</span> TODAY()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div><div class="column">
-<p><img data-src="./img/type.png"></p>
+<p><code>datetime.timedelta(days=-3, seconds=45245, microseconds=577301)</code></p>
 </div></div>
-</section>
-<section id="trying-out-dates" class="slide level2">
-<h2>Trying out dates</h2>
+<div class="fragment">
 <div class="columns">
 <div class="column">
-<p><img data-src="./img/selection-of-date-type.png"></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a aria-label="1"></a><span class="im">from</span> datetime <span class="im">import</span> timedelta <span class="im">as</span> td</span>
+<span id="cb3-2"><a aria-label="2"></a><span class="cf">return</span> (</span>
+<span id="cb3-3"><a aria-label="3"></a>  $Start <span class="op">-</span> NOW()</span>
+<span id="cb3-4"><a aria-label="4"></a>) <span class="op">/</span> td(days<span class="op">=</span><span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div><div class="column">
-<p><img data-src="./img/date-picker.png"></p>
+<p><code>2.458484637708333</code></p>
 </div></div>
-<!-- TODO: Examples from https://support.getgrist.com/examples/ -->
-</section></section>
-<section>
-<section id="accessing-your-data-over-the-api" class="title-slide slide level1 center">
-<h1>Accessing your data over the API</h1>
+</div>
+</div>
+<div class="fragment">
+<div class="columns">
+<div class="column">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a aria-label="1"></a><span class="im">from</span> datetime <span class="im">import</span> timedelta <span class="im">as</span> td</span>
+<span id="cb4-2"><a aria-label="2"></a><span class="cf">return</span> <span class="bu">int</span>(</span>
+<span id="cb4-3"><a aria-label="3"></a>  $Start <span class="op">-</span> NOW()</span>
+<span id="cb4-4"><a aria-label="4"></a>) <span class="op">/</span> td(days<span class="op">=</span><span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div><div class="column">
+<p><code>2</code></p>
+</div></div>
+</div>
+<div class="fragment">
+<div class="columns">
+<div class="column">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a aria-label="1"></a>DATEDIF($Start, NOW(), <span class="st">'D'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div><div class="column">
+<p><code>3</code></p>
+</div></div>
+</div>
+</section>
+<section id="adding-a-second-table" class="slide level2">
+<h2>Adding a second table</h2>
+<p>Let’s use a second <del>sheet</del> table, and <del>link</del> have a Foreign Key to our main table.</p>
+<div class="columns">
+<div class="column" style="width:30%;">
+<div class="fragment">
+<p><a href="./img/2nd_table_start.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="./img/2nd_table_start.png"></a></p>
+</div>
+</div><div class="column" style="width:70%;">
+<div class="fragment">
+<p><a href="./img/2nd_table_2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="./img/2nd_table_2.png"></a></p>
+</div>
+</div></div>
+</section>
+<section id="setting-up-some-column-types" class="slide level2">
+<h2>Setting up some column types</h2>
+<div class="columns">
+<div class="column">
+<p><strong>Markdown</strong></p>
+<p><a href="./img/2nd_table_3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="./img/2nd_table_3.png"></a></p>
+</div><div class="column">
+<p><strong>Attachments</strong></p>
+<p><a href="./img/2nd_table_4.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img data-src="./img/2nd_table_4.png"></a></p>
+</div></div>
+</section>
+<section id="adding-a-reference-column" class="slide level2">
+<h2>Adding a reference column</h2>
+<div class="columns">
+<div class="column">
+<div class="fragment">
+<p><a href="./img/2nd_table.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img data-src="./img/2nd_table.png"></a></p>
+</div>
+</div><div class="column">
+<div class="fragment">
+<p><a href="./img/2nd_table_fk.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img data-src="./img/2nd_table_fk.png"></a></p>
+</div>
+</div></div>
+</section>
+<section id="and-lookups" class="slide level2">
+<h2>And lookups</h2>
+<div class="fragment">
+<p><i class="fa-solid fa-table" aria-label="table"></i> Events <i class="fa-solid fa-arrow-left" aria-label="arrow-left"></i> <i class="fa-solid fa-table" aria-label="table"></i> Attachments</p>
+<pre><code>Attachments.lookupRecords(Event=$id)</code></pre>
+</div>
+<div class="fragment">
+<p>Playing with the string repetitions</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a aria-label="1"></a>count <span class="op">=</span> <span class="bu">len</span>(Attachments.lookupRecords(Event<span class="op">=</span>$id))</span>
+<span id="cb7-2"><a aria-label="2"></a></span>
+<span id="cb7-3"><a aria-label="3"></a><span class="cf">return</span> <span class="st">"📦"</span> <span class="op">*</span> count</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="putting-together-views" class="slide level2">
+<h2>Putting together views</h2>
+<p><a href="./img/linked_tables_with_formulas.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img data-src="./img/linked_tables_with_formulas.png" class="fofo"></a></p>
+</section>
+<section class="slide level2">
 
-</section>
-<section id="getting-the-accounts-api-key" class="slide level2">
-<h2>Getting the account’s API key</h2>
-<p>In Grist settings we can jump in directly into the API Console.</p>
+<!--
+## Computed / Helper Columns can be hidden 🙈
 
-<img data-src="./img/api_key.png" class="r-stretch"></section>
-<section id="the-gry-cli" class="slide level2">
-<h2>The <code>gry</code> CLI</h2>
-</section>
-<section id="what-about-a-notebook" class="slide level2">
-<h2>What about a notebook?</h2>
-</section>
-<section id="section" class="slide level2">
-<h2><!-- Show `gry` --></h2>
+
+::: {.columns}
+
+::: {.column}
+
+From the author panel (right side on the `Table` tab, on the bottom)
+
+
+:::
+
+::: {.column}
+
+![](./img/hide_columns.png)
+
+:::
+
+
+:::
+
+
+
+
+---
+
+## Styling columns
+
+
+::: {.columns}
+::: {.column width=30%}
+::: {.fragment}
+#### Column styling
+
+![](./img/conditional_style.png)
+:::
+:::
+
+::: {.column width=30%}
+::: {.fragment}
+#### Row styling
+![](./img/rwo-style.png)
+
+:::
+
+:::
+
+::: {.column width=30%}
+
+::: {.fragment}
+#### Creating a formula
+
+![](./img/style_formulas_example.png)
+:::
+:::
+:::
+
+-->
 </section>
 <section class="slide level2">
 
 </section></section>
 <section>
-<section id="using-ai" class="title-slide slide level1 center">
-<h1>Using AI</h1>
+<section id="presentation" class="title-slide slide level1 center">
+<h1>Presentation</h1>
+<p>Custom widgets</p>
+</section>
+<section class="slide level2">
 
+<div class="smaller">
+<p>Grist supports custom widgets, an example of one that comes with it is the calendar</p>
+<div class="columns">
+<div class="column">
+<p><a href="./img/add-new.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img data-src="./img/add-new.png"></a></p>
+</div><div class="column">
+<p><a href="./img/widget-type.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14"><img data-src="./img/widget-type.png"></a></p>
+</div></div>
+</div>
+</section>
+<section id="custom-widgets-cont." class="slide level2">
+<h2>Custom Widgets (cont.)</h2>
+<div class="columns">
+<div class="column">
+<p><a href="./img/calendar-setup.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15"><img data-src="./img/calendar-setup.png"></a></p>
+</div><div class="column smaller">
+<p>This configuration can be modified later in the creator panel.</p>
+</div></div>
+</section>
+<section id="custom-widgets-cont.-1" class="slide level2">
+<h2>Custom Widgets (cont.)</h2>
+
+<img data-src="./img/full_calendar.png" class="r-stretch"></section>
+<section id="more-widgets-to-explore-or-create" class="slide level2">
+<h2>More widgets to explore (or create)</h2>
+
+<img data-src="./img/more-widgets.png" class="r-stretch"></section>
+<section class="slide level2">
+
+<!--
+
+## Column types
+
+::: {.columns}
+::: {.column}
+![](./img/column.png)
+:::
+::: {.column}
+![](./img/type.png)
+:::
+:::
+
+## Trying out dates
+
+::: {.columns}
+::: {.column}
+![](./img/selection-of-date-type.png)
+:::
+::: {.column}
+![](./img/date-picker.png)
+:::
+:::
+
+-->
+<!-- TODO: Examples from https://support.getgrist.com/examples/ -->
+</section></section>
+<section>
+<section id="api-access" class="title-slide slide level1 center">
+<h1>API Access</h1>
+
+</section>
+<section id="getting-the-accounts-api-key" class="slide level2">
+<h2>Getting the account’s API key</h2>
+<p>To get the user’s API key, this is in the <a href="http://localhost:8484/account/developer" target="_blank">user settings</a>.</p>
+<p><a href="./img/api_key.png" class="lightbox" data-gallery="quarto-lightbox-gallery-18"><img data-src="./img/api_key.png"></a></p>
+</section>
+<section class="slide level2">
+
+<!-- API access screenshots -->
+<div class="columns">
+<div class="column">
+<div class="fragment">
+<p><a href="./img/api_document_1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-19"><img data-src="./img/api_document_1.png" class="fofu"></a></p>
+</div>
+</div><div class="column">
+<div class="fragment">
+<p><a href="./img/api_document_2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-20"><img data-src="./img/api_document_2.png"></a></p>
+</div>
+<div class="fragment">
+<p><a href="./img/api_document_rest.png" class="lightbox" data-gallery="quarto-lightbox-gallery-21"><img data-src="./img/api_document_rest.png"></a></p>
+</div>
+</div></div>
+</section>
+<section id="a-cli-client-for-the-api" class="slide level2">
+<h2>A CLI client for the API</h2>
+<p><code>pygrister</code> is a Python library and a CLI for grist.</p>
+<p>It requires an URL and an API key, but more configuration can be passed.</p>
+<p>This in example <code>.env</code> we could use in our workshop repo:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode numberSource shell number-lines code-with-copy"><code class="sourceCode"><span id="cb8-1"><a aria-label="1"></a>GRIST_API_KEY=22...36</span>
+<span id="cb8-2"><a aria-label="2"></a>GRIST_SELF_MANAGED=Y</span>
+<span id="cb8-3"><a aria-label="3"></a>GRIST_SELF_MANAGED_HOME=http://localhost:8484</span>
+<span id="cb8-4"><a aria-label="4"></a>GRIST_SELF_MANAGED_SINGLE_ORG=N</span>
+<span id="cb8-5"><a aria-label="5"></a>GRIST_SERVER_PROTOCOL=http</span>
+<span id="cb8-6"><a aria-label="6"></a>GRIST_TEAM_SITE=docs</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="gry---listing-workspaces" class="slide level2">
+<h2>gry - listing workspaces</h2>
+<div class="fragment">
+<pre><code>$ gry ws list
+┏━━━━┳━━━━━━┳━━━━━━━┳━━━━━━━┳━━━━━━┓
+┃ id ┃ name ┃ owner ┃ email ┃ docs ┃
+┡━━━━╇━━━━━━╇━━━━━━━╇━━━━━━━╇━━━━━━┩
+│ 3  │ Home │ Null  │       │ 1    │
+└────┴──────┴───────┴───────┴──────┘</code></pre>
+</div>
+<div class="fragment">
+<pre><code>$ gry ws see -w 3
+┏━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ key  ┃ value                                      ┃
+┡━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│ id   │ 3                                          │
+│ name │ Home                                       │
+│ team │ 3 - pycon-workshop                         │
+├──────┼────────────────────────────────────────────┤
+│ doc  │ q5aBBVtSotFo4YJdVuoLoD - Untitled document │
+└──────┴────────────────────────────────────────────┘</code></pre>
+</div>
+</section>
+<section id="gry---listing-tables" class="slide level2">
+<h2>gry - listing tables</h2>
+<div class="service-account-output">
+<pre><code>gry table list -d q5aBBVtSotFo
+┏━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ table id    ┃ metadata                    ┃
+┡━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│ Events      │ tableRef: 1                 │
+│             │ primaryViewId: 1            │
+│             │ summarySourceTable: 0       │
+│             │ onDemand: False             │
+│             │ rawViewSectionRef: 2        │
+│             │ recordCardViewSectionRef: 3 │
+├─────────────┼─────────────────────────────┤
+│ Attachments │ tableRef: 2                 │
+│             │ primaryViewId: 2            │
+│             │ summarySourceTable: 0       │
+│             │ onDemand: False             │
+│             │ rawViewSectionRef: 5        │
+│             │ recordCardViewSectionRef: 6 │
+└─────────────┴─────────────────────────────┘</code></pre>
+</div>
+</section>
+<section id="gry---running-sql" class="slide level2">
+<h2>gry - running SQL</h2>
+<pre><code>gry sql 'select id, Activity, Start, Category from Events' -d q5aBBVtSotFo
+┏━━━━┳━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━┓
+┃ id ┃ Activity ┃ Start      ┃ Category         ┃
+┡━━━━╇━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━┩
+│ 2  │ PyCon    │ 1790920800 │ ["🎙️conference"] │
+└────┴──────────┴────────────┴──────────────────┘</code></pre>
+</section>
+<section id="service-accounts" class="slide level2">
+<h2>Service Accounts</h2>
+<ul>
+<li class="fragment">It’s a bit dangerous to give full access to our documents to any automation with the user API key (GRIST_API_KEY)</li>
+<li class="fragment">Service Accounts are pseudo-users which can be given finer grained access to a a few tables</li>
+<li class="fragment">There’s not UI for creating service accounts, but <code>gry</code> CLI comes handy.</li>
+</ul>
+</section>
+<section id="creating-service-accounts" class="slide level2">
+<h2>Creating service accounts</h2>
+<div class="fragment">
+<pre><code>gry sacc new --label sacc 2026-12-31
+Done. Id: 2 (key: 6a4e9e39ceb0161bbbd5971089e215647191db97)</code></pre>
+</div>
+<div class="fragment">
+<p>👆 that’s the new API key for that service account, and should replace <code>GRIST_API_KEY</code></p>
+</div>
+<div class="fragment service-account-output">
+<pre><code>gry sacc see 2
+┏━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ key         ┃ value                                                        ┃
+┡━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│ id          │ 2                                                            │
+│ login       │ bd86cf79-4abc-44db-af9d-68b5070cfa14@serviceaccounts.invalid │
+│ label       │ sacc                                                         │
+│ description │                                                              │
+│ expires     │ 2026-12-31T00:00:00.000Z                                     │
+│ valid key   │ True                                                         │
+└─────────────┴──────────────────────────────────────────────────────────────┘</code></pre>
+</div>
+</section>
+<section id="key-has-no-access" class="slide level2">
+<h2>Key has no access</h2>
+<pre><code>GRIST_API_KEY=6a4e9e39ceb0161bbbd5971089e215647191db97 gry ws list
+Error! Status: 403
+{'error': 'access denied'}</code></pre>
+</section>
+<section id="inviting-the-service-account-to-the-document" class="slide level2">
+<h2>Inviting the service account to the document</h2>
+<p><a href="./img/adding_users.png" class="lightbox" data-gallery="quarto-lightbox-gallery-22"><img data-src="./img/adding_users.png"></a></p>
+</section>
+<section id="using-our-service-account" class="slide level2">
+<h2>Using our service account</h2>
+<p><a href="./img/adding_users_2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-23"><img data-src="./img/adding_users_2.png"></a></p>
+</section>
+<section id="setting-fine-grained-permissions" class="slide level2">
+<h2>Setting fine grained permissions</h2>
+<p><a href="./img/access_rules.png" class="lightbox" data-gallery="quarto-lightbox-gallery-24"><img data-src="./img/access_rules.png"></a></p>
+</section>
+<section id="service-account-now-has-access" class="slide level2">
+<h2>Service account now has access</h2>
+<pre><code>GRIST_API_KEY=6a4e9e39ceb0161bbbd5971089e215647191db97 gry ws list
+┏━━━━┳━━━━━━┳━━━━━━━┳━━━━━━━┳━━━━━━┓
+┃ id ┃ name ┃ owner ┃ email ┃ docs ┃
+┡━━━━╇━━━━━━╇━━━━━━━╇━━━━━━━╇━━━━━━┩
+│ 3  │ Home │ Null  │       │ 1    │
+└────┴──────┴───────┴───────┴──────┘</code></pre>
+</section>
+<section class="slide level2">
+
+</section></section>
+<section>
+<section id="using-notebooks" class="title-slide slide level1 center">
+<h1>Using Notebooks</h1>
+<p>We can import <code>GristApi</code> from <code>pygrister.api</code>.</p>
+</section>
+<section class="slide level2">
+
+</section></section>
+<section>
+<section id="using-grist-mcp" class="title-slide slide level1 center">
+<h1>Using grist MCP</h1>
+<p>🤖</p>
 </section>
 <section id="connecting-through-mcp" class="slide level2">
 <h2>Connecting through MCP</h2>
 <!-- MCP server options, official, Python and JavaScript one -->
+<p><a href="https://github.com/nic01asFr/mcp-server-grist" target="blank_"><code>mcp-server-grist</code></a> is a MCP server written in Python. It allows AI applications like Claude, IBM Bob, Codex, pi, OpenClaw, Hermes, etc. to connect to the Grist API.</p>
+<p>This is not the official MCP that lives in <code>https://&lt;yoursite&gt;.getgrist.com/mcp</code> for the commercial version, so authentication will use the same API KEYs instead of OAauth2.</p>
 </section>
 <section class="slide level2">
 
@@ -400,15 +853,12 @@ flowchart TB
 </section>
 <section class="slide level2">
 
-</section>
-<section class="slide level2">
-
 </section></section>
-<section id="closing-words" class="title-slide slide level1 center">
-<h1>Closing words</h1>
-<ul>
-<li class="fragment">The level of control</li>
-</ul>
+<section id="thank-you" class="title-slide slide level1 center">
+<h1>Thank you</h1>
+<div class="fragment">
+<p><strong>Questions?</strong></p>
+</div>
 
 
 </section>
@@ -697,7 +1147,7 @@ flowchart TB
         }
           var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
           var mailtoRegex = new RegExp(/^mailto:/);
-            var filterRegex = new RegExp("git@work\.github\.com:D3f0\/pycon-2026-teaching-spreadhseets-python\.git");
+            var filterRegex = new RegExp("git@work\.github\.com:D3f0\/py-spreadsheets-2026\.git");
           var isInternal = (href) => {
               return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
           }
@@ -795,6 +1245,2202 @@ flowchart TB
         }
       });
       </script>
+    <script type="text/javascript">
+    let _cfCounter = 0;
+
+    // Annotation styling options, read once per init from the container.
+    // `ann-line`        = solid (default) | dashed | dotted | none  → leader-line style
+    // `ann-line-color`  = CSS color | auto (default → follow shape color)
+    // `ann-title-color` = CSS color | auto (default → shape color) | none (inherit body text)
+    function annOpts(container) {
+      const style = (container.dataset.annLine || 'solid').toLowerCase();
+      const dash  = style === 'dashed' ? '6 5' : style === 'dotted' ? '1 5' : null;
+      return {
+        drawLine: style !== 'none',
+        dash,
+        lineColor:  container.dataset.annLineColor  || 'auto',
+        titleColor: container.dataset.annTitleColor || 'auto',
+      };
+    }
+
+    // Resolve the callout title tint for a given shape color, per `ann-title-color`.
+    function annTitleColor(opts, shapeColor) {
+      return opts.titleColor === 'auto' ? shapeColor
+           : opts.titleColor === 'none' ? 'inherit'
+           : opts.titleColor;
+    }
+
+    // Build a styled leader <line>, or null when lines are turned off.
+    function makeLeaderLine(opts, shapeColor, x1, y1, x2, y2) {
+      if (!opts.drawLine) return null;
+      const ln = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+      ln.setAttribute('x1', x1); ln.setAttribute('y1', y1);
+      ln.setAttribute('x2', x2); ln.setAttribute('y2', y2);
+      ln.setAttribute('stroke', opts.lineColor === 'auto' ? shapeColor : opts.lineColor);
+      ln.setAttribute('stroke-width', '2');
+      ln.setAttribute('stroke-linecap', 'round');   // renders dotted as round dots
+      if (opts.dash) ln.setAttribute('stroke-dasharray', opts.dash);
+      return ln;
+    }
+
+    // Extract a node label as HTML rather than flattened text, so inline markup
+    // such as Font Awesome icons (<i class="fa-...">) survives into the diagram.
+    // Strips nested .annotation children (plus any extra selectors, e.g. 'item' for
+    // the hierarchy layout) and unwraps Pandoc's <p> wrapper.
+    // Reveal.js fragment classes (see reveal.js/plugin/fragment styles). Diagram
+    // elements are built dynamically after Reveal parses the deck, so an author's
+    // `.fragment` div (plus any fade-*/highlight-*/etc. modifier and an explicit
+    // `data-fragment-index`) has to be copied onto the generated node by hand for
+    // Reveal's fragment plugin to pick it up.
+    const FRAGMENT_CLASS_RE = /^fragment$|^fade-|^highlight-|^grow$|^shrink$|^strike$|^semi-fade-out$|^current-visible$/;
+    function copyFragmentAttrs(src, dst) {
+      if (!src) return;
+      Array.from(src.classList)
+        .filter(c => FRAGMENT_CLASS_RE.test(c))
+        .forEach(c => dst.classList.add(c));
+      if (src.hasAttribute('data-fragment-index')) {
+        dst.setAttribute('data-fragment-index', src.getAttribute('data-fragment-index'));
+      }
+      // Any inline style on the source (e.g. `transition-delay` to stagger
+      // same-index fragments) is appended, not overwritten, so it layers on top
+      // of the positioning styles the diagram already set on `dst`. Some callers
+      // (e.g. `.overlap` divs) hide `src` via inline `display: none` before this
+      // runs; `dataset.origStyle`, snapshotted beforehand, is preferred when set.
+      const style = src.dataset.origStyle !== undefined ? src.dataset.origStyle : src.getAttribute('style');
+      if (style) dst.style.cssText += (dst.style.cssText && !dst.style.cssText.endsWith(';') ? ';' : '') + style;
+    }
+
+    function labelHTML(el, stripSelectors) {
+      const clone = el.cloneNode(true);
+      const drop = ['annotation'].concat(stripSelectors || []);
+      Array.from(clone.children)
+        .filter(c => c.classList && drop.some(s => c.classList.contains(s)))
+        .forEach(c => clone.removeChild(c));
+      const ps = Array.from(clone.children).filter(c => c.tagName === 'P');
+      if (clone.childElementCount === 1 && ps.length === 1) {
+        return ps[0].innerHTML.trim();
+      }
+      return clone.innerHTML.trim();
+    }
+
+    function initCircleFlow(container) {
+      const items = Array.from(container.querySelectorAll('.item'));
+      if (items.length === 0) return;
+
+      const n = items.length;
+
+      // Per-item annotation HTML (nested `.annotation` div); null if absent.
+      const annHTML = items.map(item => {
+        const ann = Array.from(item.children).find(c => c.classList.contains('annotation'));
+        return ann ? ann.innerHTML.trim() : null;
+      });
+      const hasAnn = annHTML.some(a => a !== null);
+
+      // When annotated, shrink the ring and reserve side columns so the whole
+      // figure (ring + callouts) fits a normal content column.
+      const ANN_W = 164, ANN_GAP = 24, OUTER = 8;
+      const PAD = hasAnn ? (ANN_W + ANN_GAP) : 0;
+      const maxR = hasAnn ? 168 : 240;
+      const cx = hasAnn ? (OUTER + PAD + maxR) : 250;
+      const W  = hasAnn ? (2 * cx) : 500;
+      const H  = hasAnn ? 430 : 500;
+      const cy = H / 2;
+
+      const nodeType = container.classList.contains('node-box')  ? 'box'  :
+                       container.classList.contains('node-none') ? 'none' : 'circle';
+      const arrowType = container.classList.contains('arrow-curved')  ? 'curved'  :
+                        container.classList.contains('arrow-thin')    ? 'thin'    :
+                        container.classList.contains('arrow-ring')    ? 'ring'    :
+                        container.classList.contains('arrow-arc')     ? 'arc'     :
+                        container.classList.contains('arrow-double')  ? 'double'  : 'chevron';
+
+      const defaultNodeColor = container.dataset.nodeColor  || '#2e6b8a';
+      const arrowColor       = container.dataset.arrowColor || '#2e6b8a';
+
+      let layoutR, nodeRadius;
+      if (n === 1) {
+        layoutR = 0;
+        nodeRadius = maxR;
+      } else {
+        const s = Math.sin(Math.PI / n);
+        layoutR = maxR / (1 + (2 / 3) * s);
+        nodeRadius = (2 / 3) * layoutR * s;
+      }
+
+      container.style.position = 'relative';
+      container.style.width = W + 'px';
+      container.style.height = H + 'px';
+
+      const positions = items.map((_, i) => {
+        const angle = (i / n) * 2 * Math.PI - Math.PI / 2;
+        return { x: cx + layoutR * Math.cos(angle), y: cy + layoutR * Math.sin(angle), angle };
+      });
+
+      const annAnchors = [];  // { ex, ey, mid, color, html } per annotated node
+      const nodeEls = items.map((item, i) => {
+        const { x, y, angle } = positions[i];
+        const nodeColor = item.getAttribute('color') || item.dataset.color || defaultNodeColor;
+        const node = document.createElement('div');
+        node.className = 'node node-' + nodeType;
+        // Node label = item text minus any nested .annotation content
+        let labelText = labelHTML(item);
+        if (annHTML[i] !== null) {
+          const clone = item.cloneNode(true);
+          Array.from(clone.children)
+            .filter(c => c.classList.contains('annotation'))
+            .forEach(c => clone.removeChild(c));
+          labelText = labelHTML(clone);
+          annAnchors.push({
+            ex: cx + maxR * Math.cos(angle),
+            ey: cy + maxR * Math.sin(angle),
+            mid: angle,
+            color: nodeColor,
+            html: annHTML[i]
+          });
+        }
+        node.innerHTML = labelText;
+        if (nodeType !== 'none') node.style.background = nodeColor;
+        node.style.left = x + 'px';
+        node.style.top = y + 'px';
+        node.style.transform = 'translate(-50%, -50%)';
+
+        if (nodeType === 'box') {
+          node.style.width  = (nodeRadius * 1.8) + 'px';
+          node.style.height = (nodeRadius * 1.2) + 'px';
+          node.style.borderRadius = (nodeRadius * 0.15) + 'px';
+        } else {
+          node.style.width  = (nodeRadius * 2) + 'px';
+          node.style.height = (nodeRadius * 2) + 'px';
+        }
+
+        container.appendChild(node);
+        item.style.display = 'none';
+        return node;
+      });
+
+      // Scale font so the longest label fills (but doesn't overflow) the node
+      const textMaxW = nodeType === 'box'  ? nodeRadius * 1.8 - 16 :
+                       nodeType === 'none' ? 80 :
+                       nodeRadius * 2 - 16;
+      const baseStyle   = getComputedStyle(nodeEls[0]);
+      const baseFontSize = parseFloat(baseStyle.fontSize) || 17.6;
+      const fontFamily   = baseStyle.fontFamily  || 'sans-serif';
+      const fontWeight   = baseStyle.fontWeight  || '500';
+      const cvs = document.createElement('canvas');
+      const cctx = cvs.getContext('2d');
+      cctx.font = `${fontWeight} ${baseFontSize}px ${fontFamily}`;
+      const maxTextWidth = Math.max(...nodeEls.map(el => cctx.measureText(el.textContent).width));
+      if (maxTextWidth > 0) {
+        // Scale to fill the node, but cap upscaling so short labels don't balloon
+        const scale = Math.min(textMaxW / maxTextWidth, 2.5);
+        nodeEls.forEach(el => el.style.fontSize = (baseFontSize * scale) + 'px');
+      }
+
+      if (hasAnn) {
+        const annSvg = makeSVGOverlay(container, W, H);
+        placeAnnotations(container, annSvg, annAnchors, cx, maxR, H, ANN_GAP);
+      }
+
+      if (n === 1) return;
+
+      const uid = 'cf' + (_cfCounter++);
+
+      if (arrowType === 'chevron') {
+        renderChevrons(container, positions, n, nodeRadius, arrowColor);
+      } else {
+        renderSVGArrows(container, positions, n, layoutR, nodeRadius, nodeType, arrowType, cx, cy, uid, arrowColor);
+      }
+    }
+
+    // --- Chevron (div-based) ---
+
+    function renderChevrons(container, positions, n, nodeRadius, arrowColor) {
+      const scale = nodeRadius / 55;
+      const w = 36 * scale, h = 28 * scale;
+
+      positions.forEach((from, i) => {
+        const to = positions[(i + 1) % n];
+        let mx = (from.x + to.x) / 2;
+        let my = (from.y + to.y) / 2;
+        const angleDeg = Math.atan2(to.y - from.y, to.x - from.x) * 180 / Math.PI;
+
+        if (n === 2) {
+          const dx = positions[1].x - positions[0].x;
+          const dy = positions[1].y - positions[0].y;
+          const len = Math.sqrt(dx * dx + dy * dy);
+          const offset = nodeRadius * 0.3;
+          const px = -dy / len * offset, py = dx / len * offset;
+          mx += i === 0 ? px : -px;
+          my += i === 0 ? py : -py;
+        }
+
+        const arrow = document.createElement('div');
+        arrow.className = 'arrow-shape';
+        arrow.style.background = arrowColor;
+        arrow.style.width  = w + 'px';
+        arrow.style.height = h + 'px';
+        arrow.style.left   = mx + 'px';
+        arrow.style.top    = my + 'px';
+        arrow.style.transform = `translate(-50%, -50%) rotate(${angleDeg}deg)`;
+        container.appendChild(arrow);
+      });
+    }
+
+    // --- SVG helpers ---
+
+    function makeSVGOverlay(container, w, h) {
+      const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      svg.setAttribute('width', w || 500);
+      svg.setAttribute('height', h || 500);
+      svg.style.cssText = 'position:absolute;left:0;top:0;overflow:visible;pointer-events:none;';
+      container.insertBefore(svg, container.firstChild);
+      return svg;
+    }
+
+    function addArrowMarker(defs, id, color, size, reverse) {
+      const marker = document.createElementNS('http://www.w3.org/2000/svg', 'marker');
+      marker.setAttribute('id', id);
+      marker.setAttribute('markerWidth',  size);
+      marker.setAttribute('markerHeight', size * 0.75);
+      marker.setAttribute('refX', reverse ? '0' : size);
+      marker.setAttribute('refY', size * 0.375);
+      marker.setAttribute('orient', reverse ? 'auto-start-reverse' : 'auto');
+      marker.setAttribute('markerUnits', 'userSpaceOnUse');
+      const poly = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+      poly.setAttribute('points', `0 0, ${size} ${size * 0.375}, 0 ${size * 0.75}`);
+      poly.setAttribute('fill', color);
+      marker.appendChild(poly);
+      defs.appendChild(marker);
+    }
+
+    function nodeEdgePoint(pos, toward, nodeRadius, nodeType) {
+      const dx = toward.x - pos.x, dy = toward.y - pos.y;
+      const len = Math.sqrt(dx * dx + dy * dy);
+      // box half-diagonal ≈ nodeRadius * 1.08; add padding for a clear gap
+      const trim = nodeType === 'none' ? nodeRadius * 0.6 : nodeType === 'box' ? nodeRadius * 1.2 : nodeRadius;
+      return { x: pos.x + dx / len * trim, y: pos.y + dy / len * trim };
+    }
+
+    // --- SVG arrow renderers ---
+
+    function renderSVGArrows(container, positions, n, layoutR, nodeRadius, nodeType, arrowType, cx, cy, uid, arrowColor) {
+      const svg  = makeSVGOverlay(container);
+      const defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
+      svg.appendChild(defs);
+
+      if (arrowType === 'ring') {
+        const maskId = uid + '-ring-mask';
+        const mask = document.createElementNS('http://www.w3.org/2000/svg', 'mask');
+        mask.setAttribute('id', maskId);
+
+        // White background — ring visible everywhere by default
+        const bg = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+        bg.setAttribute('x', '-500'); bg.setAttribute('y', '-500');
+        bg.setAttribute('width', '1500'); bg.setAttribute('height', '1500');
+        bg.setAttribute('fill', 'white');
+        mask.appendChild(bg);
+
+        // Black rect per node — hides the ring inside each node
+        const nw = nodeRadius * (nodeType === 'box' ? 1.8 : 2) + 8;
+        const nh = nodeRadius * (nodeType === 'box' ? 1.2 : 2) + 8;
+        positions.forEach(pos => {
+          const r = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+          r.setAttribute('x', pos.x - nw / 2); r.setAttribute('y', pos.y - nh / 2);
+          r.setAttribute('width', nw); r.setAttribute('height', nh);
+          r.setAttribute('fill', 'black');
+          mask.appendChild(r);
+        });
+        defs.appendChild(mask);
+
+        const el = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+        el.setAttribute('cx', cx); el.setAttribute('cy', cy);
+        el.setAttribute('r', layoutR);
+        el.setAttribute('fill', 'none');
+        el.setAttribute('stroke', arrowColor);
+        el.setAttribute('stroke-width', '2');
+        el.setAttribute('mask', `url(#${maskId})`);
+        svg.appendChild(el);
+        return;
+      }
+
+      if (arrowType === 'arc') {
+        const hw = Math.max(8, nodeRadius * 0.18);
+        const arrowHeadLen = hw * 2;
+
+        const angleOffset = Math.asin(Math.min(nodeRadius / layoutR, 0.99));
+        const startAngle = positions[0].angle + angleOffset;
+        const tipAngle   = positions[0].angle + 2 * Math.PI - angleOffset;
+        const bodyAngle  = tipAngle - arrowHeadLen / layoutR;
+
+        const rOut = layoutR + hw;
+        const rIn  = layoutR - hw;
+        const p = (r, a) => `${cx + r * Math.cos(a)} ${cy + r * Math.sin(a)}`;
+
+        const d = [
+          `M ${p(rOut, startAngle)}`,
+          `A ${rOut} ${rOut} 0 1 1 ${p(rOut, bodyAngle)}`,
+          `L ${p(layoutR, tipAngle)}`,
+          `L ${p(rIn, bodyAngle)}`,
+          `A ${rIn} ${rIn} 0 1 0 ${p(rIn, startAngle)}`,
+          'Z'
+        ].join(' ');
+
+        const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        path.setAttribute('d', d);
+        path.setAttribute('fill', arrowColor);
+        path.setAttribute('stroke', 'none');
+        svg.appendChild(path);
+        return;
+      }
+
+      if (arrowType === 'curved') {
+        const hw = Math.max(8, nodeRadius * 0.18); // half-width of arrow body
+        const arrowHeadLen = hw * 2;               // length of the pointed tip
+
+        const trimR = nodeType === 'none' ? nodeRadius * 0.85 : nodeRadius;
+        const angleOffset = Math.asin(Math.min(trimR / layoutR, 0.99));
+
+        positions.forEach((from, i) => {
+          const to = positions[(i + 1) % n];
+          const fromAngle = from.angle + angleOffset;
+          let toAngle = to.angle - angleOffset;
+          if (toAngle <= fromAngle) toAngle += 2 * Math.PI;
+
+          // Tip of arrowhead is at toAngle; body ends arrowHeadLen back along the arc
+          const tipAngle  = toAngle;
+          const bodyAngle = toAngle - arrowHeadLen / layoutR;
+          const largeArc  = (bodyAngle - fromAngle > Math.PI) ? 1 : 0;
+
+          const rOut = layoutR + hw;
+          const rIn  = layoutR - hw;
+
+          const p = (r, a) => `${cx + r * Math.cos(a)} ${cy + r * Math.sin(a)}`;
+
+          const d = [
+            `M ${p(rOut, fromAngle)}`,
+            `A ${rOut} ${rOut} 0 ${largeArc} 1 ${p(rOut, bodyAngle)}`,
+            `L ${p(layoutR, tipAngle)}`,
+            `L ${p(rIn,  bodyAngle)}`,
+            `A ${rIn}  ${rIn}  0 ${largeArc} 0 ${p(rIn,  fromAngle)}`,
+            'Z'
+          ].join(' ');
+
+          const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+          path.setAttribute('d', d);
+          path.setAttribute('fill', arrowColor);
+          path.setAttribute('stroke', 'none');
+          svg.appendChild(path);
+        });
+        return;
+      }
+
+      // thin and double — straight lines with arrowheads
+      const markerSize = 12;
+      addArrowMarker(defs, uid + '-end',   arrowColor, markerSize, false);
+      if (arrowType === 'double') addArrowMarker(defs, uid + '-start', arrowColor, markerSize, true);
+
+      positions.forEach((from, i) => {
+        const to = positions[(i + 1) % n];
+        let p1 = nodeEdgePoint(from, to, nodeRadius, nodeType);
+        let p2 = nodeEdgePoint(to, from, nodeRadius, nodeType);
+
+        if (n === 2) {
+          const dx = positions[1].x - positions[0].x;
+          const dy = positions[1].y - positions[0].y;
+          const len = Math.sqrt(dx * dx + dy * dy);
+          const offset = nodeRadius * 0.3;
+          const px = -dy / len * offset, py = dx / len * offset;
+          const sign = i === 0 ? 1 : -1;
+          p1 = { x: p1.x + sign * px, y: p1.y + sign * py };
+          p2 = { x: p2.x + sign * px, y: p2.y + sign * py };
+        }
+
+        const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+        line.setAttribute('x1', p1.x);
+        line.setAttribute('y1', p1.y);
+        line.setAttribute('x2', p2.x);
+        line.setAttribute('y2', p2.y);
+        line.setAttribute('stroke', arrowColor);
+        line.setAttribute('stroke-width', '2');
+        line.setAttribute('marker-end', `url(#${uid}-end)`);
+        if (arrowType === 'double') line.setAttribute('marker-start', `url(#${uid}-start)`);
+        svg.appendChild(line);
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.circle-flow').forEach(el => {
+        el.setAttribute('data-cf-init', '1');
+        initCircleFlow(el);
+      });
+      document.querySelectorAll('.pie').forEach(el => {
+        el.setAttribute('data-cf-init', '1');
+        initPie(el);
+      });
+      document.querySelectorAll('.process').forEach(el => {
+        el.setAttribute('data-cf-init', '1');
+        initProcess(el);
+      });
+      document.querySelectorAll('.pyramid').forEach(el => {
+        el.setAttribute('data-cf-init', '1');
+        initPyramid(el);
+      });
+      document.querySelectorAll('.matrix').forEach(el => {
+        el.setAttribute('data-cf-init', '1');
+        initMatrix(el);
+      });
+      document.querySelectorAll('.hierarchy').forEach(el => {
+        el.setAttribute('data-cf-init', '1');
+        initHierarchy(el);
+      });
+      document.querySelectorAll('.venn').forEach(el => {
+        el.setAttribute('data-cf-init', '1');
+        initVenn(el);
+      });
+      document.querySelectorAll('.stacked-venn').forEach(el => {
+        el.setAttribute('data-cf-init', '1');
+        initStackedVenn(el);
+      });
+      document.querySelectorAll('.funnel').forEach(el => {
+        el.setAttribute('data-cf-init', '1');
+        initFunnel(el);
+      });
+      document.querySelectorAll('.cycle').forEach(el => {
+        el.setAttribute('data-cf-init', '1');
+        initCycle(el);
+      });
+      // Diagrams may add `.fragment` elements (e.g. an annotated `.icon`/`.overlap`)
+      // after Reveal has already scanned the deck for fragments; re-sync so they're
+      // picked up and get a fragment index.
+      if (typeof Reveal !== 'undefined' && Reveal.sync) Reveal.sync();
+    });
+
+    if (typeof Reveal !== 'undefined') {
+      Reveal.on('slidechanged', () => {
+        document.querySelectorAll('.circle-flow:not([data-cf-init])').forEach(el => {
+          el.setAttribute('data-cf-init', '1');
+          initCircleFlow(el);
+        });
+        document.querySelectorAll('.pie:not([data-cf-init])').forEach(el => {
+          el.setAttribute('data-cf-init', '1');
+          initPie(el);
+        });
+        document.querySelectorAll('.process:not([data-cf-init])').forEach(el => {
+          el.setAttribute('data-cf-init', '1');
+          initProcess(el);
+        });
+        document.querySelectorAll('.pyramid:not([data-cf-init])').forEach(el => {
+          el.setAttribute('data-cf-init', '1');
+          initPyramid(el);
+        });
+        document.querySelectorAll('.matrix:not([data-cf-init])').forEach(el => {
+          el.setAttribute('data-cf-init', '1');
+          initMatrix(el);
+        });
+        document.querySelectorAll('.hierarchy:not([data-cf-init])').forEach(el => {
+          el.setAttribute('data-cf-init', '1');
+          initHierarchy(el);
+        });
+        document.querySelectorAll('.venn:not([data-cf-init])').forEach(el => {
+          el.setAttribute('data-cf-init', '1');
+          initVenn(el);
+        });
+        document.querySelectorAll('.stacked-venn:not([data-cf-init])').forEach(el => {
+          el.setAttribute('data-cf-init', '1');
+          initStackedVenn(el);
+        });
+        document.querySelectorAll('.funnel:not([data-cf-init])').forEach(el => {
+          el.setAttribute('data-cf-init', '1');
+          initFunnel(el);
+        });
+        document.querySelectorAll('.cycle:not([data-cf-init])').forEach(el => {
+          el.setAttribute('data-cf-init', '1');
+          initCycle(el);
+        });
+        if (Reveal.sync) Reveal.sync();
+      });
+    }
+
+    // --- Pie (pie slices) ---
+
+    function initPie(container) {
+      const items = Array.from(container.querySelectorAll('.item'));
+      if (items.length === 0) return;
+
+      const n = items.length;
+      const hasGap = container.classList.contains('gap');
+      const anyItemGap = items.some(item => item.classList.contains('gap'));
+      const sliceOffset = 20;
+      const defaultColor = container.dataset.nodeColor || '#2e6b8a';
+
+      // `.arrow` is a donut sub-variant: segments are separated by chevron-shaped
+      // seams pointing clockwise, so the ring reads as a cyclical flow. It implies
+      // donut rendering (a hollow center). Falls back to a plain donut for n === 1.
+      const isArrow = container.classList.contains('arrow');
+      const isDonut = container.classList.contains('donut') || isArrow;
+      let holeFrac = parseFloat(container.dataset.hole);
+      if (isNaN(holeFrac)) holeFrac = 0.55;
+      holeFrac = Math.min(0.85, Math.max(0.2, holeFrac));
+
+      // Per-item annotation HTML (from a nested `.annotation` div); null if absent.
+      const annHTML = items.map(item => {
+        const ann = Array.from(item.children).find(c => c.classList.contains('annotation'));
+        return ann ? ann.innerHTML.trim() : null;
+      });
+      const hasAnn = annHTML.some(a => a !== null);
+
+      // Geometry. When annotated, the donut shrinks and side columns are reserved
+      // so the whole figure (donut + callouts) fits a normal content column rather
+      // than spilling outside it.
+      const ANN_W = 164;   // callout column width (keep in sync with .annotation CSS)
+      const ANN_GAP = 24;  // gap between ring edge and callout column
+      const OUTER = 8;     // outer margin so callout text doesn't touch the edge
+      const PAD = hasAnn ? (ANN_W + ANN_GAP) : 0;
+      const r = hasAnn ? 168 : ((hasGap || anyItemGap) ? 210 : 240);
+      const rInner = isDonut ? r * holeFrac : 0;
+
+      const cx = hasAnn ? (OUTER + PAD + r) : 250;
+      const W  = hasAnn ? (2 * cx) : 500;
+      const H  = hasAnn ? 430 : 500;
+      const cy = H / 2;
+
+      container.style.position = 'relative';
+      container.style.width = W + 'px';
+      container.style.height = H + 'px';
+      container.style.margin = '0 auto';
+      container.style.display = 'block';
+
+      const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      svg.setAttribute('width', W);
+      svg.setAttribute('height', H);
+      svg.style.cssText = 'position:absolute;left:0;top:0;overflow:visible;';
+      container.appendChild(svg);
+
+      const labelEls = [];
+      const annAnchors = [];  // { ex, ey, mid, color, html } per annotated slice
+
+      items.forEach((item, i) => {
+        const color = item.getAttribute('color') || item.dataset.color || defaultColor;
+        const startAngle = (i / n) * 2 * Math.PI - Math.PI / 2;
+        const endAngle   = ((i + 1) / n) * 2 * Math.PI - Math.PI / 2;
+        const midAngle   = (startAngle + endAngle) / 2;
+
+        const itemOffset = (hasGap || item.classList.contains('gap')) ? sliceOffset : 0;
+        const dx = itemOffset * Math.cos(midAngle);
+        const dy = itemOffset * Math.sin(midAngle);
+        const ox = cx + dx, oy = cy + dy;
+
+        const x1 = ox + r * Math.cos(startAngle);
+        const y1 = oy + r * Math.sin(startAngle);
+        const x2 = ox + r * Math.cos(endAngle);
+        const y2 = oy + r * Math.sin(endAngle);
+        const largeArc = (endAngle - startAngle > Math.PI) ? 1 : 0;
+
+        let d;
+        if (n === 1) {
+          // Full circle drawn as two semicircle arcs (avoids near-coincident
+          // endpoint degeneracy); donut adds a reversed inner circle + evenodd fill.
+          const ring = (rad) =>
+            `M ${ox - rad} ${oy} A ${rad} ${rad} 0 1 0 ${ox + rad} ${oy} ` +
+            `A ${rad} ${rad} 0 1 0 ${ox - rad} ${oy} Z`;
+          d = isDonut ? ring(r) + ' ' + ring(rInner) : ring(r);
+        } else if (isArrow) {
+          // Each segment's radial edges become chevrons advanced forward (clockwise)
+          // at the mid radius: the leading edge forms an arrowhead, the trailing edge
+          // a matching notch the previous arrowhead nests into. The gap leaves a
+          // uniform arrow-shaped white seam between consecutive segments. The angular
+          // half-gap shrinks with radius (`halfGap / ρ`) so the seam keeps a constant
+          // *linear* width instead of fanning out toward the rim.
+          const span = endAngle - startAngle;
+          const halfGap = r * 0.025;                     // constant seam half-width (px)
+          const gapAt = (rad) => halfGap / rad;          // angular half-gap at radius
+          const tip  = Math.min(0.13, span * 0.32);      // chevron tip advance angle
+          const rMid = (rInner + r) / 2;
+          const P = (rad, a) => `${ox + rad * Math.cos(a)} ${oy + rad * Math.sin(a)}`;
+          d = `M ${P(rInner, startAngle + gapAt(rInner))} ` +
+              `L ${P(rMid, startAngle + gapAt(rMid) + tip)} ` +
+              `L ${P(r, startAngle + gapAt(r))} ` +
+              `A ${r} ${r} 0 ${largeArc} 1 ${P(r, endAngle - gapAt(r))} ` +
+              `L ${P(rMid, endAngle - gapAt(rMid) + tip)} ` +
+              `L ${P(rInner, endAngle - gapAt(rInner))} ` +
+              `A ${rInner} ${rInner} 0 ${largeArc} 0 ${P(rInner, startAngle + gapAt(rInner))} Z`;
+        } else if (isDonut) {
+          const ix1 = ox + rInner * Math.cos(startAngle);
+          const iy1 = oy + rInner * Math.sin(startAngle);
+          const ix2 = ox + rInner * Math.cos(endAngle);
+          const iy2 = oy + rInner * Math.sin(endAngle);
+          d = `M ${ix1} ${iy1} L ${x1} ${y1} A ${r} ${r} 0 ${largeArc} 1 ${x2} ${y2} ` +
+              `L ${ix2} ${iy2} A ${rInner} ${rInner} 0 ${largeArc} 0 ${ix1} ${iy1} Z`;
+        } else {
+          d = `M ${ox} ${oy} L ${x1} ${y1} A ${r} ${r} 0 ${largeArc} 1 ${x2} ${y2} Z`;
+        }
+
+        const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        path.setAttribute('d', d);
+        path.setAttribute('fill', color);
+        if (n === 1 && isDonut) path.setAttribute('fill-rule', 'evenodd');
+        if (!hasGap && !isArrow) {
+          path.setAttribute('stroke', 'white');
+          path.setAttribute('stroke-width', '3');
+        }
+        svg.appendChild(path);
+
+        const labelR = isDonut
+          ? (rInner + r) / 2
+          : (n === 1 ? 0 : r * 0.6);
+        const lx = ox + labelR * Math.cos(midAngle);
+        const ly = oy + labelR * Math.sin(midAngle);
+
+        // Shape label = item text minus any nested .annotation content
+        let labelText = labelHTML(item);
+        if (annHTML[i] !== null) {
+          const clone = item.cloneNode(true);
+          Array.from(clone.children)
+            .filter(c => c.classList.contains('annotation'))
+            .forEach(c => clone.removeChild(c));
+          labelText = labelHTML(clone);
+          // Anchor the leader line at this slice's outer-edge midpoint
+          annAnchors.push({
+            ex: ox + r * Math.cos(midAngle),
+            ey: oy + r * Math.sin(midAngle),
+            mid: midAngle,
+            color,
+            html: annHTML[i]
+          });
+        }
+
+        const label = document.createElement('div');
+        label.className = 'slice-label';
+        label.innerHTML = labelText;
+        label.style.left = lx + 'px';
+        label.style.top  = ly + 'px';
+        container.appendChild(label);
+        labelEls.push(label);
+
+        item.style.display = 'none';
+      });
+
+      // Scale font so longest label fits within its slice
+      const sliceWidth = 2 * r * Math.sin(Math.PI / n) * 0.85;
+      const textMaxW = Math.max(60, sliceWidth);
+      const baseStyle = getComputedStyle(labelEls[0]);
+      const baseFontSize = parseFloat(baseStyle.fontSize) || 17.6;
+      const fontFamily = baseStyle.fontFamily || 'sans-serif';
+      const fontWeight = baseStyle.fontWeight || '500';
+      const cvs = document.createElement('canvas');
+      const cctx = cvs.getContext('2d');
+      cctx.font = `${fontWeight} ${baseFontSize}px ${fontFamily}`;
+      const maxTextWidth = Math.max(...labelEls.map(el => cctx.measureText(el.textContent).width));
+      if (maxTextWidth > textMaxW && maxTextWidth > 0) {
+        const scaledSize = (baseFontSize * textMaxW / maxTextWidth) + 'px';
+        labelEls.forEach(el => el.style.fontSize = scaledSize);
+      }
+
+      // Center content in the donut hole
+      if (isDonut && container.dataset.center) {
+        const center = document.createElement('div');
+        center.className = 'donut-center';
+        center.textContent = container.dataset.center;
+        center.style.left = cx + 'px';
+        center.style.top  = cy + 'px';
+        center.style.maxWidth = (2 * rInner * 0.85) + 'px';
+        container.appendChild(center);
+      }
+
+      if (hasAnn) placeAnnotations(container, svg, annAnchors, cx, r, H, ANN_GAP);
+    }
+
+    // --- Annotations (external callouts with leader lines) ---
+    //
+    // Shared by radial layouts. `anchors` is a list of
+    //   { ex, ey, mid, color, html }
+    // where (ex, ey) is the leader-line start on the shape's outer edge, `mid` is
+    // the angle (used to pick a side), `color` tints the leader line + title, and
+    // `html` is the callout content. Callouts are stacked on the left/right side so
+    // they don't overlap. `cx` is the figure's center x (callout columns sit at
+    // cx ± (r + colGap)), `r` is the shape's outer radius, `H` the container height
+    // (stack is clamped to it), and `colGap` the gap from the ring to the column.
+    function placeAnnotations(container, svg, anchors, cx, r, H, colGap) {
+      if (anchors.length === 0) return;
+      const vGap = 14;            // min vertical gap between stacked callouts
+      const opts = annOpts(container);
+
+      const right = anchors.filter(a => Math.cos(a.mid) >= 0).sort((a, b) => a.ey - b.ey);
+      const left  = anchors.filter(a => Math.cos(a.mid) <  0).sort((a, b) => a.ey - b.ey);
+
+      const placeSide = (list, side) => {
+        if (list.length === 0) return;
+        const colX = side === 'right' ? cx + r + colGap : cx - r - colGap;
+
+        // Build callouts and measure their heights
+        const recs = list.map(a => {
+          const el = document.createElement('div');
+          el.className = 'annotation annotation-' + side;
+          el.style.setProperty('--ann-color', annTitleColor(opts, a.color));
+          el.style.left = colX + 'px';
+          el.innerHTML = a.html;
+          container.appendChild(el);
+          return { a, el, h: el.offsetHeight };
+        });
+
+        // Stack vertically: prefer centering on the anchor, push down on collision
+        let prevBottom = -Infinity;
+        recs.forEach(rec => {
+          let top = rec.a.ey - rec.h / 2;
+          if (top < prevBottom + vGap) top = prevBottom + vGap;
+          rec.top = top;
+          prevBottom = top + rec.h;
+        });
+        // If the stack overflows the bottom, shift the whole column up
+        const overflow = prevBottom - (H - 4);
+        if (overflow > 0) recs.forEach(rec => { rec.top -= overflow; });
+
+        recs.forEach(rec => {
+          rec.el.style.top = rec.top + 'px';
+          const ly = rec.top + rec.h / 2;
+          const x2 = side === 'right' ? colX - 8 : colX + 8;
+          const line = makeLeaderLine(opts, rec.a.color, rec.a.ex, rec.a.ey, x2, ly);
+          if (line) svg.insertBefore(line, svg.firstChild);
+        });
+      };
+
+      placeSide(right, 'right');
+      placeSide(left, 'left');
+    }
+
+    // --- Process (linear flow) ---
+
+    function initProcess(container) {
+      const items = Array.from(container.querySelectorAll('.item'));
+      if (items.length === 0) return;
+
+      const n = items.length;
+      const vertical = container.classList.contains('vertical');
+
+      const nodeType = container.classList.contains('node-circle') ? 'circle' :
+                       container.classList.contains('node-none')   ? 'none'   : 'box';
+      const arrowType = container.classList.contains('arrow-thin')   ? 'thin'   :
+                        container.classList.contains('arrow-double') ? 'double' : 'chevron';
+      // `.arrow` is a chevron sub-variant: same interlocking tiles, but deeper
+      // points and more landscape tiles so each segment reads as a distinct arrow.
+      const arrowStyle = container.classList.contains('arrow');
+      const chevron = container.classList.contains('chevron') || arrowStyle;
+      const ARROW_WING_FRAC = 0.24; // arrow shaft inset per side, as a fraction of the cross-axis
+
+      const defaultNodeColor = container.dataset.nodeColor  || '#2e6b8a';
+      const arrowColor       = container.dataset.arrowColor || '#2e6b8a';
+
+      // Per-item annotation HTML (nested `.annotation` div); null if absent.
+      const annHTML = items.map(item => {
+        const ann = Array.from(item.children).find(c => c.classList.contains('annotation'));
+        return ann ? ann.innerHTML.trim() : null;
+      });
+      const hasAnn = annHTML.some(a => a !== null);
+      const ANN_W = 164, ANN_GAP = 24, BAND_H = 115;
+
+      // Read container size from CSS (allows user override)
+      container.style.position = 'relative';
+      const cs = getComputedStyle(container);
+      const totalW = parseFloat(cs.width)  || (vertical ? 200 : 900);
+      const totalH = parseFloat(cs.height) || (vertical ? 600 : 200);
+
+      const mainAxis = vertical ? totalH : totalW;
+      const crossAxis = vertical ? totalW : totalH;
+
+      // Annotation room: callouts go beside (vertical flow) or above/below
+      // (horizontal flow) the line of nodes; enlarge the container to fit them and
+      // shift the node line toward the new center.
+      let containerW = totalW, containerH = totalH, crossShift = 0;
+      if (hasAnn) {
+        if (vertical) { containerW = totalW + 2 * (ANN_W + ANN_GAP); crossShift = ANN_W + ANN_GAP; }
+        else          { containerH = totalH + 2 * BAND_H;            crossShift = BAND_H; }
+        container.style.width    = containerW + 'px';
+        container.style.height   = containerH + 'px';
+        container.style.maxWidth = 'none';  // .process(.vertical) caps width via CSS
+      }
+
+      // Per-item gap multiplier (extra space before .gap items, except the first)
+      const gapWeights = items.map((item, i) => (i > 0 && item.classList.contains('gap')) ? 1.6 : 1);
+      const totalGapWeight = gapWeights.slice(1).reduce((a, b) => a + b, 0);
+
+      let boxCross, boxMain, arrowSlot = 0, notchPx = 0;
+      const centers = [];
+
+      if (chevron) {
+        // Chevrons are the steps themselves: big interlocking tiles, no connectors.
+        // `.arrow` makes the tiles shorter (landscape) and the point deeper so each
+        // segment reads as an arrowhead rather than a block with a thin seam.
+        boxCross = arrowStyle ? Math.min(crossAxis * 0.62, (mainAxis / n) * 0.55)
+                              : Math.min(crossAxis * 0.9,  (mainAxis / n) * 0.85);
+        boxMain  = mainAxis / n; // refined below to account for overlap + gaps
+        notchPx  = arrowStyle ? Math.min(boxCross * 1.0, (mainAxis / n) * 0.32)
+                              : boxCross * 0.4;
+        const gutter = boxCross * 0.08; // thin slanted gap between tiles so seams read
+        // Interlock depth = how far the point sinks into the next tile's tail notch.
+        // Chevron's notch is full-depth (notchPx); arrow's tail notch is shallower
+        // (ARROW_WING_FRAC drives `tnotch` in the clip-path below), so tiles overlap
+        // by that shallower amount — otherwise the deep point buries past the notch.
+        const interlockPx = arrowStyle ? notchPx * (1 - 2 * ARROW_WING_FRAC) : notchPx;
+        const extraGap = boxCross * 0.35;
+        const gapPx = gapWeights.map(w => (w - 1) * extraGap);
+        const sumGap = gapPx.slice(1).reduce((a, b) => a + b, 0);
+        // Tiles interlock (tip nests in next notch) separated by a gutter; fill mainAxis:
+        // n*boxMain - (n-1)*(interlockPx - gutter) + sumGap = mainAxis
+        boxMain = (mainAxis + (n - 1) * (interlockPx - gutter) - sumGap) / n;
+        let cur = boxMain / 2;
+        for (let i = 0; i < n; i++) {
+          if (i > 0) cur += (boxMain - interlockPx + gutter) + gapPx[i];
+          centers.push(cur);
+        }
+      } else {
+        // Allocate: n nodes + (sum of gap weights) arrow-slots fill mainAxis
+        // arrowSlot baseline ≈ 0.5 * nodeSize. Solve: n*nodeSize + 0.5*nodeSize*totalGapWeight = mainAxis
+        // => nodeSize = mainAxis / (n + 0.5 * totalGapWeight)
+        const denom = n + 0.5 * totalGapWeight;
+        let nodeSize = mainAxis / denom; // along main axis
+        // Cap so node doesn't exceed cross-axis (with some padding)
+        const maxAlongCross = crossAxis * 0.9;
+        // Node cross-axis size
+        boxCross = nodeType === 'box' ? Math.min(maxAlongCross, nodeSize * 0.6) : Math.min(maxAlongCross, nodeSize * 0.85);
+        boxMain  = nodeType === 'box' ? nodeSize * 0.85 : boxCross; // box is wider along main; circle/none stays square-ish
+        arrowSlot = (mainAxis - n * boxMain) / Math.max(1, totalGapWeight);
+
+        // Compute center positions along main axis
+        let cursor = boxMain / 2;
+        for (let i = 0; i < n; i++) {
+          if (i > 0) cursor += boxMain + arrowSlot * gapWeights[i];
+          centers.push(cursor);
+        }
+      }
+
+      const crossCenter = crossAxis / 2 + crossShift;
+
+      const positions = centers.map(c => vertical ? { x: crossCenter, y: c } : { x: c, y: crossCenter });
+
+      const annAnchors = [];  // { x, y, color, html } per annotated node
+      const nodeEls = items.map((item, i) => {
+        const { x, y } = positions[i];
+        const nodeColor = item.getAttribute('color') || item.dataset.color || defaultNodeColor;
+        const node = document.createElement('div');
+        node.className = 'node node-' + nodeType;
+        let labelText = labelHTML(item);
+        if (annHTML[i] !== null) {
+          const clone = item.cloneNode(true);
+          Array.from(clone.children)
+            .filter(c => c.classList.contains('annotation'))
+            .forEach(c => clone.removeChild(c));
+          labelText = labelHTML(clone);
+          annAnchors.push({ x, y, color: nodeColor, html: annHTML[i] });
+        }
+        node.innerHTML = labelText;
+        if (nodeType !== 'none') node.style.background = nodeColor;
+        node.style.left = x + 'px';
+        node.style.top  = y + 'px';
+        node.style.transform = 'translate(-50%, -50%)';
+
+        if (chevron) {
+          node.classList.add('chevron-step');
+          node.style.background = nodeColor;
+          node.style.width  = (vertical ? boxCross : boxMain) + 'px';
+          node.style.height = (vertical ? boxMain  : boxCross) + 'px';
+          node.style.setProperty('--notch', notchPx + 'px');
+          const first = i === 0, last = i === n - 1;
+          // Center the label on each shape's centroid, not the bounding box.
+          // First (flat tail) → mass shifts toward start; last (flat head) → toward end.
+          // Derived: centroid offset = ±(N·W/4 − N²/6) / (W − N/2) along the main axis.
+          const pad = notchPx * 0.6;
+          const shift = (notchPx * boxMain / 4 - notchPx * notchPx / 6) / (boxMain - notchPx / 2);
+          // Arrow keeps a point on every tile (incl. last), so only the flat first tail shifts.
+          const off = arrowStyle ? (first ? -shift : 0) : (first ? -shift : last ? shift : 0);
+          const padMainStart = pad + off; // top (vertical) / left (horizontal)
+          const padMainEnd   = pad - off; // bottom / right
+          let clip;
+          if (arrowStyle) {
+            // Block-arrow: a shorter rectangular shaft whose head flares into wings
+            // (full cross-axis height) before tapering to the point. Every tile keeps
+            // its head; the tail has an inward notch (flat on the first tile) that the
+            // previous tile's point nests into.
+            const wingPx = boxCross * ARROW_WING_FRAC;
+            // Tail notch is shallower than the head point so its edges run parallel to
+            // the head's point-to-wing edges — the previous tile's point nests with a
+            // uniform-width seam instead of a wedge. tnotch = notch·(1 − 2·wingFrac).
+            const tnotchPx = notchPx * (1 - 2 * ARROW_WING_FRAC);
+            node.style.setProperty('--wing', wingPx + 'px');
+            node.style.setProperty('--tnotch', tnotchPx + 'px');
+            const N = 'var(--notch)', W = 'var(--wing)', T = 'var(--tnotch)';
+            // Keep the label inside the shaft, clear of the tail notch and the head point.
+            const padHead = notchPx + 6;            // before the flaring head/point
+            const padTail = first ? pad : tnotchPx + 6; // after the tail notch (flat on first)
+            if (vertical) {
+              const tailNotch = first ? '' : `, 50% ${T}`;
+              clip = `polygon(${W} 0${tailNotch}, calc(100% - ${W}) 0, ` +
+                     `calc(100% - ${W}) calc(100% - ${N}), 100% calc(100% - ${N}), ` +
+                     `50% 100%, 0 calc(100% - ${N}), ${W} calc(100% - ${N}))`;
+              node.style.padding = `${padTail}px 4px ${padHead}px`;
+            } else {
+              const headX = `calc(100% - ${N})`;
+              const tailNotch = first ? '' : `, ${T} 50%`;
+              clip = `polygon(0 ${W}, ${headX} ${W}, ${headX} 0, 100% 50%, ` +
+                     `${headX} 100%, ${headX} calc(100% - ${W}), 0 calc(100% - ${W})${tailNotch})`;
+              node.style.padding = `4px ${padHead}px 4px ${padTail}px`;
+            }
+          } else if (vertical) {
+            const top = first ? '0 0, 100% 0' : '0 0, 50% var(--notch), 100% 0';
+            const bot = last ? '100% 100%, 0 100%'
+                             : '100% calc(100% - var(--notch)), 50% 100%, 0 calc(100% - var(--notch))';
+            clip = `polygon(${top}, ${bot})`;
+            node.style.padding = `${padMainStart}px 4px ${padMainEnd}px`;
+          } else {
+            const head = last ? '100% 0, 100% 100%'
+                              : 'calc(100% - var(--notch)) 0, 100% 50%, calc(100% - var(--notch)) 100%';
+            const tail = first ? '0 100%, 0 0' : '0 100%, var(--notch) 50%, 0 0';
+            clip = `polygon(0 0, ${head}, ${tail})`;
+            node.style.padding = `4px ${padMainEnd}px 4px ${padMainStart}px`;
+          }
+          node.style.clipPath = clip;
+        } else if (nodeType === 'box') {
+          const w = vertical ? boxCross : boxMain;
+          const h = vertical ? boxMain  : boxCross;
+          node.style.width  = w + 'px';
+          node.style.height = h + 'px';
+          node.style.borderRadius = (Math.min(w, h) * 0.15) + 'px';
+        } else if (nodeType === 'circle') {
+          const d = Math.min(boxMain, boxCross);
+          node.style.width  = d + 'px';
+          node.style.height = d + 'px';
+        } else {
+          node.style.width  = boxMain + 'px';
+          node.style.height = boxCross + 'px';
+        }
+
+        container.appendChild(node);
+        item.style.display = 'none';
+        return node;
+      });
+
+      // Font scaling — fit longest label within node along main axis
+      const textMaxW = chevron
+        ? (vertical ? boxCross : boxMain) - 2 * notchPx - 8
+        : (nodeType === 'box' ? (vertical ? boxCross : boxMain) : Math.min(boxMain, boxCross)) - 16;
+      const baseStyle    = getComputedStyle(nodeEls[0]);
+      const baseFontSize = parseFloat(baseStyle.fontSize) || 17.6;
+      const fontFamily   = baseStyle.fontFamily || 'sans-serif';
+      const fontWeight   = baseStyle.fontWeight || '500';
+      const cvs = document.createElement('canvas');
+      const cctx = cvs.getContext('2d');
+      cctx.font = `${fontWeight} ${baseFontSize}px ${fontFamily}`;
+      const maxTextWidth = Math.max(...nodeEls.map(el => cctx.measureText(el.textContent).width));
+      if (maxTextWidth > textMaxW && maxTextWidth > 0) {
+        const scaledSize = (baseFontSize * textMaxW / maxTextWidth) + 'px';
+        nodeEls.forEach(el => el.style.fontSize = scaledSize);
+      }
+
+      // Annotations (drawn before the early returns so they apply to every variant)
+      if (hasAnn) {
+        const opts = annOpts(container);
+        const annSvg = makeSVGOverlay(container, containerW, containerH);
+        if (vertical) {
+          // Beside the column, alternating left/right — reuse the radial helper
+          const anchors = annAnchors.map((a, k) => {
+            const right = (k % 2 === 0);
+            return { ex: right ? a.x + boxCross / 2 : a.x - boxCross / 2, ey: a.y,
+                     mid: right ? 0 : Math.PI, color: a.color, html: a.html };
+          });
+          placeAnnotations(container, annSvg, anchors, crossCenter, boxCross / 2, containerH, ANN_GAP);
+        } else {
+          // Above/below the row, alternating, centered on each node
+          const rowTop = crossCenter - boxCross / 2;
+          const rowBot = crossCenter + boxCross / 2;
+          const gap = 20;
+          annAnchors.forEach((a, k) => {
+            const above = (k % 2 === 0);
+            const el = document.createElement('div');
+            el.className = 'annotation annotation-center';
+            el.style.setProperty('--ann-color', annTitleColor(opts, a.color));
+            el.style.left = a.x + 'px';
+            el.innerHTML = a.html;
+            container.appendChild(el);
+            const h = el.offsetHeight;
+            el.style.top = (above ? (rowTop - gap - h) : (rowBot + gap)) + 'px';
+            const line = makeLeaderLine(opts, a.color, a.x, above ? rowTop : rowBot,
+                                        a.x, above ? rowTop - gap : rowBot + gap);
+            if (line) annSvg.appendChild(line);
+          });
+        }
+      }
+
+      if (n === 1) return;
+      if (chevron) return; // chevron tiles convey flow themselves — no connectors
+
+      const uid = 'cfp' + (_cfCounter++);
+
+      if (arrowType === 'chevron') {
+        // Chevron sized to fit the arrow slot between nodes
+        positions.forEach((from, i) => {
+          if (i === n - 1) return;
+          const to = positions[i + 1];
+          const mx = (from.x + to.x) / 2;
+          const my = (from.y + to.y) / 2;
+          const slotLen = arrowSlot * gapWeights[i + 1];
+          const w = Math.min(slotLen * 0.7, boxCross * 0.7);
+          const h = w * 0.78;
+          const arrow = document.createElement('div');
+          arrow.className = 'arrow-shape';
+          arrow.style.background = arrowColor;
+          arrow.style.width  = w + 'px';
+          arrow.style.height = h + 'px';
+          arrow.style.left   = mx + 'px';
+          arrow.style.top    = my + 'px';
+          const rot = vertical ? 90 : 0;
+          arrow.style.transform = `translate(-50%, -50%) rotate(${rot}deg)`;
+          container.appendChild(arrow);
+        });
+        return;
+      }
+
+      // thin / double — SVG lines with arrowheads
+      const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      svg.setAttribute('width', containerW);
+      svg.setAttribute('height', containerH);
+      svg.style.cssText = 'position:absolute;left:0;top:0;overflow:visible;pointer-events:none;';
+      container.insertBefore(svg, container.firstChild);
+      const defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
+      svg.appendChild(defs);
+
+      const markerSize = 12;
+      addArrowMarker(defs, uid + '-end', arrowColor, markerSize, false);
+      if (arrowType === 'double') addArrowMarker(defs, uid + '-start', arrowColor, markerSize, true);
+
+      positions.forEach((from, i) => {
+        if (i === n - 1) return;
+        const to = positions[i + 1];
+        // Trim line so it starts at node edge
+        const halfMain = boxMain / 2;
+        const trim = halfMain + 4;
+        let x1, y1, x2, y2;
+        if (vertical) {
+          x1 = from.x; y1 = from.y + trim;
+          x2 = to.x;   y2 = to.y   - trim;
+        } else {
+          x1 = from.x + trim; y1 = from.y;
+          x2 = to.x   - trim; y2 = to.y;
+        }
+        const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+        line.setAttribute('x1', x1);
+        line.setAttribute('y1', y1);
+        line.setAttribute('x2', x2);
+        line.setAttribute('y2', y2);
+        line.setAttribute('stroke', arrowColor);
+        line.setAttribute('stroke-width', '2');
+        line.setAttribute('marker-end', `url(#${uid}-end)`);
+        if (arrowType === 'double') line.setAttribute('marker-start', `url(#${uid}-start)`);
+        svg.appendChild(line);
+      });
+    }
+
+    // --- Pyramid (stacked triangle bands) ---
+
+    function initPyramid(container) {
+      const items = Array.from(container.querySelectorAll('.item'));
+      if (items.length === 0) return;
+
+      const n = items.length;
+      const cx = 250;
+      const apexY = 20, baseY = 480, H = baseY - apexY;
+      const baseHalf = 230;
+      const inverted = container.classList.contains('inverted');
+      const hasGap = container.classList.contains('gap');
+      const defaultColor = container.dataset.nodeColor || '#2e6b8a';
+
+      // Per-item annotation HTML (nested `.annotation` div); null if absent.
+      const annHTML = items.map(item => {
+        const ann = Array.from(item.children).find(c => c.classList.contains('annotation'));
+        return ann ? ann.innerHTML.trim() : null;
+      });
+      const hasAnn = annHTML.some(a => a !== null);
+
+      // Fixed 500-unit system. When annotated, scale down and offset so callout
+      // columns on both sides fit a normal content column.
+      const ANN_W = 164, ANN_GAP = 24, OUTER = 8;
+      const s = hasAnn ? 0.7 : 1;
+      const diagSize = 500 * s;
+      const PAD = hasAnn ? (ANN_W + ANN_GAP) : 0;
+      const W  = hasAnn ? (2 * OUTER + 2 * PAD + diagSize) : 500;
+      const CH = hasAnn ? 380 : 500;
+      const offsetX = hasAnn ? (OUTER + PAD) : 0;
+      const offsetY = hasAnn ? (CH - diagSize) / 2 : 0;
+      const X = x => offsetX + x * s;
+      const Y = y => offsetY + y * s;
+
+      container.style.position = 'relative';
+      container.style.width = W + 'px';
+      container.style.height = CH + 'px';
+      container.style.margin = '0 auto';
+      container.style.display = 'block';
+
+      const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      svg.setAttribute('width', W);
+      svg.setAttribute('height', CH);
+      svg.style.cssText = 'position:absolute;left:0;top:0;overflow:visible;';
+      container.appendChild(svg);
+
+      // half-width of the triangle at vertical fraction p (0 = top, 1 = bottom)
+      const halfAt = p => (inverted ? (1 - p) : p) * baseHalf;
+
+      const labelEls = [];
+      const bandWidths = [];
+      const annAnchors = [];  // { ex, ey, mid, color, html } per annotated band
+
+      items.forEach((item, i) => {
+        const color = item.getAttribute('color') || item.dataset.color || defaultColor;
+        const itemGap = hasGap || item.classList.contains('gap');
+        const inset = itemGap ? 5 : 0;
+
+        const pTop = i / n, pBot = (i + 1) / n;
+        let yTop = apexY + pTop * H + inset;
+        let yBot = apexY + pBot * H - inset;
+        const topHalf = halfAt(pTop);
+        const botHalf = halfAt(pBot);
+
+        const d = `M ${X(cx - topHalf)} ${Y(yTop)} L ${X(cx + topHalf)} ${Y(yTop)} ` +
+                  `L ${X(cx + botHalf)} ${Y(yBot)} L ${X(cx - botHalf)} ${Y(yBot)} Z`;
+
+        const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        path.setAttribute('d', d);
+        path.setAttribute('fill', color);
+        if (!hasGap) {
+          path.setAttribute('stroke', 'white');
+          path.setAttribute('stroke-width', '3');
+        }
+        svg.appendChild(path);
+
+        const ly = (yTop + yBot) / 2;
+        const midHalf = halfAt((pTop + pBot) / 2);
+        let labelText = labelHTML(item);
+        if (annHTML[i] !== null) {
+          const clone = item.cloneNode(true);
+          Array.from(clone.children)
+            .filter(c => c.classList.contains('annotation'))
+            .forEach(c => clone.removeChild(c));
+          labelText = labelHTML(clone);
+          const right = (i % 2 === 0);
+          annAnchors.push({
+            ex: right ? X(cx + midHalf) : X(cx - midHalf),
+            ey: Y(ly),
+            mid: right ? 0 : Math.PI,
+            color,
+            html: annHTML[i]
+          });
+        }
+        const label = document.createElement('div');
+        label.className = 'slice-label';
+        label.innerHTML = labelText;
+        label.style.left = X(cx) + 'px';
+        label.style.top  = Y(ly) + 'px';
+        container.appendChild(label);
+        labelEls.push(label);
+
+        // usable width at the label's vertical midpoint
+        bandWidths.push(2 * midHalf * s);
+        item.style.display = 'none';
+      });
+
+      // Scale each label down to fit its own band width (bands vary a lot in width)
+      const baseStyle = getComputedStyle(labelEls[0]);
+      const baseFontSize = parseFloat(baseStyle.fontSize) || 17.6;
+      const fontFamily = baseStyle.fontFamily || 'sans-serif';
+      const fontWeight = baseStyle.fontWeight || '500';
+      const cvs = document.createElement('canvas');
+      const cctx = cvs.getContext('2d');
+      cctx.font = `${fontWeight} ${baseFontSize}px ${fontFamily}`;
+      labelEls.forEach((el, i) => {
+        const textMaxW = Math.max(40, bandWidths[i] * 0.85);
+        const w = cctx.measureText(el.textContent).width;
+        if (w > textMaxW && w > 0) {
+          el.style.fontSize = (baseFontSize * textMaxW / w) + 'px';
+        }
+      });
+
+      if (hasAnn) placeAnnotations(container, svg, annAnchors, X(cx), baseHalf * s, CH, ANN_GAP);
+    }
+
+    // --- Matrix (2x2 quadrants) ---
+
+    function initMatrix(container) {
+      const items = Array.from(container.querySelectorAll('.item'));
+      if (items.length === 0) return;
+
+      const outline = container.classList.contains('outline');
+      const arrows  = container.classList.contains('arrows');
+      const hasGap  = container.classList.contains('gap');
+      const defaultColor = container.dataset.nodeColor  || '#2e6b8a';
+      const lineColor    = container.dataset.arrowColor || '#333333';
+
+      // Square bounds (leave a gutter for axis labels/titles)
+      const x0 = 70, y0 = 60, x1 = 430, y1 = 420;
+      const cx = (x0 + x1) / 2, cy = (y0 + y1) / 2;
+
+      container.style.position = 'relative';
+      container.style.width = '500px';
+      container.style.height = '500px';
+      container.style.margin = '0 auto';
+      container.style.display = 'block';
+
+      const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      svg.setAttribute('width', '500');
+      svg.setAttribute('height', '500');
+      svg.style.cssText = 'position:absolute;left:0;top:0;overflow:visible;';
+      container.appendChild(svg);
+      const defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
+      svg.appendChild(defs);
+
+      // Quadrant rects in item order: TL, TR, BL, BR
+      const quads = [
+        { x: x0, y: y0, w: cx - x0, h: cy - y0 },
+        { x: cx, y: y0, w: x1 - cx, h: cy - y0 },
+        { x: x0, y: cy, w: cx - x0, h: y1 - cy },
+        { x: cx, y: cy, w: x1 - cx, h: y1 - cy }
+      ];
+      const gapInset = 6;
+
+      const labelEls = [];
+      quads.forEach((q, i) => {
+        const item = items[i];
+        let rx = q.x, ry = q.y, rw = q.w, rh = q.h;
+        if (hasGap) { rx += gapInset; ry += gapInset; rw -= 2 * gapInset; rh -= 2 * gapInset; }
+
+        if (!outline) {
+          const color = (item && (item.getAttribute('color') || item.dataset.color)) || defaultColor;
+          const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+          rect.setAttribute('x', rx); rect.setAttribute('y', ry);
+          rect.setAttribute('width', rw); rect.setAttribute('height', rh);
+          rect.setAttribute('fill', color);
+          if (!hasGap) { rect.setAttribute('stroke', 'white'); rect.setAttribute('stroke-width', '3'); }
+          svg.appendChild(rect);
+        } else {
+          const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+          rect.setAttribute('x', rx); rect.setAttribute('y', ry);
+          rect.setAttribute('width', rw); rect.setAttribute('height', rh);
+          rect.setAttribute('fill', 'none');
+          rect.setAttribute('stroke', lineColor);
+          rect.setAttribute('stroke-width', '2');
+          svg.appendChild(rect);
+        }
+
+        if (item) {
+          const label = document.createElement('div');
+          label.className = 'slice-label';
+          label.innerHTML = labelHTML(item);
+          label.style.left = (q.x + q.w / 2) + 'px';
+          label.style.top  = (q.y + q.h / 2) + 'px';
+          if (outline) label.style.color = '#222222';
+          container.appendChild(label);
+          labelEls.push(label);
+          item.style.display = 'none';
+        }
+      });
+
+      // Center cross lines (skipped in gap mode; outline mode draws its own cell borders)
+      if (!hasGap && !outline) {
+        [['v', cx, y0, cx, y1], ['h', x0, cy, x1, cy]].forEach(([, ax, ay, bx, by]) => {
+          const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+          line.setAttribute('x1', ax); line.setAttribute('y1', ay);
+          line.setAttribute('x2', bx); line.setAttribute('y2', by);
+          line.setAttribute('stroke', lineColor);
+          line.setAttribute('stroke-width', '2');
+          svg.appendChild(line);
+        });
+      } else if (!hasGap && outline) {
+        [[cx, y0, cx, y1], [x0, cy, x1, cy]].forEach(([ax, ay, bx, by]) => {
+          const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+          line.setAttribute('x1', ax); line.setAttribute('y1', ay);
+          line.setAttribute('x2', bx); line.setAttribute('y2', by);
+          line.setAttribute('stroke', lineColor);
+          line.setAttribute('stroke-width', '2');
+          svg.appendChild(line);
+        });
+      }
+
+      // Arrowed axes — drawn outside the square along the bottom and left edges,
+      // pointing toward the "high" direction (right on x, up on y).
+      if (arrows) {
+        const uid = 'cfm' + (_cfCounter++);
+        addArrowMarker(defs, uid + '-end', lineColor, 12, false);
+        const ax = 22; // axis offset outside the square
+        const axisLines = [
+          [x0 - ax, y1, x0 - ax, y0],   // y-axis: bottom -> top (up = high)
+          [x0, y1 + ax, x1, y1 + ax]    // x-axis: left -> right (right = high)
+        ];
+        axisLines.forEach(([px1, py1, px2, py2]) => {
+          const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+          line.setAttribute('x1', px1); line.setAttribute('y1', py1);
+          line.setAttribute('x2', px2); line.setAttribute('y2', py2);
+          line.setAttribute('stroke', lineColor);
+          line.setAttribute('stroke-width', '2');
+          line.setAttribute('marker-end', `url(#${uid}-end)`);
+          svg.appendChild(line);
+        });
+      }
+
+      // Scale quadrant labels down to fit a cell (cells are equal-sized)
+      const cellW = (x1 - x0) / 2 - (hasGap ? 2 * gapInset : 0);
+      const textMaxW = Math.max(60, cellW * 0.85);
+      if (labelEls.length) {
+        const baseStyle = getComputedStyle(labelEls[0]);
+        const baseFontSize = parseFloat(baseStyle.fontSize) || 17.6;
+        const fontFamily = baseStyle.fontFamily || 'sans-serif';
+        const fontWeight = baseStyle.fontWeight || '500';
+        const cvs = document.createElement('canvas');
+        const cctx = cvs.getContext('2d');
+        cctx.font = `${fontWeight} ${baseFontSize}px ${fontFamily}`;
+        const maxTextWidth = Math.max(...labelEls.map(el => cctx.measureText(el.textContent).width));
+        if (maxTextWidth > textMaxW && maxTextWidth > 0) {
+          const scaledSize = (baseFontSize * textMaxW / maxTextWidth) + 'px';
+          labelEls.forEach(el => el.style.fontSize = scaledSize);
+        }
+      }
+
+      // Axis end labels (Low/High) and named axis titles
+      const d = container.dataset;
+      const offEnd = arrows ? 40 : 16;
+      const mkEnd = (text, left, top) => {
+        if (!text) return;
+        const el = document.createElement('div');
+        el.className = 'axis-end';
+        el.textContent = text;
+        el.style.left = left + 'px';
+        el.style.top  = top + 'px';
+        container.appendChild(el);
+      };
+      mkEnd(d.xLow,  x0 - offEnd, cy);
+      mkEnd(d.xHigh, x1 + offEnd, cy);
+      mkEnd(d.yLow,  cx, y1 + offEnd);
+      mkEnd(d.yHigh, cx, y0 - offEnd);
+
+      if (d.xAxis) {
+        const el = document.createElement('div');
+        el.className = 'axis-title';
+        el.textContent = d.xAxis;
+        el.style.left = '0';
+        el.style.width = '500px';
+        el.style.top = (y1 + offEnd + 20) + 'px';
+        container.appendChild(el);
+      }
+      if (d.yAxis) {
+        const el = document.createElement('div');
+        el.className = 'axis-title';
+        el.textContent = d.yAxis;
+        el.style.left = (x0 - offEnd - 28) + 'px';
+        el.style.top = cy + 'px';
+        el.style.transform = 'translate(-50%, -50%) rotate(-90deg)';
+        el.style.transformOrigin = 'center';
+        el.style.whiteSpace = 'nowrap';
+        container.appendChild(el);
+      }
+    }
+
+    // --- Hierarchy (org chart / tree) ---
+
+    // Direct-child .item divs only (querySelectorAll would flatten the tree)
+    function directItemChildren(el) {
+      return Array.from(el.children).filter(c => c.classList.contains('item'));
+    }
+
+    // A node's own label = its content excluding any nested .item children
+    function ownLabel(el) {
+      return labelHTML(el, ["item"]);
+    }
+
+    function initHierarchy(container) {
+      const roots = directItemChildren(container);
+      if (roots.length === 0) return;
+
+      const horizontal = container.classList.contains('horizontal');
+      const outline = container.classList.contains('outline');
+      const nodeType = container.classList.contains('node-circle') ? 'circle' :
+                       container.classList.contains('node-none')   ? 'none'   : 'box';
+      const defaultNodeColor = container.dataset.nodeColor  || '#2e6b8a';
+      const lineColor        = container.dataset.arrowColor || '#333333';
+
+      // Baseline geometry (pre-scale)
+      const boxW = nodeType === 'circle' ? 90 : 130;
+      const boxH = nodeType === 'circle' ? 90 : 54;
+      const gap = 24;          // min gap between sibling subtrees (along cross axis)
+      const levelGap = 56;     // gap between depth levels (along main axis)
+      const level = (horizontal ? boxW : boxH) + levelGap;
+      const breadth = horizontal ? boxH : boxW;  // node extent along the cross axis
+
+      // Build tree { el, label, color, children }
+      function build(el) {
+        return {
+          el,
+          label: ownLabel(el),
+          color: el.getAttribute('color') || el.dataset.color || defaultNodeColor,
+          children: directItemChildren(el).map(build)
+        };
+      }
+      const tree = roots.map(build);
+
+      // Width pass (extent along cross axis), post-order
+      function measure(node) {
+        if (node.children.length === 0) { node.extent = breadth; return; }
+        node.children.forEach(measure);
+        const childrenExtent = node.children.reduce((s, c) => s + c.extent, 0) +
+                               gap * (node.children.length - 1);
+        node.extent = Math.max(breadth, childrenExtent);
+      }
+      tree.forEach(measure);
+
+      // Position pass: `cross` = position along cross axis (left edge of subtree),
+      // `depth` = level index. node.c = cross-axis center, node.m = main-axis center.
+      let maxDepth = 0;
+      function place(node, cross, depth) {
+        maxDepth = Math.max(maxDepth, depth);
+        node.m = depth * level + (horizontal ? boxW : boxH) / 2;
+        if (node.children.length === 0) {
+          node.c = cross + breadth / 2;
+        } else {
+          const childrenExtent = node.children.reduce((s, c) => s + c.extent, 0) +
+                                 gap * (node.children.length - 1);
+          let cursor = cross + (node.extent - childrenExtent) / 2;
+          node.children.forEach(ch => { place(ch, cursor, depth + 1); cursor += ch.extent + gap; });
+          const first = node.children[0], last = node.children[node.children.length - 1];
+          node.c = (first.c + last.c) / 2;
+        }
+      }
+      // Lay the roots out side by side along the cross axis
+      let rootCursor = 0;
+      tree.forEach(r => { place(r, rootCursor, 0); rootCursor += r.extent + gap; });
+
+      // Flatten and convert (cross, main) -> (x, y)
+      const flat = [];
+      function collect(node, parent) {
+        node.parent = parent || null;
+        node.x = horizontal ? node.m : node.c;
+        node.y = horizontal ? node.c : node.m;
+        flat.push(node);
+        node.children.forEach(ch => collect(ch, node));
+      }
+      tree.forEach(r => collect(r, null));
+
+      // Raw bounding box, then scale to fit a viewport
+      const halfW = boxW / 2, halfH = boxH / 2;
+      const minX = Math.min(...flat.map(n => n.x - halfW));
+      const maxX = Math.max(...flat.map(n => n.x + halfW));
+      const minY = Math.min(...flat.map(n => n.y - halfH));
+      const maxY = Math.max(...flat.map(n => n.y + halfH));
+      const rawW = maxX - minX, rawH = maxY - minY;
+
+      const maxW = 900, maxH = 520;
+      const scale = Math.min(maxW / rawW, maxH / rawH, 1);
+      const W = rawW * scale, H = rawH * scale;
+      const sx = v => (v - minX) * scale;
+      const sy = v => (v - minY) * scale;
+
+      container.style.position = 'relative';
+      container.style.width = W + 'px';
+      container.style.height = H + 'px';
+
+      // SVG connectors (behind nodes)
+      const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      svg.setAttribute('width', W);
+      svg.setAttribute('height', H);
+      svg.style.cssText = 'position:absolute;left:0;top:0;overflow:visible;pointer-events:none;';
+      container.appendChild(svg);
+
+      flat.forEach(node => {
+        if (!node.parent) return;
+        const p = node.parent;
+        let d;
+        if (horizontal) {
+          const x1 = sx(p.x + halfW), y1 = sy(p.y);
+          const x2 = sx(node.x - halfW), y2 = sy(node.y);
+          const mx = (x1 + x2) / 2;
+          d = `M ${x1} ${y1} H ${mx} V ${y2} H ${x2}`;
+        } else {
+          const x1 = sx(p.x), y1 = sy(p.y + halfH);
+          const x2 = sx(node.x), y2 = sy(node.y - halfH);
+          const my = (y1 + y2) / 2;
+          d = `M ${x1} ${y1} V ${my} H ${x2} V ${y2}`;
+        }
+        const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        path.setAttribute('d', d);
+        path.setAttribute('fill', 'none');
+        path.setAttribute('stroke', lineColor);
+        path.setAttribute('stroke-width', '2');
+        svg.appendChild(path);
+      });
+
+      // Node divs
+      const nodeEls = flat.map(node => {
+        const el = document.createElement('div');
+        el.className = 'node node-' + nodeType;
+        el.innerHTML = node.label;
+        if (nodeType !== 'none' && !outline) el.style.background = node.color;
+        if (outline) {
+          el.style.background = 'transparent';
+          el.style.border = '2px solid ' + node.color;
+          el.style.color = '#222222';
+        }
+        el.style.width  = (boxW * scale) + 'px';
+        el.style.height = (boxH * scale) + 'px';
+        if (nodeType === 'box') el.style.borderRadius = (Math.min(boxW, boxH) * 0.12 * scale) + 'px';
+        el.style.left = sx(node.x) + 'px';
+        el.style.top  = sy(node.y) + 'px';
+        el.style.transform = 'translate(-50%, -50%)';
+        container.appendChild(el);
+        node.el.style.display = 'none';
+        return el;
+      });
+
+      // Font scaling — shrink each label to fit its box (boxes are uniform width)
+      const textMaxW = boxW * scale - 16;
+      const baseStyle = getComputedStyle(nodeEls[0]);
+      const baseFontSize = parseFloat(baseStyle.fontSize) || 17.6;
+      const fontFamily = baseStyle.fontFamily || 'sans-serif';
+      const fontWeight = baseStyle.fontWeight || '500';
+      const cvs = document.createElement('canvas');
+      const cctx = cvs.getContext('2d');
+      cctx.font = `${fontWeight} ${baseFontSize}px ${fontFamily}`;
+      nodeEls.forEach(el => {
+        const w = cctx.measureText(el.textContent).width;
+        if (w > textMaxW && w > 0) el.style.fontSize = (baseFontSize * textMaxW / w) + 'px';
+      });
+    }
+
+    // --- Venn (2- and 3-set overlapping circles) ---
+
+    function initVenn(container) {
+      const items = Array.from(container.querySelectorAll('.item'));
+      if (items.length < 2 || items.length > 3) return;  // only 2- and 3-set
+      const n = items.length;
+
+      const palette = ['#2e6b8a', '#c0584f', '#5a9367'];
+      const baseColor = container.dataset.nodeColor;
+
+      // Per-item annotation HTML (nested `.annotation` div); null if absent.
+      const annHTML = items.map(item => {
+        const ann = Array.from(item.children).find(c => c.classList.contains('annotation'));
+        return ann ? ann.innerHTML.trim() : null;
+      });
+      // Per-item icon HTML (nested `.icon` div); null if absent. Unlike the rest
+      // of an item's label, the icon always stays pinned inside the circle's
+      // exclusive lobe, even under `.outside-labels` (which only pushes the text
+      // label outside the rim).
+      const iconEls = items.map(item => Array.from(item.children).find(c => c.classList.contains('icon')) || null);
+      const iconHTML = iconEls.map(icon => icon ? icon.innerHTML.trim() : null);
+      const hasOverlapDivAnn = Array.from(container.children).some(c => c.classList.contains('overlap') &&
+        Array.from(c.children).some(cc => cc.classList.contains('annotation')));
+      const hasAnn = annHTML.some(a => a !== null) || hasOverlapDivAnn;
+
+      // `.outside-labels` moves set labels from inside each circle's exclusive
+      // lobe to just outside its rim — useful when the label names what a circle
+      // represents without implying the label text itself is "in" the set. Plain
+      // text only: no leader lines, unlike `.annotation` callouts.
+      const outsideLabels = container.classList.contains('outside-labels');
+      const OUTSIDE_MARGIN = 110;  // room reserved around the diagram for outside labels
+
+      // The venn uses a fixed 500-unit coordinate system. When annotated, scale it
+      // down (s) and offset it so side callout columns fit a normal content column.
+      const ANN_W = 164, ANN_GAP = 24, OUTER = 8;
+      const s = hasAnn ? 0.72 : 1;
+      const diagW = 500 * s;
+      const PAD = hasAnn ? (ANN_W + ANN_GAP) : 0;
+      const marginOutside = outsideLabels ? OUTSIDE_MARGIN : 0;
+      const baseW = hasAnn ? (2 * OUTER + 2 * PAD + diagW) : 500;
+      const baseH = hasAnn ? 430 : 500;
+      const W = baseW + 2 * marginOutside;
+      const H = baseH + 2 * marginOutside;
+      const offsetX = (hasAnn ? (OUTER + PAD) : 0) + marginOutside;
+      const offsetY = (hasAnn ? (baseH - diagW) / 2 : 0) + marginOutside;
+      const X = x => offsetX + x * s;   // map base-coord x → container x
+      const Y = y => offsetY + y * s;
+      const Rr = r => r * s;
+
+      container.style.position = 'relative';
+      container.style.width = W + 'px';
+      container.style.height = H + 'px';
+      container.style.margin = '0 auto';
+      container.style.display = 'block';
+
+      const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      svg.setAttribute('width', W);
+      svg.setAttribute('height', H);
+      svg.style.cssText = 'position:absolute;left:0;top:0;overflow:visible;';
+      container.appendChild(svg);
+
+      // Circle centers/radius per set count
+      const circles = n === 2
+        ? [{ cx: 175, cy: 250, r: 150 }, { cx: 325, cy: 250, r: 150 }]
+        : [{ cx: 250, cy: 155, r: 140 }, { cx: 320, cy: 275, r: 140 }, { cx: 180, cy: 275, r: 140 }];
+
+      items.forEach((item, i) => {
+        const color = item.getAttribute('color') || item.dataset.color || baseColor || palette[i];
+        // Outline is independent of fill: falls back from item -> container, and
+        // is only drawn when a color is actually given (no outline by default).
+        const outlineColor = item.getAttribute('outline-color') || item.dataset.outlineColor ||
+          container.dataset.outlineColor || null;
+        const outlineWidthRaw = item.getAttribute('outline-width') || item.dataset.outlineWidth ||
+          container.dataset.outlineWidth;
+        const outlineWidth = outlineWidthRaw ? parseFloat(outlineWidthRaw) : 2;
+        const fillOpacity = item.getAttribute('fill-opacity') || item.dataset.fillOpacity ||
+          container.dataset.fillOpacity || '0.45';
+        const c = circles[i];
+        const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+        circle.setAttribute('cx', X(c.cx));
+        circle.setAttribute('cy', Y(c.cy));
+        circle.setAttribute('r', Rr(c.r));
+        circle.setAttribute('fill', color);
+        circle.setAttribute('fill-opacity', fillOpacity);
+        if (outlineColor) {
+          circle.setAttribute('stroke', outlineColor);
+          circle.setAttribute('stroke-width', outlineWidth);
+        }
+        circle.style.mixBlendMode = 'multiply';
+        svg.appendChild(circle);
+        item.style.display = 'none';
+      });
+
+      // Labels: set labels (from item text) + overlap labels (from container attrs)
+      const setLabels = n === 2
+        ? [{ x: 120, y: 250 }, { x: 380, y: 250 }]
+        : [{ x: 250, y: 95 }, { x: 380, y: 330 }, { x: 120, y: 330 }];
+
+      const overlaps = n === 2
+        ? [{ key: 'ab', x: 250, y: 250 }]
+        : [{ key: 'ab', x: 345, y: 180 },
+           { key: 'ac', x: 155, y: 180 },
+           { key: 'bc', x: 250, y: 330 },
+           { key: 'abc', x: 250, y: 245 }];
+
+      // Overlap regions can also be given as `.overlap.<key>` divs (siblings of
+      // `.item`) instead of plain `ab=` container attributes, so they can carry a
+      // nested `.annotation` callout the same way sets do.
+      const overlapKeys = ['ab', 'ac', 'bc', 'abc'];
+      const overlapDivMap = {};
+      Array.from(container.children)
+        .filter(c => c.classList.contains('overlap'))
+        .forEach(div => {
+          const key = overlapKeys.find(k => div.classList.contains(k));
+          if (key) overlapDivMap[key] = div;
+          // Snapshot the author's inline style (if any) before hiding the source
+          // div, so copyFragmentAttrs() doesn't pick up this `display: none`.
+          div.dataset.origStyle = div.getAttribute('style') || '';
+          div.style.display = 'none';
+        });
+
+      const labelEls = [];
+      const annAnchors = [];  // { ex, ey, mid, color, html } per annotated set
+      const Ox = X(250), Oy = Y(250);
+
+      items.forEach((item, i) => {
+        const label = document.createElement('div');
+        label.className = 'set-label';
+        let labelText = labelHTML(item, ['icon']);
+        const c = circles[i];
+        const ccx = X(c.cx), ccy = Y(c.cy), rr = Rr(c.r);
+        const dx = ccx - Ox, dy = ccy - Oy, len = Math.hypot(dx, dy) || 1;
+        const ux = dx / len, uy = dy / len;
+        if (annHTML[i] !== null) {
+          const clone = item.cloneNode(true);
+          Array.from(clone.children)
+            .filter(c => c.classList.contains('annotation') || c.classList.contains('icon'))
+            .forEach(c => clone.removeChild(c));
+          labelText = labelHTML(clone);
+          // Leader starts on this set's outer rim, away from the diagram center
+          const color = item.getAttribute('color') || item.dataset.color || baseColor || palette[i];
+          annAnchors.push({ ex: ccx + rr * ux, ey: ccy + rr * uy, mid: Math.atan2(uy, ux), color, html: annHTML[i] });
+        }
+        label.innerHTML = labelText;
+        if (outsideLabels) {
+          label.classList.add('outside');
+          const gap = 46;
+          label.style.left = (ccx + (rr + gap) * ux) + 'px';
+          label.style.top  = (ccy + (rr + gap) * uy) + 'px';
+        } else {
+          label.style.left = X(setLabels[i].x) + 'px';
+          label.style.top  = Y(setLabels[i].y) + 'px';
+        }
+        container.appendChild(label);
+        labelEls.push(label);
+
+        if (iconHTML[i] !== null) {
+          const icon = document.createElement('div');
+          icon.className = 'set-icon';
+          icon.innerHTML = iconHTML[i];
+          icon.style.left = X(setLabels[i].x) + 'px';
+          icon.style.top  = Y(setLabels[i].y) + 'px';
+          copyFragmentAttrs(iconEls[i], icon);
+          container.appendChild(icon);
+        }
+      });
+
+      const overlapColor = container.dataset.overlapColor;
+      overlaps.forEach(o => {
+        const div = overlapDivMap[o.key];
+        let html = null;
+        let annHtmlOv = null;
+        if (div) {
+          const ann = Array.from(div.children).find(c => c.classList.contains('annotation'));
+          annHtmlOv = ann ? ann.innerHTML.trim() : null;
+          const divHTML = labelHTML(div);
+          if (divHTML) html = divHTML;
+        }
+        if (!html && container.dataset[o.key]) html = container.dataset[o.key];
+        if (html) {
+          const label = document.createElement('div');
+          label.className = 'overlap-label';
+          label.innerHTML = html;
+          label.style.left = X(o.x) + 'px';
+          label.style.top  = Y(o.y) + 'px';
+          if (overlapColor) label.style.color = overlapColor;
+          copyFragmentAttrs(div, label);
+          container.appendChild(label);
+        }
+        if (annHtmlOv) {
+          const ox = X(o.x), oy = Y(o.y);
+          const dx = ox - Ox, dy = oy - Oy, len = Math.hypot(dx, dy) || 1;
+          const ux = dx / len, uy = dy / len;
+          const color = overlapColor || baseColor || '#666';
+          annAnchors.push({ ex: ox, ey: oy, mid: Math.atan2(uy, ux), color, html: annHtmlOv });
+        }
+      });
+
+      // Shrink set labels so the longest fits within a circle's exclusive lobe
+      // (outside labels have their own margin and wrap via CSS instead).
+      const textMaxW = outsideLabels ? Infinity : (n === 2 ? 150 : 130) * s;
+      const baseStyle = getComputedStyle(labelEls[0]);
+      const baseFontSize = parseFloat(baseStyle.fontSize) || 17.6;
+      const fontFamily = baseStyle.fontFamily || 'sans-serif';
+      const fontWeight = baseStyle.fontWeight || '600';
+      const cvs = document.createElement('canvas');
+      const cctx = cvs.getContext('2d');
+      cctx.font = `${fontWeight} ${baseFontSize}px ${fontFamily}`;
+      const maxW = Math.max(...labelEls.map(el => cctx.measureText(el.textContent).width));
+      if (maxW > textMaxW && maxW > 0) {
+        const scaled = (baseFontSize * textMaxW / maxW) + 'px';
+        labelEls.forEach(el => el.style.fontSize = scaled);
+      }
+
+      if (hasAnn) placeAnnotations(container, svg, annAnchors, X(250), diagW / 2, H, ANN_GAP);
+    }
+
+    function initStackedVenn(container) {
+      const items = Array.from(container.querySelectorAll('.item'));
+      if (items.length < 2) return;  // need at least 2 circles
+      const n = items.length;
+
+      const palette = ['#c0584f', '#5a9367', '#7a5a9b', '#2e6b8a', '#b8893a'];
+      const baseColor = container.dataset.nodeColor;
+
+      // Per-item annotation HTML (nested `.annotation` div); null if absent.
+      const annHTML = items.map(item => {
+        const ann = Array.from(item.children).find(c => c.classList.contains('annotation'));
+        return ann ? ann.innerHTML.trim() : null;
+      });
+      const hasAnn = annHTML.some(a => a !== null);
+
+      const SIZE = 500;
+      const margin = 10;
+      // When annotated, reserve a callout column on the right (the nested circles
+      // label along one axis, so callouts read best as a single stacked column).
+      const ANN_W = 164, ANN_GAP = 24, OUTER = 8;
+      const R = hasAnn ? 200 : (SIZE / 2 - margin);   // outer radius
+      const W = hasAnn ? (OUTER + 2 * R + ANN_GAP + ANN_W + OUTER) : SIZE;
+      const H = hasAnn ? 420 : SIZE;
+      const cx = hasAnn ? (OUTER + R) : SIZE / 2;
+      const cy = H / 2;
+
+      container.style.position = 'relative';
+      container.style.width = W + 'px';
+      container.style.height = H + 'px';
+      container.style.margin = '0 auto';
+      container.style.display = 'block';
+
+      const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      svg.setAttribute('width', W);
+      svg.setAttribute('height', H);
+      svg.style.cssText = 'position:absolute;left:0;top:0;overflow:visible;';
+      container.appendChild(svg);
+
+      // Nested concentric circles sharing a common edge point (containment): the
+      // first item is the largest outer circle, each later item nests inside it,
+      // internally tangent at a shared point P on the outer rim. Circle i (0 =
+      // outermost) has radius R·(n−i)/n and center C0 + (R−r_i)·u, where u points
+      // toward the shared edge. Painted largest-first so smaller ones sit on top.
+      //
+      // The diagram rotates by anchoring P in any direction without rotating the
+      // labels (they are upright divs). `direction=` picks an edge; `angle=` adds
+      // a clockwise rotation (degrees) on top of it.
+      const dirDeg = { down: 90, up: -90, left: 180, right: 0 };
+      const baseDeg = dirDeg[(container.dataset.direction || 'down').toLowerCase()] ?? 90;
+      const rot = parseFloat(container.dataset.angle) || 0;
+      const rad = (baseDeg + rot) * Math.PI / 180;
+      const ux = Math.cos(rad), uy = Math.sin(rad);   // unit vector toward shared edge
+
+      const radii = items.map((_, i) => R * (n - i) / n);
+
+      items.forEach((item, i) => {
+        const color = item.getAttribute('color') || item.dataset.color || baseColor || palette[i % palette.length];
+        const d = R - radii[i];                       // center offset from C0 toward edge
+        const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+        circle.setAttribute('cx', cx + d * ux);
+        circle.setAttribute('cy', cy + d * uy);
+        circle.setAttribute('r', radii[i]);
+        circle.setAttribute('fill', color);
+        svg.appendChild(circle);
+        item.style.display = 'none';
+      });
+
+      // Labels sit in each circle's exclusive crescent — the band on the far side
+      // from the shared edge, between this circle's far rim and the next inner
+      // circle's far rim. They are placed along the −u axis through C0 and never
+      // rotated. Distance from C0 along u: dLabel = R − r_i − r_{i+1} (innermost:
+      // R − r_last, i.e. the middle of its body).
+      const labelEls = [];
+      const labelPos = [];
+      const annAnchors = [];  // { ex, ey, mid, color, html } per annotated circle
+      items.forEach((item, i) => {
+        const dLabel = (i < n - 1) ? (R - radii[i] - radii[i + 1]) : (R - radii[i]);
+        const lx = cx + dLabel * ux, ly = cy + dLabel * uy;
+        const label = document.createElement('div');
+        label.className = 'set-label';
+        let labelText = labelHTML(item);
+        if (annHTML[i] !== null) {
+          const clone = item.cloneNode(true);
+          Array.from(clone.children)
+            .filter(c => c.classList.contains('annotation'))
+            .forEach(c => clone.removeChild(c));
+          labelText = labelHTML(clone);
+          // Start the leader on this circle's right rim, level with its label
+          const color = item.getAttribute('color') || item.dataset.color || baseColor || palette[i % palette.length];
+          const ccx = cx + (R - radii[i]) * ux, ccy = cy + (R - radii[i]) * uy;
+          const dxr = Math.sqrt(Math.max(0, radii[i] * radii[i] - (ly - ccy) * (ly - ccy)));
+          annAnchors.push({ ex: ccx + dxr, ey: ly, mid: 0, color, html: annHTML[i] });
+        }
+        label.innerHTML = labelText;
+        label.style.left = lx + 'px';
+        label.style.top  = ly + 'px';
+        container.appendChild(label);
+        labelEls.push(label);
+        labelPos.push({ x: lx, y: ly });
+      });
+
+      // Per-label down-scale to fit the chord width of its circle at the label's
+      // position (distance from that circle's center, projected across the rim).
+      const baseStyle = getComputedStyle(labelEls[0]);
+      const baseFontSize = parseFloat(baseStyle.fontSize) || 17.6;
+      const fontFamily = baseStyle.fontFamily || 'sans-serif';
+      const fontWeight = baseStyle.fontWeight || '600';
+      const cvs = document.createElement('canvas');
+      const cctx = cvs.getContext('2d');
+      cctx.font = `${fontWeight} ${baseFontSize}px ${fontFamily}`;
+      labelEls.forEach((el, i) => {
+        const r = radii[i];
+        const d = R - r;
+        const ccx = cx + d * ux, ccy = cy + d * uy;
+        const dist = Math.hypot(labelPos[i].x - ccx, labelPos[i].y - ccy);
+        const chord = 2 * Math.sqrt(Math.max(0, r * r - dist * dist));
+        const maxW = Math.max(40, chord * 0.8);
+        const w = cctx.measureText(el.textContent).width;
+        if (w > maxW && w > 0) el.style.fontSize = (baseFontSize * maxW / w) + 'px';
+      });
+
+      if (hasAnn) placeAnnotations(container, svg, annAnchors, cx, R, H, ANN_GAP);
+    }
+
+    // --- Funnel (flat-bottomed narrowing stages) ---
+
+    function initFunnel(container) {
+      const items = Array.from(container.querySelectorAll('.item'));
+      if (items.length === 0) return;
+
+      const n = items.length;
+      const cx = 250;
+      const topY = 20, botY = 480, H = botY - topY;
+      const fullHalf = 230;
+      const hasGap = container.classList.contains('gap');
+      const defaultColor = container.dataset.nodeColor || '#2e6b8a';
+
+      // Per-item annotation HTML (nested `.annotation` div); null if absent.
+      const annHTML = items.map(item => {
+        const ann = Array.from(item.children).find(c => c.classList.contains('annotation'));
+        return ann ? ann.innerHTML.trim() : null;
+      });
+      const hasAnn = annHTML.some(a => a !== null);
+
+      // The funnel uses a fixed 500-unit system. When annotated, scale it down and
+      // offset it so callout columns on both sides fit a normal content column.
+      const ANN_W = 164, ANN_GAP = 24, OUTER = 8;
+      const s = hasAnn ? 0.7 : 1;
+      const diagSize = 500 * s;
+      const PAD = hasAnn ? (ANN_W + ANN_GAP) : 0;
+      const W  = hasAnn ? (2 * OUTER + 2 * PAD + diagSize) : 500;
+      const CH = hasAnn ? 380 : 500;
+      const offsetX = hasAnn ? (OUTER + PAD) : 0;
+      const offsetY = hasAnn ? (CH - diagSize) / 2 : 0;
+      const X = x => offsetX + x * s;
+      const Y = y => offsetY + y * s;
+
+      container.style.position = 'relative';
+      container.style.width = W + 'px';
+      container.style.height = CH + 'px';
+      container.style.margin = '0 auto';
+      container.style.display = 'block';
+
+      // Band widths: proportional to value= if any item supplies one, otherwise a
+      // smooth linear narrowing from full width down to 35%.
+      const rawVals = items.map(it => parseFloat(it.getAttribute('value') ?? it.dataset.value));
+      const hasVals = rawVals.some(v => !isNaN(v));
+      let fracs;
+      if (hasVals) {
+        const vals = rawVals.map(v => isNaN(v) ? 0 : v);
+        const maxV = Math.max(...vals, 0);
+        fracs = vals.map(v => maxV > 0 ? v / maxV : 0);
+      } else {
+        fracs = items.map((_, i) => n === 1 ? 1 : 1 - (i / (n - 1)) * 0.65);
+      }
+
+      const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      svg.setAttribute('width', W);
+      svg.setAttribute('height', CH);
+      svg.style.cssText = 'position:absolute;left:0;top:0;overflow:visible;';
+      container.appendChild(svg);
+
+      const labelEls = [];
+      const bandWidths = [];
+      const annAnchors = [];  // { ex, ey, mid, color, html } per annotated stage
+
+      items.forEach((item, i) => {
+        const color = item.getAttribute('color') || item.dataset.color || defaultColor;
+        const itemGap = hasGap || item.classList.contains('gap');
+        const inset = itemGap ? 5 : 0;
+
+        const yTop = topY + (i / n) * H + inset;
+        const yBot = topY + ((i + 1) / n) * H - inset;
+        // Trapezoid: top edge = this stage, bottom edge = next stage (last is a rectangle)
+        const topHalf = fullHalf * fracs[i];
+        const botHalf = fullHalf * (i < n - 1 ? fracs[i + 1] : fracs[i]);
+
+        const d = `M ${X(cx - topHalf)} ${Y(yTop)} L ${X(cx + topHalf)} ${Y(yTop)} ` +
+                  `L ${X(cx + botHalf)} ${Y(yBot)} L ${X(cx - botHalf)} ${Y(yBot)} Z`;
+
+        const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        path.setAttribute('d', d);
+        path.setAttribute('fill', color);
+        if (!hasGap) {
+          path.setAttribute('stroke', 'white');
+          path.setAttribute('stroke-width', '3');
+        }
+        svg.appendChild(path);
+
+        const ly = (yTop + yBot) / 2;
+        let labelText = labelHTML(item);
+        if (annHTML[i] !== null) {
+          const clone = item.cloneNode(true);
+          Array.from(clone.children)
+            .filter(c => c.classList.contains('annotation'))
+            .forEach(c => clone.removeChild(c));
+          labelText = labelHTML(clone);
+          // Alternate sides; leader starts at the stage's edge at its mid-height
+          const halfMid = (topHalf + botHalf) / 2;
+          const right = (i % 2 === 0);
+          annAnchors.push({
+            ex: right ? X(cx + halfMid) : X(cx - halfMid),
+            ey: Y(ly),
+            mid: right ? 0 : Math.PI,
+            color,
+            html: annHTML[i]
+          });
+        }
+        const label = document.createElement('div');
+        label.className = 'slice-label';
+        label.innerHTML = labelText;
+        label.style.left = X(cx) + 'px';
+        label.style.top  = Y(ly) + 'px';
+        container.appendChild(label);
+        labelEls.push(label);
+
+        // usable width at the label's vertical midpoint (the narrower, bottom edge)
+        bandWidths.push(2 * Math.min(topHalf, botHalf) * s);
+        item.style.display = 'none';
+      });
+
+      // Scale each label down to fit its own band width (bands vary in width)
+      const baseStyle = getComputedStyle(labelEls[0]);
+      const baseFontSize = parseFloat(baseStyle.fontSize) || 17.6;
+      const fontFamily = baseStyle.fontFamily || 'sans-serif';
+      const fontWeight = baseStyle.fontWeight || '500';
+      const cvs = document.createElement('canvas');
+      const cctx = cvs.getContext('2d');
+      cctx.font = `${fontWeight} ${baseFontSize}px ${fontFamily}`;
+      labelEls.forEach((el, i) => {
+        const textMaxW = Math.max(40, bandWidths[i] * 0.85);
+        const w = cctx.measureText(el.textContent).width;
+        if (w > textMaxW && w > 0) {
+          el.style.fontSize = (baseFontSize * textMaxW / w) + 'px';
+        }
+      });
+
+      if (hasAnn) placeAnnotations(container, svg, annAnchors, X(cx), fullHalf * s, CH, ANN_GAP);
+    }
+
+    // --- Cycle (ring of arc-shaped arrow segments) ---
+
+    function initCycle(container) {
+      const items = Array.from(container.querySelectorAll('.item'));
+      if (items.length === 0) return;
+
+      const n = items.length;
+      const defaultColor = container.dataset.nodeColor || '#2e6b8a';
+
+      // Per-item annotation HTML (nested `.annotation` div); null if absent.
+      const annHTML = items.map(item => {
+        const ann = Array.from(item.children).find(c => c.classList.contains('annotation'));
+        return ann ? ann.innerHTML.trim() : null;
+      });
+      const hasAnn = annHTML.some(a => a !== null);
+
+      // Ring band radii — shrunk when annotated to leave room for side callouts.
+      const ro = hasAnn ? 168 : 225;     // outer radius of the ring band
+      const ri = ro * (150 / 225);       // inner radius (original proportion)
+      const rm = (ro + ri) / 2;          // mid radius (labels + arrow tip)
+      const wing = (ro - ri) * 0.45;     // how far the arrowhead overhangs the band
+
+      const ANN_W = 164, ANN_GAP = 24, OUTER = 8;
+      const rAnchor = ro + wing;         // leader lines start just outside the band
+      const PAD = hasAnn ? (ANN_W + ANN_GAP) : 0;
+      const cx = hasAnn ? (OUTER + PAD + rAnchor) : 250;
+      const W  = hasAnn ? (2 * cx) : 500;
+      const H  = hasAnn ? 430 : 500;
+      const cy = H / 2;
+
+      container.style.position = 'relative';
+      container.style.width = W + 'px';
+      container.style.height = H + 'px';
+      container.style.margin = '0 auto';
+      container.style.display = 'block';
+
+      const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      svg.setAttribute('width', W);
+      svg.setAttribute('height', H);
+      svg.style.cssText = 'position:absolute;left:0;top:0;overflow:visible;';
+      container.appendChild(svg);
+
+      const step = 2 * Math.PI / n;      // angular span per segment
+      const gapAngle = Math.min(step * 0.18, 0.22);  // gap between segments (centered)
+      const headAngle = Math.min(step * 0.28, 0.4);  // angular length of the arrowhead
+      const start = -Math.PI / 2;        // first segment begins at the top
+      const p = (r, a) => `${cx + r * Math.cos(a)} ${cy + r * Math.sin(a)}`;
+
+      const labelEls = [];
+      const labelArc = [];
+      const annAnchors = [];  // { ex, ey, mid, color, html } per annotated segment
+
+      items.forEach((item, i) => {
+        const color = item.getAttribute('color') || item.dataset.color || defaultColor;
+        const a0 = start + i * step + gapAngle / 2;        // trailing edge of the band
+        const a1 = start + (i + 1) * step - gapAngle / 2;  // arrowhead tip
+        const aBody = a1 - headAngle;                      // where the body ends / head begins
+        const largeArc = (aBody - a0) > Math.PI ? 1 : 0;
+
+        // Body is a constant-width arc band; the head is a triangle whose wings
+        // overhang both rims and taper to a tip at the mid radius.
+        const d = [
+          `M ${p(ro, a0)}`,
+          `A ${ro} ${ro} 0 ${largeArc} 1 ${p(ro, aBody)}`,
+          `L ${p(ro + wing, aBody)}`,
+          `L ${p(rm, a1)}`,
+          `L ${p(ri - wing, aBody)}`,
+          `L ${p(ri, aBody)}`,
+          `A ${ri} ${ri} 0 ${largeArc} 0 ${p(ri, a0)}`,
+          'Z'
+        ].join(' ');
+
+        const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        path.setAttribute('d', d);
+        path.setAttribute('fill', color);
+        svg.appendChild(path);
+
+        const aMid = (a0 + aBody) / 2;
+        const lx = cx + rm * Math.cos(aMid), ly = cy + rm * Math.sin(aMid);
+        const label = document.createElement('div');
+        label.className = 'slice-label';
+        let labelText = labelHTML(item);
+        if (annHTML[i] !== null) {
+          const clone = item.cloneNode(true);
+          Array.from(clone.children)
+            .filter(c => c.classList.contains('annotation'))
+            .forEach(c => clone.removeChild(c));
+          labelText = labelHTML(clone);
+          annAnchors.push({
+            ex: cx + rAnchor * Math.cos(aMid),
+            ey: cy + rAnchor * Math.sin(aMid),
+            mid: aMid,
+            color,
+            html: annHTML[i]
+          });
+        }
+        label.innerHTML = labelText;
+        label.style.left = lx + 'px';
+        label.style.top  = ly + 'px';
+        container.appendChild(label);
+        labelEls.push(label);
+        labelArc.push(aBody - a0);
+        item.style.display = 'none';
+      });
+
+      // Scale labels to fit the arc length of the band body (minus the head)
+      const baseStyle = getComputedStyle(labelEls[0]);
+      const baseFontSize = parseFloat(baseStyle.fontSize) || 17.6;
+      const fontFamily = baseStyle.fontFamily || 'sans-serif';
+      const fontWeight = baseStyle.fontWeight || '500';
+      const cvs = document.createElement('canvas');
+      const cctx = cvs.getContext('2d');
+      cctx.font = `${fontWeight} ${baseFontSize}px ${fontFamily}`;
+      labelEls.forEach((el, i) => {
+        const textMaxW = Math.max(40, rm * labelArc[i] * 0.85);
+        const w = cctx.measureText(el.textContent).width;
+        if (w > textMaxW && w > 0) {
+          el.style.fontSize = (baseFontSize * textMaxW / w) + 'px';
+        }
+      });
+
+      if (hasAnn) placeAnnotations(container, svg, annAnchors, cx, rAnchor, H, ANN_GAP);
+    }
+    </script>
+    <script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+    (function() {
+      let previousOnload = window.onload;
+      window.onload = () => {
+        if (previousOnload) {
+          previousOnload();
+        }
+        lightboxQuarto.on('slide_before_load', (data) => {
+          const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+          const href = trigger.getAttribute('href');
+          if (href !== null) {
+            const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+            if (imgEl !== null) {
+              const srcAttr = imgEl.getAttribute("src");
+              if (srcAttr && srcAttr.startsWith("data:")) {
+                slideConfig.href = srcAttr;
+              }
+            }
+          } 
+        });
+      
+        lightboxQuarto.on('slide_after_load', (data) => {
+          const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(slideNode);
+          }
+        });
+      
+      };
+      
+    })();
+              </script>
     
 
 </body></html>

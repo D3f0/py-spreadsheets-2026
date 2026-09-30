@@ -32,6 +32,10 @@
 }
 
 /* other quarto variables */
+:root {
+  --quarto-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
 /* syntax highlight based on Pandoc's rules */
 pre > code.sourceCode > span {
   color: #545454;
@@ -226,4 +230,4 @@ code span.wa {
   content: "</";
 }
 
-/*# sourceMappingURL=580920022e8259f4cd7cc33e13ce799c.css.map */
+/*# sourceMappingURL=a0e48aebe202bc7301f9966d54efda35.css.map */
