@@ -96,9 +96,7 @@ gh repo clone \
 
 ---
 
-# What will I get from this workshop
-
----
+## What will I get from this workshop
 
 ::: {.incremental}
 - Create a small application with spreadsheets for a simple calendar.
@@ -177,9 +175,9 @@ flowchart TB
     Formulas --> Engine
     Engine <--> API["Grist REST API"]
 
+    API <--> CLI["gry (cli)"]
     API <--> Notebook["Python notebook"]
-    API <--> CLI["$ gry CLI"]
-    API <--> MCP["With MCP"]
+    API <--> MCP["OSS MCP"]
 
     classDef ui fill:#e4f1f8,stroke:#24557a,color:#263238,stroke-width:2px,font-size:25px;
     classDef python fill:#fff0c9,stroke:#8b4b00,color:#263238,stroke-width:2px,font-size:25px;
@@ -190,9 +188,9 @@ flowchart TB
     class UI,Engine,API,OfficialMCP ui;
     class Sandbox,Formulas python;
     class Notebook client;
-    class Gry terminal;
+    class CLI terminal;
     class DB data;
-    class MCP mcp;
+    class MCP client;
     style TopRow fill:none,stroke:none;
     linkStyle default stroke:#607d8b,stroke-width:2px;
 ```
