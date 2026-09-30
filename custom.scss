@@ -131,3 +131,26 @@ $code-block-font-size: 0.72em;
   max-height: 58vh;
   height: auto;
 }
+
+.reveal .narrow-figure {
+  width: 65%;
+  margin-right: auto;
+  margin-left: auto;
+  text-align: center;
+}
+
+.reveal .narrow-figure--portrait {
+  width: 45%;
+}
+
+.reveal .narrow-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.reveal .narrow-figure figcaption {
+  text-align: center;
+}
