@@ -30,6 +30,7 @@ services:
       GRIST_ENABLE_SERVICE_ACCOUNTS: true
       GRIST_IN_SERVICE: true
       # GRIST_BOOT_KEY: d540e2f84-fac0-497a-b2d7-85371b5255d0
+      DEBUG: 1
 
     ports:
       - "127.0.0.1:8484:8484"

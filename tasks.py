@@ -2,7 +2,7 @@
 # /// script
 # requires-python = ">=3.11"
 # dependencies = [
-#     "invoke-toolkit>=0.0.59",
+#     "invoke-toolkit>=0.0.73",
 # ]
 # ///
 """Development tasks for the workshop slides."""
@@ -21,7 +21,7 @@ from typing import Annotated, Union, cast
 from urllib.parse import unquote, urlsplit
 
 import yaml
-from invoke_toolkit import Context, script, task
+from invoke_toolkit import Context, script, task, Task
 from invoke_toolkit.utils.fzf import select
 
 ROOT = Path(__file__).resolve().parent
@@ -261,6 +261,20 @@ def stage_images(ctx: Context) -> None:
     with ctx.cd(ROOT):
         ctx.run(shlex.join(command))
     ctx.print(f"Staged {len(images)} slide image(s)")
+
+
+def _ensure_tilt_installed(ctx: Context, fail: bool = False):
+    """Check that tilt is installed"""
+    if not shutil.which("tilt"):
+        if fail:
+            ctx.rich_exit("[red]tilt[/] not installed")
+        else:
+            ctx.print_error("tilt not found")
+
+@task(pre=[Task(_ensure_tilt_installed), ])
+def up(ctx: Context) -> None:
+    """Shortcut for tilt up"""
+    ctx.run("tilt up", pty=True)
 
 
 script()

@@ -12,3 +12,6 @@ slides_files/
 hermes/
 .zed/
 .vscode/
+docs/superpowers
+docs/2026-*.md
+docs/2026-*.html

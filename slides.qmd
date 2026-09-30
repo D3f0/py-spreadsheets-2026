@@ -47,7 +47,7 @@ filters:
 
 ::: {.column width="40%"}
 
-![](img/Teaching%20your%20spreadsheets%20sone%20pytho%202.png){fig-alt="A cartoon Python writing a spreadsheet formula with a fountain pen"}
+![](img/Teaching%20your%20spreadsheets%20sone%20pytho%203.png){fig-alt="A cartoon Python writing a spreadsheet formula with a fountain pen"}
 
 :::
 
@@ -72,37 +72,40 @@ filters:
 
 **👇 🐳 Docker to follow along**
 
-```
+```{.shell code-line-numbers="false"}
 gh repo clone \
-D3f0
+  D3f0/py-spreadhseets-2026 \
+  && uv run tasks.py launch
 ```
 
-<!-- You can also clone the repo with:
-```shell
-gh repo clone D3f0/pycon-2026-teaching-spreadhseets-python
-````
--->
+
 :::
 :::
+
+---
+
+![](./img/562a7a03c4143.jpeg)
 
 ---
 
 # What will I get from this workshop
 
+
+
 ---
 
 ::: {.incremental}
-- Manage column types in Python types (`int`, `list`, `datetime` and more)
-- Create formulas with Python syntax
-- Create relationships between tables in your spreadhseets
-- Build applications out of spreadhseets
+- Create a small application with spreadsheets for a simple calendar.
+- Use Python for the columns
+- Add some formulas, with Python!
+- Create more than one ~~sheet~~, table! 
+- Go beyond the UI into API access and MCP
+
 <!-- have full contorl over youd data ? -->
 :::
 
 ::: {.notes}
 
-Also, Grist allows self hosting, so we can have private data that
-we fully own.
 
 :::
 
@@ -114,16 +117,18 @@ we fully own.
 
 ## A spreadsheet or a database
 
-::: {.incremental}
+::: {.fragment}
+
 - Grist is an Open Source spreadsheet engine, that we can run:
     - locally
     - in the cloud or homelab
     - as a SaaS (like Google Docs) [https://getgrist.com](https://getgirst.com)
-- It stores everything as a SQLite database that is easy to share and backup.
-- The visualization of the data can be customized, also know as Custom Widgets.
+::: 
 
+::: {.fragment}
+- It stores everything as a SQLite database that is easy to share and backup
 :::
-
+  
 ::: {.notes}
 
 Talk about the SMVE (check if time allows)
@@ -151,27 +156,36 @@ Talk about the SMVE (check if time allows)
   }
 }}%%
 flowchart TB
-    UI["Spreadsheet UI"] --> Engine["Document engine<br/>(Node.js)"]
+    subgraph TopRow[" "]
+        direction LR
+        UI["Spreadsheet UI"]
+        OfficialMCP["Official MCP"]
+    end
+
+    UI --> Engine["Document engine<br/>(Node.js)"]
+    OfficialMCP <-.-> Engine
     Engine <--> DB[("SQLite")]
-    Engine --> Sandbox["Sandboxed Python"] --> Formulas["Formulas"]
+    Engine --> Sandbox["🐍 Sandboxed Python"] --> Formulas["Formulas"]
     Formulas --> Engine
     Engine <--> API["Grist REST API"]
 
     API <--> Notebook["Python notebook"]
-    API <--> Gry["gry CLI"]
-    API <-.-> MCP["With MCP"]
-
+    API <--> CLI["$ gry CLI"]
+    API <--> MCP["With MCP"]
 
     classDef ui fill:#e4f1f8,stroke:#24557a,color:#263238,stroke-width:2px,font-size:25px;
     classDef python fill:#fff0c9,stroke:#8b4b00,color:#263238,stroke-width:2px,font-size:25px;
     classDef data fill:#edf3df,stroke:#5f6f36,color:#263238,stroke-width:2px,font-size:25px;
     classDef client fill:#dfeecf,stroke:#5f6f36,color:#263238,stroke-width:2px,font-size:25px;
-    classDef mcp fill:#fdf6e3,stroke:#5f6f36,color:#263238,stroke-width:2px,stroke-dasharray:6 4,font-size:25px;
-    class UI,Engine,API ui;
+    classDef terminal fill:#263238,stroke:#24557a,color:#fdf6e3,stroke-width:2px,font-family:monospace,font-size:25px;
+    classDef mcp fill:#fdf6e3,stroke:#5f6f36,color:#263238,stroke-width:2px, font-size:25px;
+    class UI,Engine,API,OfficialMCP ui;
     class Sandbox,Formulas python;
-    class Notebook,Gry client;
+    class Notebook client;
+    class Gry terminal;
     class DB data;
     class MCP mcp;
+    style TopRow fill:none,stroke:none;
     linkStyle default stroke:#607d8b,stroke-width:2px;
 ```
 
@@ -232,10 +246,10 @@ Working in Grist is organized in this way:
 
 ::: {.incremental}
 - {{< fa globe >}} A site (each user has his/hers)
-- {{< fa folder-open >}} A workspace, this is like folders and contain documents
-- {{< fa file-lines >}} Documents
-  - {{< fa database >}} Database
-  - {{< fa table-columns >}} Pages, views and other presentation data
+  - {{< fa folder-open >}} A workspace, this is like folders and contain documents
+    - {{< fa file-lines >}} Documents
+      - {{< fa database >}} Database
+      - {{< fa table-columns >}} Pages, views and other presentation data
 
 :::
 
@@ -248,25 +262,244 @@ Working in Grist is organized in this way:
 
 ---
 
-## Our first column
+## Creating a calendar style application
 
-We will be using the date data type in Grist.
+{{< fa table-cells >}} For this we will create a few columns in a table
+
+::: {.incremental}
+- Activity
+- {{< fa calendar-day >}} Start
+- {{< fa calendar-check >}} End
+- {{< fa toggle-on >}} All day
+- {{< fa tag >}} Category
+:::
+
+---
+
+## First Table
+
+![A table with some typed columns](./img/first_table.png)
 
 ---
 
-## First Python formula
+## Code View
 
-We'd like to highlight the rows that are in the past.
+![The code view for that table](./img/code_view.png)
+
+---
+
+## First Python formula {.smaller}
+
+::: {.fragment .bigger }
+Let's create a our first formula to compute how many days we have before the column `$Start`
+:::
+
+
+::: {.fragment}
+
+::: {.columns}
+
+::: {.column}
+
+```{.python}
+$Start - TODAY() 
+```
+
+:::
+
+::: {.column}
+
+`
+datetime.timedelta(days=-3, seconds=45245, microseconds=577301)
+`
+
+:::
+
+:::
+
+::: {.fragment}
+
+
+::: {.columns}
+
+::: {.column}
+
+```{.python}
+from datetime import timedelta as td
+return (
+  $Start - NOW()
+) / td(days=1)
+```
+
+:::
+
+::: {.column}
+
+`2.458484637708333`
+
+:::
+
+:::
+
+:::
+
+
+
+:::
+
+
+
+::: {.fragment}
+
+
+::: {.columns}
+
+::: {.column}
+
+```{.python}
+from datetime import timedelta as td
+return int(
+  $Start - NOW()
+) / td(days=1)
+```
+:::
+
+::: {.column}
+
+2
+
+:::
+
+:::
+
+
+
+:::
+
+
+
+::: {.fragment}
+
+
+::: {.columns}
+
+::: {.column}
+
+```python
+DATEDIF($Start, NOW(), 'D')
+```
+
+:::
+
+::: {.column}
+
+```
+3
+```
+
+:::
+
+:::
+
+:::
 
 
 
 ---
 
-## Hiding columns
+## Computed / Helper Columns can be hidden 🙈
+
+
+::: {.columns}
+
+::: {.column}
+
+From the author panel (right side on the `Table` tab, on the bottom)
+
+
+:::
+
+::: {.column}
+
+![](./img/hide_columns.png)
+
+:::
+
+:::
+
 
 
 
 ---
+
+## Styling columns
+
+TBD
+
+---
+
+## Custom Widgets {.smaller}
+
+Grist supports custom widgets, an example of one that comes with
+it is the calendar
+
+
+
+::: {.columns}
+
+::: {.column}
+
+![](./img/add-new.png)
+
+
+:::
+
+::: {.column}
+
+![](./img/widget-type)
+
+
+:::
+
+:::
+
+---
+
+## Custom Widgets (cont.)
+
+
+
+::: {.columns}
+
+::: {.column}
+
+![](./img/calendar-setup.png)
+
+:::
+
+::: {.column .smaller}
+
+This configuration can be modified later in the creator panel.
+
+:::
+
+:::
+
+---
+
+## Custom Widgets (cont.)
+
+![](./img/full_calendar.png)
+
+---
+
+## More widgets to explore (or create)
+
+![](./img/more-widgets.png)
+
+---
+
+<!--
 
 ## Column types
 
@@ -290,6 +523,7 @@ We'd like to highlight the rows that are in the past.
 :::
 :::
 
+-->
 
 <!-- TODO: Examples from https://support.getgrist.com/examples/ -->
 
@@ -302,6 +536,23 @@ We'd like to highlight the rows that are in the past.
 In Grist settings we can jump in directly into the API Console.
 
 ![](./img/api_key.png)
+
+[link](http://localhost:8484/account/developer)
+
+---
+
+## Service Accounts
+
+- It's a bit dangerous to give full access to our documents to any automation
+- Service Accounts are pseudo-users which can be given finer grained access to a a few tables
+
+---
+
+## Creating user accounts
+
+- User accounts are emails that end in `@@serviceaccounts.invalid`
+
+---
 
 ---
 
@@ -317,8 +568,6 @@ In Grist settings we can jump in directly into the API Console.
 
 ---
 
----
-
 
 # Using AI
 
@@ -330,11 +579,7 @@ In Grist settings we can jump in directly into the API Console.
 
 ---
 
----
-
 ## Using Hermes
-
----
 
 ---
 
