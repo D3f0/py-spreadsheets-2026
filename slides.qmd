@@ -499,14 +499,14 @@ From the author panel (right side on the `Table` tab, on the bottom)
 
 
 # Presentation 
-Custom widgets
+Different ways to present the data
 
 --- 
 
 ::: {.smaller}
 
-Grist supports custom widgets, an example of one that comes with
-it is the calendar
+Grist supports a diversity widgets, we will focus on a simple one
+called Calendar widget {{< fa calendar >}}
 
 
 
@@ -530,9 +530,13 @@ it is the calendar
 
 :::
 
+::: notes
+Visualizations are done also through widgets
+:::
+
 ---
 
-## Custom Widgets (cont.)
+## Calendar Widgets (cont.)
 
 
 
@@ -554,7 +558,7 @@ This configuration can be modified later in the creator panel.
 
 ---
 
-## Custom Widgets (cont.)
+## Calendar Widgets (cont.)
 
 ![](./img/full_calendar.png){.r-stretch}
 
@@ -566,7 +570,7 @@ This configuration can be modified later in the creator panel.
 
 ---
 
-## Custom Widgets
+## Custom widgets
 
 - Customs CSS, HTML and JS can be stored in Grist itself.
 - If they are mean to be re-used in many documents, it's recommended to 
@@ -615,7 +619,7 @@ To get the user's API key, this is in the [user settings](http://localhost:8484/
 
 ---
 
-<!-- API access screenshots -->
+## The document identifier
 
 ::: {.columns}
 
@@ -678,9 +682,6 @@ $ gry ws list
 
 
 ::: {.fragment}
-
-
-
 
 ```
 $ gry ws see -w 3
@@ -828,12 +829,13 @@ Or scripts
 
 ---
 
-## Marimo
+## Marimo {.smaller}
 
 ::: {.incremental}
 - Marimo is a modern Python notebook centered around the idea of reproducibility
 - The notebooks are not `.ipynb` format (JSON) but `.py`
 - A notebook can also be a script, a test suite and an application.
+- Takes advantage of modern python packaging like with uv for sandboxing.
 :::
 
 ::: {.fragment}
@@ -848,7 +850,7 @@ Or scripts
 
 ---
 
-
+TBD
 
 ---
 
@@ -864,17 +866,66 @@ Or scripts
 
 [`mcp-server-grist`](https://github.com/nic01asFr/mcp-server-grist){target=blank_} is a MCP server written in Python. It allows AI applications like Claude, IBM Bob, Codex, pi, OpenClaw, Hermes, etc. to connect to the Grist API.
 
+::: callout
 This is not the official MCP that lives in `https://<yoursite>.getgrist.com/mcp` for the
 commercial version, so authentication will use the same API KEYs instead of OAauth2.
+:::
+
+To run `mcp-server-grist` with `uv` we need these two environment variables:
+
+- `GRIST_API_KEY` (user or Service Account)
+- `GRIST_API_URL` (this will be where Grist is running + `/api`)
+  
+---
+
+## Example JSON {.smaller}
+
+```json
+{
+  "mcpServers": {
+    "grist-server": {
+      "timeout": 60,
+      "type": "stdio",
+      "command": "uvx",
+      "args": [
+        "--with",
+        "fastmcp<3", # this is important 🙈 as it's not been updated
+        "mcp-server-grist"
+      ],
+      "env": {
+        "GRIST_API_KEY": "2273b28ebed8ba2aa38c99f788cf9cb314012536",
+        "GRIST_API_URL": "http://localhost:8484/api"
+      }
+      
+    }
+  }
+}
+
+```
+
+::: callout 
+👆 I'm going to use this in IBM Bob, but should work the same to any other harness
+:::
 
 ---
+
+## Example conversation
+
+![](./img/bob-mcp.png)
 
 ---
 
 ## Using Hermes
 
 Hermes is a popular agent that build its own memory. Has connectors for many
-messaging platforms {{< fa whatsapp >}} {{< fa telegram >}}
+messaging platforms {{< fa brands whatsapp >}} {{< fa brands telegram >}} {{< fa brands discord >}} 
+
+But for our demo, we will use an extension called [WebUI extension {{< fa brands github >}}]()
+
+
+---
+
+TBD
 
 ---
 
