@@ -66,8 +66,8 @@ cmd_button(
 )
 
 config.set_enabled_resources([
-    'caddy',
     'Grist Spreadsheet',
     'Marimo Notebook',
     'Hermes WebUI',
+    'Hermes Backend',
 ])
