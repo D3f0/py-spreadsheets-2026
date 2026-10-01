@@ -99,7 +99,7 @@ gh repo clone \
 ## What will I get from this workshop
 
 ::: {.incremental}
-- Create a small application with spreadsheets for a simple calendar.
+- Build a small Calendar application based on spreadsheets
 - Define tables and their relationships
 - Customizing how they present information
 - Use Python (and Excel functions) in formulas

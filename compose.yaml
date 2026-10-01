@@ -149,4 +149,5 @@ volumes:
     name: pycon-2026-teaching-spreadhseets-python_grist-data
     external: true
   hermes-data:
+    name: pycon-2026-teaching-spreadhseets-python_hermes-data
   hermes-agent-src:

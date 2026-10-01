@@ -35,6 +35,15 @@ def _quarto_installed(ctx: Context):
         ctx.rich_exit("quarto not found in [red]$PATH[/]")
 
 
+@task()
+def free_port(ctx: Context, port: int, status: str = "listen") -> None:
+    """Free a port"""
+    if not isinstance(port, int) or not 1024 < port < 65535:
+        ctx.rich_exit("Port is invalid")
+    ctx.run(
+        f"lsof -i :{port} | grep {{status}} | awk '{{print $2}}' | xargs kill -9"
+    )
+
 @task(aliases=["p"], pre=[_quarto_installed])
 def preview(
     ctx: Context,
@@ -327,6 +336,7 @@ def _ensure_tilt_installed(ctx: Context, fail: bool = False):
 )
 def up(ctx: Context) -> None:
     """Shortcut for tilt up"""
+    free_port(ctx, port=10350,)
     ctx.run("tilt up", pty=True)
 
 

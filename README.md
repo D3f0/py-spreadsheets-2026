@@ -40,7 +40,7 @@ direnv allow
 docker compose up -d
 ```
 
-The Hermes WebUI uses the configured Hermes Agent gateway and provides model selection in its settings. Authentication is intentionally disabled because this is a loopback-only demo; keep the published port local. WebUI and Hermes state is persisted in the `hermes-data` volume.
+The Hermes WebUI uses the configured Hermes Agent gateway and provides model selection in its settings. Authentication is intentionally disabled because this is a loopback-only demo; keep the published port local. WebUI and Hermes state, including the Grist MCP definition in `/opt/data/config.yaml`, is persisted in the explicitly named `pycon-2026-teaching-spreadhseets-python_hermes-data` volume. The explicit name keeps the same profile when containers are rebuilt or recreated and when Compose is invoked with a different project name.
 
 With `OPENROUTER_API_KEY` set in `.env`, configure Hermes without the interactive wizard:
 
@@ -48,7 +48,7 @@ With `OPENROUTER_API_KEY` set in `.env`, configure Hermes without the interactiv
 direnv exec . uv run tasks.py setup-hermes
 ```
 
-This stops the Hermes services, writes the OpenRouter provider and model into the persisted Hermes configuration, adds the Grist MCP stdio server, and starts the services again. The MCP subprocess runs inside the Hermes container with `uvx`; it reaches Grist at `http://grist:8484/api` and receives `GRIST_API_KEY` from the ignored host `.env` through the Hermes container environment. The default model is `deepseek/deepseek-v4.1-flash`. To choose another model:
+This stops the Hermes services, writes the OpenRouter provider and model into the persisted Hermes configuration, adds the Grist MCP stdio server, and starts the services again. The MCP subprocess runs inside the Hermes container with `uvx`; it reaches Grist at `http://grist:8484/api` and receives `GRIST_API_KEY` from the ignored host `.env` through the Hermes container environment. Run this task once to initialize a new volume; ordinary restarts, rebuilds, and container recreation retain the MCP definition. The default model is `deepseek/deepseek-v4.1-flash`. To choose another model:
 
 ```bash
 direnv exec . uv run tasks.py setup-hermes --model cohere/north-mini-code:free
@@ -57,8 +57,10 @@ direnv exec . uv run tasks.py setup-hermes --model cohere/north-mini-code:free
 Verify MCP discovery and its read-only Grist connection:
 
 ```bash
-docker compose exec hermes hermes mcp test grist
-docker compose exec hermes hermes chat --oneshot --format stream-json \
+docker compose run --rm --no-deps hermes \
+  /opt/hermes/.venv/bin/hermes mcp test grist
+docker compose run --rm --no-deps hermes \
+  /opt/hermes/.venv/bin/hermes chat --oneshot --format stream-json \
   -q 'Use the Grist MCP tool list_organizations exactly once. Do not modify anything.'
 ```
 
@@ -132,7 +134,7 @@ docker compose ps
 docker compose logs -f grist       # or marimo / webui / caddy
 ```
 
-Grist documents and Hermes configuration, credentials, and application data are stored in named volumes. A normal shutdown preserves them:
+Grist documents and Hermes configuration, credentials, and application data are stored in named volumes. The explicitly named Hermes volume also survives a Compose project-name change. A normal shutdown, rebuild, or container recreation preserves them:
 
 ```bash
 docker compose down
