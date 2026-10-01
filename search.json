@@ -25,7 +25,7 @@
     "href": "slides.html#what-will-i-get-from-this-workshop",
     "title": "Teaching Some Python to Your Spreadsheets",
     "section": "What will I get from this workshop",
-    "text": "What will I get from this workshop\n\nCreate a small application with spreadsheets for a simple calendar.\nDefine tables and their relationships\nCustomizing how they present information\nUse Python (and Excel functions) in formulas\nAccessing data over the API with different levels of access\nAccessing data over the CLI\nInteracting with the database through MCP in an Agent"
+    "text": "What will I get from this workshop\n\nBuild a small Calendar application based on spreadsheets\nDefine tables and their relationships\nCustomizing how they present information\nUse Python (and Excel functions) in formulas\nAccessing data over the API with different levels of access\nAccessing data over the CLI\nInteracting with the database through MCP in an Agent"
   },
   {
     "objectID": "slides.html#what-is-grist",
@@ -119,18 +119,18 @@
     "text": "Putting together views"
   },
   {
-    "objectID": "slides.html#custom-widgets-cont.",
-    "href": "slides.html#custom-widgets-cont.",
+    "objectID": "slides.html#calendar-widgets-cont.",
+    "href": "slides.html#calendar-widgets-cont.",
     "title": "Teaching Some Python to Your Spreadsheets",
-    "section": "Custom Widgets (cont.)",
-    "text": "Custom Widgets (cont.)\n\n\n\n\nThis configuration can be modified later in the creator panel."
+    "section": "Calendar Widgets (cont.)",
+    "text": "Calendar Widgets (cont.)\n\n\n\n\nThis configuration can be modified later in the creator panel."
   },
   {
-    "objectID": "slides.html#custom-widgets-cont.-1",
-    "href": "slides.html#custom-widgets-cont.-1",
+    "objectID": "slides.html#calendar-widgets-cont.-1",
+    "href": "slides.html#calendar-widgets-cont.-1",
     "title": "Teaching Some Python to Your Spreadsheets",
-    "section": "Custom Widgets (cont.)",
-    "text": "Custom Widgets (cont.)"
+    "section": "Calendar Widgets (cont.)",
+    "text": "Calendar Widgets (cont.)"
   },
   {
     "objectID": "slides.html#more-widgets-to-explore",
@@ -143,8 +143,8 @@
     "objectID": "slides.html#custom-widgets",
     "href": "slides.html#custom-widgets",
     "title": "Teaching Some Python to Your Spreadsheets",
-    "section": "Custom Widgets",
-    "text": "Custom Widgets\n\nCustoms CSS, HTML and JS can be stored in Grist itself.\nIf they are mean to be re-used in many documents, it’s recommended to host these resources in a common place.\nA coding AI agent/harness with good planning can create engaging UIs"
+    "section": "Custom widgets",
+    "text": "Custom widgets\n\nCustoms CSS, HTML and JS can be stored in Grist itself.\nIf they are mean to be re-used in many documents, it’s recommended to host these resources in a common place.\nA coding AI agent/harness with good planning can create engaging UIs"
   },
   {
     "objectID": "slides.html#getting-the-accounts-api-key",
@@ -152,6 +152,13 @@
     "title": "Teaching Some Python to Your Spreadsheets",
     "section": "Getting the account’s API key",
     "text": "Getting the account’s API key\nTo get the user’s API key, this is in the user settings."
+  },
+  {
+    "objectID": "slides.html#the-document-identifier",
+    "href": "slides.html#the-document-identifier",
+    "title": "Teaching Some Python to Your Spreadsheets",
+    "section": "The document identifier",
+    "text": "The document identifier"
   },
   {
     "objectID": "slides.html#a-cli-client-for-the-api",
@@ -235,20 +242,34 @@
     "href": "slides.html#marimo",
     "title": "Teaching Some Python to Your Spreadsheets",
     "section": "Marimo",
-    "text": "Marimo\n\nMarimo is a modern Python notebook centered around the idea of reproducibility\nThe notebooks are not .ipynb format (JSON) but .py\nA notebook can also be a script, a test suite and an application."
+    "text": "Marimo\n\nMarimo is a modern Python notebook centered around the idea of reproducibility\nThe notebooks are not .ipynb format (JSON) but .py\nA notebook can also be a script, a test suite and an application.\nTakes advantage of modern python packaging like with uv for sandboxing."
   },
   {
     "objectID": "slides.html#connecting-through-mcp",
     "href": "slides.html#connecting-through-mcp",
     "title": "Teaching Some Python to Your Spreadsheets",
     "section": "Connecting through MCP",
-    "text": "Connecting through MCP\n\nmcp-server-grist is a MCP server written in Python. It allows AI applications like Claude, IBM Bob, Codex, pi, OpenClaw, Hermes, etc. to connect to the Grist API.\nThis is not the official MCP that lives in https://&lt;yoursite&gt;.getgrist.com/mcp for the commercial version, so authentication will use the same API KEYs instead of OAauth2."
+    "text": "Connecting through MCP\n\nmcp-server-grist is a MCP server written in Python. It allows AI applications like Claude, IBM Bob, Codex, pi, OpenClaw, Hermes, etc. to connect to the Grist API.\n\n\n\nThis is not the official MCP that lives in https://&lt;yoursite&gt;.getgrist.com/mcp for the commercial version, so authentication will use the same API KEYs instead of OAauth2.\n\n\n\nTo run mcp-server-grist with uv we need these two environment variables:\n\nGRIST_API_KEY (user or Service Account)\nGRIST_API_URL (this will be where Grist is running + /api)"
+  },
+  {
+    "objectID": "slides.html#example-json",
+    "href": "slides.html#example-json",
+    "title": "Teaching Some Python to Your Spreadsheets",
+    "section": "Example JSON",
+    "text": "Example JSON\n{\n  \"mcpServers\": {\n    \"grist-server\": {\n      \"timeout\": 60,\n      \"type\": \"stdio\",\n      \"command\": \"uvx\",\n      \"args\": [\n        \"--with\",\n        \"fastmcp&lt;3\", # this is important 🙈 as it's not been updated\n        \"mcp-server-grist\"\n      ],\n      \"env\": {\n        \"GRIST_API_KEY\": \"2273b28ebed8ba2aa38c99f788cf9cb314012536\",\n        \"GRIST_API_URL\": \"http://localhost:8484/api\"\n      }\n      \n    }\n  }\n}\n\n\n\n👆 I’m going to use this in IBM Bob, but should work the same to any other harness"
+  },
+  {
+    "objectID": "slides.html#example-conversation",
+    "href": "slides.html#example-conversation",
+    "title": "Teaching Some Python to Your Spreadsheets",
+    "section": "Example conversation",
+    "text": "Example conversation"
   },
   {
     "objectID": "slides.html#using-hermes",
     "href": "slides.html#using-hermes",
     "title": "Teaching Some Python to Your Spreadsheets",
     "section": "Using Hermes",
-    "text": "Using Hermes\nHermes is a popular agent that build its own memory. Has connectors for many messaging platforms"
+    "text": "Using Hermes\nHermes is a popular agent that build its own memory. Has connectors for many messaging platforms   \nBut for our demo, we will use an extension called WebUI extension"
   }
 ]

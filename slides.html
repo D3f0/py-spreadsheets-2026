@@ -275,7 +275,7 @@ Nahuel Defossé
 <section id="what-will-i-get-from-this-workshop" class="slide level2">
 <h2>What will I get from this workshop</h2>
 <ul>
-<li class="fragment">Create a small application with spreadsheets for a simple calendar.</li>
+<li class="fragment">Build a small Calendar application based on spreadsheets</li>
 <li class="fragment">Define tables and their relationships</li>
 <li class="fragment">Customizing how they present information</li>
 <li class="fragment">Use Python (and Excel functions) in formulas</li>
@@ -608,12 +608,12 @@ From the author panel (right side on the `Table` tab, on the bottom)
 <section>
 <section id="presentation" class="title-slide slide level1 center">
 <h1>Presentation</h1>
-<p>Custom widgets</p>
+<p>Different ways to present the data</p>
 </section>
 <section class="slide level2">
 
 <div class="smaller">
-<p>Grist supports custom widgets, an example of one that comes with it is the calendar</p>
+<p>Grist supports a diversity widgets, we will focus on a simple one called Calendar widget <i class="fa-solid fa-calendar" aria-label="calendar"></i></p>
 <div class="columns">
 <div class="column">
 <p><a href="./img/add-new.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img data-src="./img/add-new.png"></a></p>
@@ -621,9 +621,22 @@ From the author panel (right side on the `Table` tab, on the bottom)
 <p><a href="./img/widget-type.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14"><img data-src="./img/widget-type.png"></a></p>
 </div></div>
 </div>
+<aside class="notes">
+<p>Visualizations are done also through widgets</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="custom-widgets-cont." class="slide level2">
-<h2>Custom Widgets (cont.)</h2>
+<section id="calendar-widgets-cont." class="slide level2">
+<h2>Calendar Widgets (cont.)</h2>
 <div class="columns">
 <div class="column">
 <p><a href="./img/calendar-setup.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15"><img data-src="./img/calendar-setup.png"></a></p>
@@ -631,8 +644,8 @@ From the author panel (right side on the `Table` tab, on the bottom)
 <p>This configuration can be modified later in the creator panel.</p>
 </div></div>
 </section>
-<section id="custom-widgets-cont.-1" class="slide level2">
-<h2>Custom Widgets (cont.)</h2>
+<section id="calendar-widgets-cont.-1" class="slide level2">
+<h2>Calendar Widgets (cont.)</h2>
 
 <img data-src="./img/full_calendar.png" class="r-stretch"></section>
 <section id="more-widgets-to-explore" class="slide level2">
@@ -640,7 +653,7 @@ From the author panel (right side on the `Table` tab, on the bottom)
 
 <img data-src="./img/more-widgets.png" class="r-stretch"></section>
 <section id="custom-widgets" class="slide level2">
-<h2>Custom Widgets</h2>
+<h2>Custom widgets</h2>
 <ul>
 <li>Customs CSS, HTML and JS can be stored in Grist itself.</li>
 <li>If they are mean to be re-used in many documents, it’s recommended to host these resources in a common place.</li>
@@ -686,9 +699,8 @@ From the author panel (right side on the `Table` tab, on the bottom)
 <p>To get the user’s API key, this is in the <a href="http://localhost:8484/account/developer" target="_blank">user settings</a>.</p>
 <p><a href="./img/api_key.png" class="lightbox" data-gallery="quarto-lightbox-gallery-18"><img data-src="./img/api_key.png"></a></p>
 </section>
-<section class="slide level2">
-
-<!-- API access screenshots -->
+<section id="the-document-identifier" class="slide level2">
+<h2>The document identifier</h2>
 <div class="columns">
 <div class="column">
 <div class="fragment">
@@ -836,12 +848,13 @@ Error! Status: 403
 <h1>Using Notebooks</h1>
 <p>Or scripts</p>
 </section>
-<section id="marimo" class="slide level2">
+<section id="marimo" class="slide level2 smaller">
 <h2>Marimo</h2>
 <ul>
 <li class="fragment">Marimo is a modern Python notebook centered around the idea of reproducibility</li>
 <li class="fragment">The notebooks are not <code>.ipynb</code> format (JSON) but <code>.py</code></li>
 <li class="fragment">A notebook can also be a script, a test suite and an application.</li>
+<li class="fragment">Takes advantage of modern python packaging like with uv for sandboxing.</li>
 </ul>
 <div class="fragment">
 <p><a href="./img/marimo_1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-25"><img data-src="./img/marimo_1.png"></a></p>
@@ -856,6 +869,7 @@ Error! Status: 403
 </section>
 <section class="slide level2">
 
+<p>TBD</p>
 </section>
 <section class="slide level2">
 
@@ -869,14 +883,60 @@ Error! Status: 403
 <h2>Connecting through MCP</h2>
 <!-- MCP server options, official, Python and JavaScript one -->
 <p><a href="https://github.com/nic01asFr/mcp-server-grist" target="blank_"><code>mcp-server-grist</code></a> is a MCP server written in Python. It allows AI applications like Claude, IBM Bob, Codex, pi, OpenClaw, Hermes, etc. to connect to the Grist API.</p>
+<div class="callout callout-none no-icon callout-style-simple">
+<div class="callout-body">
+<div class="callout-content">
 <p>This is not the official MCP that lives in <code>https://&lt;yoursite&gt;.getgrist.com/mcp</code> for the commercial version, so authentication will use the same API KEYs instead of OAauth2.</p>
+</div>
+</div>
+</div>
+<p>To run <code>mcp-server-grist</code> with <code>uv</code> we need these two environment variables:</p>
+<ul>
+<li><code>GRIST_API_KEY</code> (user or Service Account)</li>
+<li><code>GRIST_API_URL</code> (this will be where Grist is running + <code>/api</code>)</li>
+</ul>
 </section>
-<section class="slide level2">
-
+<section id="example-json" class="slide level2 smaller">
+<h2>Example JSON</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode numberSource json number-lines code-with-copy"><code class="sourceCode json"><span id="cb17-1"><a aria-label="1"></a><span class="fu">{</span></span>
+<span id="cb17-2"><a aria-label="2"></a>  <span class="dt">"mcpServers"</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb17-3"><a aria-label="3"></a>    <span class="dt">"grist-server"</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb17-4"><a aria-label="4"></a>      <span class="dt">"timeout"</span><span class="fu">:</span> <span class="dv">60</span><span class="fu">,</span></span>
+<span id="cb17-5"><a aria-label="5"></a>      <span class="dt">"type"</span><span class="fu">:</span> <span class="st">"stdio"</span><span class="fu">,</span></span>
+<span id="cb17-6"><a aria-label="6"></a>      <span class="dt">"command"</span><span class="fu">:</span> <span class="st">"uvx"</span><span class="fu">,</span></span>
+<span id="cb17-7"><a aria-label="7"></a>      <span class="dt">"args"</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb17-8"><a aria-label="8"></a>        <span class="st">"--with"</span><span class="ot">,</span></span>
+<span id="cb17-9"><a aria-label="9"></a>        <span class="st">"fastmcp&lt;3"</span><span class="ot">,</span> <span class="er">#</span> <span class="er">this</span> <span class="er">is</span> <span class="er">important</span> <span class="er">🙈</span> <span class="er">as</span> <span class="er">it's</span> <span class="er">not</span> <span class="er">been</span> <span class="er">updated</span></span>
+<span id="cb17-10"><a aria-label="10"></a>        <span class="st">"mcp-server-grist"</span></span>
+<span id="cb17-11"><a aria-label="11"></a>      <span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb17-12"><a aria-label="12"></a>      <span class="dt">"env"</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb17-13"><a aria-label="13"></a>        <span class="dt">"GRIST_API_KEY"</span><span class="fu">:</span> <span class="st">"2273b28ebed8ba2aa38c99f788cf9cb314012536"</span><span class="fu">,</span></span>
+<span id="cb17-14"><a aria-label="14"></a>        <span class="dt">"GRIST_API_URL"</span><span class="fu">:</span> <span class="st">"http://localhost:8484/api"</span></span>
+<span id="cb17-15"><a aria-label="15"></a>      <span class="fu">}</span></span>
+<span id="cb17-16"><a aria-label="16"></a>      </span>
+<span id="cb17-17"><a aria-label="17"></a>    <span class="fu">}</span></span>
+<span id="cb17-18"><a aria-label="18"></a>  <span class="fu">}</span></span>
+<span id="cb17-19"><a aria-label="19"></a><span class="fu">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-none no-icon callout-style-simple">
+<div class="callout-body">
+<div class="callout-content">
+<p>👆 I’m going to use this in IBM Bob, but should work the same to any other harness</p>
+</div>
+</div>
+</div>
+</section>
+<section id="example-conversation" class="slide level2">
+<h2>Example conversation</h2>
+<p><a href="./img/bob-mcp.png" class="lightbox" data-gallery="quarto-lightbox-gallery-26"><img data-src="./img/bob-mcp.png"></a></p>
 </section>
 <section id="using-hermes" class="slide level2">
 <h2>Using Hermes</h2>
-<p>Hermes is a popular agent that build its own memory. Has connectors for many messaging platforms <i class="fa-solid fa-whatsapp" aria-label="whatsapp"></i> <i class="fa-solid fa-telegram" aria-label="telegram"></i></p>
+<p>Hermes is a popular agent that build its own memory. Has connectors for many messaging platforms <i class="fa-brands fa-whatsapp" aria-label="whatsapp"></i> <i class="fa-brands fa-telegram" aria-label="telegram"></i> <i class="fa-brands fa-discord" aria-label="discord"></i></p>
+<p>But for our demo, we will use an extension called <a href="">WebUI extension <i class="fa-brands fa-github" aria-label="github"></i></a></p>
+</section>
+<section class="slide level2">
+
+<p>TBD</p>
 </section>
 <section class="slide level2">
 
