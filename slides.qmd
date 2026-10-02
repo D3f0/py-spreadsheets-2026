@@ -51,10 +51,10 @@ lightbox:
 - 🐍 Pythonista with 18 years of experience 🇦🇷 🧉
   - Co-organized SciPy Latin America
   - PyCon Argentina and EuroPython speaker
-- 🚜 Former CTO at [Hello Tractor](https://hellotractor.com/)
+- 🚜 Former CTO at [{{< fa link >}}Hello Tractor](https://hellotractor.com/)
 - 🧪 Software Engineer at IBM Software Innovation Lab
-- 🛰️ Worked on [foundational models for geospatial applications](https://www.earthdata.nasa.gov/news/nasa-ibm-openly-release-geospatial-ai-foundation-model-nasa-earth-observation-data)
-- 💬 Worked on [Flowpilot](https://research.ibm.com/projects/flowpilot), providing core features to different products and divisions
+- 🛰️ Worked on [{{< fa link >}}foundational models for geospatial applications](https://www.earthdata.nasa.gov/news/nasa-ibm-openly-release-geospatial-ai-foundation-model-nasa-earth-observation-data)
+- 💬 Worked on [{{< fa link >}}Flowpilot](https://research.ibm.com/projects/flowpilot), providing core features to different products and divisions
 - 💬 Currently working on [Datascape], a data harness for insight generation, enterprise data scale.
 :::
 
@@ -156,13 +156,13 @@ Accessing Grist API with AI tools
 
 [{{< rrqr https://d3f0.github.io/py-spreadsheets-2026/slides.html size=500 >}}](https://d3f0.github.io/py-spreadsheets-2026/slides.html#/title-slide){target="_blank"}
 
-[https://d3f0.github.io/py-spreadsheets-2026/slides.html](https://d3f0.github.io/py-spreadsheets-2026/slides.html){target="_blank"}
+[{{< fa link >}}https://d3f0.github.io/py-spreadsheets-2026/slides.html](https://d3f0.github.io/py-spreadsheets-2026/slides.html){target="_blank"}
 
 :::
 ::: {.column}
 **👈🏽 Slides**
 
-**👇🏽 🐳 & ** [![](img/tilt-favicon.ico){.inline-icon .nolightbox width=32 style="vertical-align: text-bottom;"}](https://docs.tilt.dev/install.html){target="_blank"} **run the workshop**
+**👇🏽 🐳 & ** [{{< fa link >}}![](img/tilt-favicon.ico){.inline-icon .nolightbox width=32 style="vertical-align: text-bottom;"}](https://docs.tilt.dev/install.html){target="_blank"} **run the workshop**
 
 ```{.shell code-line-numbers="false"}
 gh repo clone \
@@ -177,7 +177,7 @@ gh repo clone \
 ---
 
 
-![[The workshop code at http://localhost:10350](http://localhost:10350){target=_blank}](./img/tilt.png)
+![[{{< fa link >}}The workshop code at http://localhost:10350](http://localhost:10350){target=_blank}](./img/tilt.png)
 
 
 ---
@@ -226,7 +226,7 @@ gh repo clone \
   It can run:
     - locally (docker or desktop)
     - in the cloud or homelab
-    - like Google Docs at [https://getgrist.com](https://getgrist.com){target=_blank}
+    - like Google Docs at [{{< fa link >}}https://getgrist.com](https://getgrist.com){target=_blank}
 :::
 
 ::: {.fragment}
@@ -245,7 +245,7 @@ Talk about the SMVE (check if time allows)
 
 
 
-![[Some examples](https://support.getgrist.com/lightweight-crm/){target=_blank](./img/grist-templates.png)
+![[{{< fa link >}}Some examples](https://support.getgrist.com/lightweight-crm/){target=_blank}](./img/grist-templates.png)
 
 
 
@@ -742,7 +742,7 @@ the calendar will automatically be reflected in the original table.
 
 ## Getting the account's API key
 
-To get the user's API key, you can find it in the [user settings](http://localhost:8484/account/developer){target=_blank}.
+To get the user's API key, you can find it in the [{{< fa link >}}user settings](http://localhost:8484/account/developer){target=_blank}.
 
 ![](./img/api_key.png)
 
@@ -1044,7 +1044,7 @@ All the functions use the SQLite dialect {{<fa feather >}}
 
 
 ::: {.fragment}
-[`mcp-server-grist`](https://github.com/nic01asFr/mcp-server-grist){target=blank_} is an MCP server written in Python. It allows AI applications like Claude, IBM Bob, Codex, pi, OpenClaw, Hermes, etc. to connect to the Grist API.
+[{{< fa link >}}`mcp-server-grist`](https://github.com/nic01asFr/mcp-server-grist){target=blank_} is an MCP server written in Python. It allows AI applications like Claude, IBM Bob, Codex, pi, OpenClaw, Hermes, etc. to connect to the Grist API.
 
 ::: callout
 This is not the official MCP that lives in `https://<yoursite>.getgrist.com/mcp` for the
