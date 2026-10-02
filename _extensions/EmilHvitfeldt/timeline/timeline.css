@@ -503,7 +503,11 @@
 .timeline.snake.tl-dotted .event:nth-child(even)  { border-left-style:   dotted; }
 
 
-/* ---- Dot shape: .tl-square, .tl-diamond, .tl-none --------- */
+/* ---- Dot shape: .tl-square, .tl-diamond, .tl-filled, .tl-none */
+
+.timeline .event.tl-filled::after {
+  background: var(--tl-color-accent, var(--tl-color-dot));
+}
 
 .timeline.tl-square .event::after {
   border-radius: 0;

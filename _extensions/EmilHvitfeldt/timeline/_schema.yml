@@ -24,6 +24,8 @@ classes:
     description: "Render the timeline line as a dotted pattern."
   tl-square:
     description: "Use square dots instead of circles."
+  tl-filled:
+    description: "Fill a specific event's dot with the timeline dot color."
   tl-diamond:
     description: "Use diamond-shaped dots instead of circles."
   tl-none:
