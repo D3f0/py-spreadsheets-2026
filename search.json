@@ -1,31 +1,38 @@
 [
   {
-    "objectID": "slides.html#welcome",
-    "href": "slides.html#welcome",
-    "title": "Teaching Some Python to Your Spreadsheets",
-    "section": "Welcome",
-    "text": "Welcome"
-  },
-  {
     "objectID": "slides.html#about-me",
     "href": "slides.html#about-me",
     "title": "Teaching Some Python to Your Spreadsheets",
     "section": "About me",
-    "text": "About me\n\n\n\n🐍 Pythonista with 18 years of experience 🇦🇷 🧉\n\nCo-organized SciPy Latin America\nPyCon Argentina and EuroPython speaker\n\n🚜 Former CTO at Hello Tractor\n🧪 Software Engineer at IBM Research Software Innovation Lab\n🛰️ Worked on foundational models for geospatial applications\n💬 Worked on Flowpilot, providing core features to different products and divisions\n💬 Currently working on [Datascape], a data harness for insight generation, enterprise data scale."
+    "text": "About me\n\n\n\n🐍 Pythonista with 18 years of experience 🇦🇷 🧉\n\nCo-organized SciPy Latin America\nPyCon Argentina and EuroPython speaker\n\n🚜 Former CTO at Hello Tractor\n🧪 Software Engineer at IBM Software Innovation Lab\n🛰️ Worked on foundational models for geospatial applications\n💬 Worked on Flowpilot, providing core features to different products and divisions\n💬 Currently working on [Datascape], a data harness for insight generation, enterprise data scale."
   },
   {
-    "objectID": "slides.html#follow-along",
-    "href": "slides.html#follow-along",
+    "objectID": "slides.html#motivation",
+    "href": "slides.html#motivation",
     "title": "Teaching Some Python to Your Spreadsheets",
-    "section": "Follow along",
-    "text": "Follow along\n\n\n\n\nhttps://github.com/D3f0/py-spreadsheets-2026/slides.html\n\n👈🏽 Slides\n👇🏽 🐳 &   run the workshop\ngh repo clone \\\n  D3f0/py-spreadhseets-2026 \\\n  && uv run tasks.py up"
+    "section": "Motivation",
+    "text": "Motivation\n\n\nIn recent times owning your data become more and more relevant.\nMany people use web based spreadhseets as important part of their lives\nPython is one of the most popular programming languages but using it in spreadhseets hasn’t been really viable yet.\nCreating very bespoke software, or ‘hyperpersonalized’ can be done both for personal use but also for multi-user environments."
   },
   {
-    "objectID": "slides.html#what-will-i-get-from-this-workshop",
-    "href": "slides.html#what-will-i-get-from-this-workshop",
+    "objectID": "slides.html#agenda",
+    "href": "slides.html#agenda",
     "title": "Teaching Some Python to Your Spreadsheets",
-    "section": "What will I get from this workshop",
-    "text": "What will I get from this workshop\n\nBuild a small Calendar application based on spreadsheets\nDefine tables and their relationships\nCustomizing how they present information\nUse Python (and Excel functions) in formulas\nAccessing data over the API with different levels of access\nAccessing data over the CLI\nInteracting with the database through MCP in an Agent"
+    "section": "Agenda",
+    "text": "Agenda\n\n\nRunning the workshop Acess to slides, repo and how to run the code.\n\n\nGrist Tables, Column Types, Python and Excel functions in formulas.\n\n\npygrister CLI access using gry CLI.\n\n\npygrister Girster API from Python\n\n\nmcp-server-grist Accessing Grist API with AI tools"
+  },
+  {
+    "objectID": "slides.html#slide-code",
+    "href": "slides.html#slide-code",
+    "title": "Teaching Some Python to Your Spreadsheets",
+    "section": "Slide & Code",
+    "text": "Slide & Code\n\n\n\n\nhttps://d3f0.github.io/py-spreadsheets-2026/slides.html\n\n👈🏽 Slides\n👇🏽 🐳 &   run the workshop\ngh repo clone \\\n  D3f0/py-spreadhseets-2026 \\\n  && uv run tasks.py up"
+  },
+  {
+    "objectID": "slides.html#misc.",
+    "href": "slides.html#misc.",
+    "title": "Teaching Some Python to Your Spreadsheets",
+    "section": "Misc.",
+    "text": "Misc.\n\n🐳 docker and its docker compose plugin are required to run the demo material\n🐍 Python tools/cli/etc shoud run with uv run or more permantently uv tool install &lt;nini&gt;.\n🛶 You don’t need tilt if you don’t want the fancy webpage with hot reload, just use docker compose up and look at the ports.\n🤖 For the AI examples, I’ve used OpenRouter, but you can use any AI provider you’d like."
   },
   {
     "objectID": "slides.html#what-is-grist",
@@ -119,6 +126,13 @@
     "text": "Putting together views"
   },
   {
+    "objectID": "slides.html#presentation",
+    "href": "slides.html#presentation",
+    "title": "Teaching Some Python to Your Spreadsheets",
+    "section": "Presentation",
+    "text": "Presentation\n\nGrist supports a diversity widgets, we will focus on a simple one called Calendar widget \n\n\n\n\n\n\n\n\nVisualizations are done also through widgets"
+  },
+  {
     "objectID": "slides.html#calendar-widgets-cont.",
     "href": "slides.html#calendar-widgets-cont.",
     "title": "Teaching Some Python to Your Spreadsheets",
@@ -130,7 +144,7 @@
     "href": "slides.html#calendar-widgets-cont.-1",
     "title": "Teaching Some Python to Your Spreadsheets",
     "section": "Calendar Widgets (cont.)",
-    "text": "Calendar Widgets (cont.)"
+    "text": "Calendar Widgets (cont.)\n\n\n\n\n  \nThe binding is bi-directional, meaning that creating a event in the calendar will automatically reflect in the original table."
   },
   {
     "objectID": "slides.html#more-widgets-to-explore",
@@ -165,7 +179,7 @@
     "href": "slides.html#a-cli-client-for-the-api",
     "title": "Teaching Some Python to Your Spreadsheets",
     "section": "A CLI client for the API",
-    "text": "A CLI client for the API\npygrister is a Python library and a CLI for grist.\nIt requires an URL and an API key, but more configuration can be passed.\nThis in example .env we could use in our workshop repo:\nGRIST_API_KEY=22...36\nGRIST_SELF_MANAGED=Y\nGRIST_SELF_MANAGED_HOME=http://localhost:8484\nGRIST_SELF_MANAGED_SINGLE_ORG=N\nGRIST_SERVER_PROTOCOL=http\nGRIST_TEAM_SITE=docs"
+    "text": "A CLI client for the API\npygrister is a Python library and a CLI for grist 1\nIt requires an URL and an API key, but more configuration can be passed.\nThis in example .env2 we could use in our workshop repo:\nGRIST_API_KEY=22...36\nGRIST_SELF_MANAGED=Y\nGRIST_SELF_MANAGED_HOME=http://localhost:8484\nGRIST_SELF_MANAGED_SINGLE_ORG=N\nGRIST_SERVER_PROTOCOL=http\nGRIST_TEAM_SITE=docs\nIf you cloned the repo is will be available with uv run (or uvx --from pygrister gry)This file needs to be created as the demo data lives in docker volumes"
   },
   {
     "objectID": "slides.html#gry---listing-workspaces",
@@ -189,60 +203,11 @@
     "text": "gry - running SQL\ngry sql 'select id, Activity, Start, Category from Events' -d q5aBBVtSotFo\n┏━━━━┳━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━┓\n┃ id ┃ Activity ┃ Start      ┃ Category         ┃\n┡━━━━╇━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━┩\n│ 2  │ PyCon    │ 1790920800 │ [\"🎙️conference\"] │\n└────┴──────────┴────────────┴──────────────────┘"
   },
   {
-    "objectID": "slides.html#service-accounts",
-    "href": "slides.html#service-accounts",
+    "objectID": "slides.html#python-api",
+    "href": "slides.html#python-api",
     "title": "Teaching Some Python to Your Spreadsheets",
-    "section": "Service Accounts",
-    "text": "Service Accounts\n\nIt’s a bit dangerous to give full access to our documents to any automation with the user API key (GRIST_API_KEY)\nService Accounts are pseudo-users which can be given finer grained access to a a few tables\nThere’s not UI for creating service accounts, but gry CLI comes handy."
-  },
-  {
-    "objectID": "slides.html#creating-service-accounts",
-    "href": "slides.html#creating-service-accounts",
-    "title": "Teaching Some Python to Your Spreadsheets",
-    "section": "Creating service accounts",
-    "text": "Creating service accounts\n\ngry sacc new --label sacc 2026-12-31\nDone. Id: 2 (key: 6a4e9e39ceb0161bbbd5971089e215647191db97)\n\n\n👆 that’s the new API key for that service account, and should replace GRIST_API_KEY\n\n\ngry sacc see 2\n┏━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n┃ key         ┃ value                                                        ┃\n┡━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩\n│ id          │ 2                                                            │\n│ login       │ bd86cf79-4abc-44db-af9d-68b5070cfa14@serviceaccounts.invalid │\n│ label       │ sacc                                                         │\n│ description │                                                              │\n│ expires     │ 2026-12-31T00:00:00.000Z                                     │\n│ valid key   │ True                                                         │\n└─────────────┴──────────────────────────────────────────────────────────────┘"
-  },
-  {
-    "objectID": "slides.html#key-has-no-access",
-    "href": "slides.html#key-has-no-access",
-    "title": "Teaching Some Python to Your Spreadsheets",
-    "section": "Key has no access",
-    "text": "Key has no access\nGRIST_API_KEY=6a4e9e39ceb0161bbbd5971089e215647191db97 gry ws list\nError! Status: 403\n{'error': 'access denied'}"
-  },
-  {
-    "objectID": "slides.html#inviting-the-service-account-to-the-document",
-    "href": "slides.html#inviting-the-service-account-to-the-document",
-    "title": "Teaching Some Python to Your Spreadsheets",
-    "section": "Inviting the service account to the document",
-    "text": "Inviting the service account to the document"
-  },
-  {
-    "objectID": "slides.html#using-our-service-account",
-    "href": "slides.html#using-our-service-account",
-    "title": "Teaching Some Python to Your Spreadsheets",
-    "section": "Using our service account",
-    "text": "Using our service account"
-  },
-  {
-    "objectID": "slides.html#setting-fine-grained-permissions",
-    "href": "slides.html#setting-fine-grained-permissions",
-    "title": "Teaching Some Python to Your Spreadsheets",
-    "section": "Setting fine grained permissions",
-    "text": "Setting fine grained permissions"
-  },
-  {
-    "objectID": "slides.html#service-account-now-has-access",
-    "href": "slides.html#service-account-now-has-access",
-    "title": "Teaching Some Python to Your Spreadsheets",
-    "section": "Service account now has access",
-    "text": "Service account now has access\nGRIST_API_KEY=6a4e9e39ceb0161bbbd5971089e215647191db97 gry ws list\n┏━━━━┳━━━━━━┳━━━━━━━┳━━━━━━━┳━━━━━━┓\n┃ id ┃ name ┃ owner ┃ email ┃ docs ┃\n┡━━━━╇━━━━━━╇━━━━━━━╇━━━━━━━╇━━━━━━┩\n│ 3  │ Home │ Null  │       │ 1    │\n└────┴──────┴───────┴───────┴──────┘"
-  },
-  {
-    "objectID": "slides.html#marimo",
-    "href": "slides.html#marimo",
-    "title": "Teaching Some Python to Your Spreadsheets",
-    "section": "Marimo",
-    "text": "Marimo\n\nMarimo is a modern Python notebook centered around the idea of reproducibility\nThe notebooks are not .ipynb format (JSON) but .py\nA notebook can also be a script, a test suite and an application.\nTakes advantage of modern python packaging like with uv for sandboxing."
+    "section": "Python API",
+    "text": "Python API\n\nThe gry commands are available as methods under pygrister.api.GristApi()"
   },
   {
     "objectID": "slides.html#connecting-through-mcp",
@@ -256,7 +221,7 @@
     "href": "slides.html#example-json",
     "title": "Teaching Some Python to Your Spreadsheets",
     "section": "Example JSON",
-    "text": "Example JSON\n{\n  \"mcpServers\": {\n    \"grist-server\": {\n      \"timeout\": 60,\n      \"type\": \"stdio\",\n      \"command\": \"uvx\",\n      \"args\": [\n        \"--with\",\n        \"fastmcp&lt;3\", # this is important 🙈 as it's not been updated\n        \"mcp-server-grist\"\n      ],\n      \"env\": {\n        \"GRIST_API_KEY\": \"2273b28ebed8ba2aa38c99f788cf9cb314012536\",\n        \"GRIST_API_URL\": \"http://localhost:8484/api\"\n      }\n      \n    }\n  }\n}\n\n\n\n👆 I’m going to use this in IBM Bob, but should work the same to any other harness"
+    "text": "Example JSON\n{\n  \"mcpServers\": {\n    \"grist-server\": {\n      \"timeout\": 60,\n      \"type\": \"stdio\",\n      \"command\": \"uvx\",\n      \"args\": [\n        \"--with\",\n        \"fastmcp&lt;3\", # this is important 🙈 as it's not been updated\n        \"mcp-server-grist\"\n      ],\n      \"env\": {\n        \"GRIST_API_KEY\": \"2273b28ebed8ba2aa38c99f788cf9cb314012536\",\n        \"GRIST_API_URL\": \"http://localhost:8484/api\"\n      }\n\n    }\n  }\n}\n\n\n\n👆 I’m going to use this in IBM Bob, but should work the same to any other harness"
   },
   {
     "objectID": "slides.html#example-conversation",

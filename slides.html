@@ -8,6 +8,8 @@
 <link href="site_libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-3419ea62b3ca2d77d3d547f86109e84e.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <link href="site_libs/quarto-contrib/diagrams-0.2.0/diagrams.css" rel="stylesheet">
+<script src="site_libs/quarto-contrib/timeline-0.1.0/timeline.js"></script>
+<link href="site_libs/quarto-contrib/timeline-0.1.0/timeline.css" rel="stylesheet">
 <link href="site_libs/quarto-contrib/fontawesome6-6.7.2/all.min.css" rel="stylesheet">
 <link href="site_libs/quarto-contrib/fontawesome6-6.7.2/latex-fontsize.css" rel="stylesheet">
 <script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
@@ -107,7 +109,8 @@
     code span.vs { color: #008000; } /* VerbatimString */
     code span.wa { color: #696969; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-15e3346f1294be9a767e192b031067f6.css">
+  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-479aa12066d1427e9be2718fe5997d0f.css">
+  <link rel="stylesheet" href="brand.css">
   <link href="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -216,13 +219,15 @@
 <div class="quarto-title-author-name">
 Nahuel Defossé
 </div>
+<div class="quarto-title-author-email">
+<a href="mailto:nahuel.defosse@{ibm,protonmail}.com">nahuel.defosse@{ibm,protonmail}.com</a>
 </div>
+        <p class="quarto-title-affiliation">
+            IBM Software Innovation Lab
+          </p>
+    </div>
 </div>
 
-</section>
-<section id="welcome" class="slide level2 center">
-<h2>Welcome</h2>
-<!-- Add the event, date, and a one-sentence promise for the workshop. -->
 </section>
 <section id="about-me" class="slide level2 about-me">
 <h2>About me</h2>
@@ -235,7 +240,7 @@ Nahuel Defossé
 <li class="fragment">PyCon Argentina and EuroPython speaker</li>
 </ul></li>
 <li class="fragment">🚜 Former CTO at <a href="https://hellotractor.com/">Hello Tractor</a></li>
-<li class="fragment">🧪 Software Engineer at IBM <del>Research</del> Software Innovation Lab</li>
+<li class="fragment">🧪 Software Engineer at IBM Software Innovation Lab</li>
 <li class="fragment">🛰️ Worked on <a href="https://www.earthdata.nasa.gov/news/nasa-ibm-openly-release-geospatial-ai-foundation-model-nasa-earth-observation-data">foundational models for geospatial applications</a></li>
 <li class="fragment">💬 Worked on <a href="https://research.ibm.com/projects/flowpilot">Flowpilot</a>, providing core features to different products and divisions</li>
 <li class="fragment">💬 Currently working on [Datascape], a data harness for insight generation, enterprise data scale.</li>
@@ -244,13 +249,81 @@ Nahuel Defossé
 <p><img data-src="img/Teaching your spreadsheets sone pytho 3.png" class="nolightbox no-shadow" alt="A cartoon Python writing a spreadsheet formula with a fountain pen"></p>
 </div></div>
 </section>
-<section id="follow-along" class="slide level2">
-<h2>Follow along</h2>
+<section class="slide level2">
+
+<p><a href="./img/562a7a03c4143.jpeg" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="./img/562a7a03c4143.jpeg"></a></p>
+</section>
+<section id="motivation" class="slide level2">
+<h2>Motivation</h2>
+<!-- ::: {.incremental}
+- Build a small Calendar application based on spreadsheets
+- Define tables and their relationships
+- Customizing how they present information
+- Use Python (and Excel functions) in formulas
+- Accessing data over the API with different levels of access
+- Accessing data over the CLI
+- Interacting with the database through MCP in an Agent
+-->
+<ul>
+<li>In recent times owning your data become more and more relevant.</li>
+<li>Many people use web based spreadhseets as important part of their lives</li>
+<li>Python is one of the most popular programming languages but using it in spreadhseets hasn’t been really viable yet.</li>
+<li>Creating very bespoke software, or ‘hyperpersonalized’ can be done both for personal use but also for multi-user environments.</li>
+</ul>
+</section>
+<section id="agenda" class="slide level2 agenda smaller">
+<h2>Agenda</h2>
+<div class="timeline vertical">
+<div class="event tl-filled" data-label="Material">
+<p><strong>Running the workshop</strong> Acess to slides, repo and how to run the code.</p>
+</div>
+<div class="event" data-label="Sreadsheet">
+<p><strong>Grist</strong> Tables, Column Types, Python and Excel functions in formulas.</p>
+</div>
+<div class="event" data-label="CLI Access">
+<p><strong>pygrister</strong> CLI access using <code>gry</code> CLI.</p>
+</div>
+<div class="event" data-label="Python library">
+<p><strong>pygrister</strong> Girster API from Python</p>
+</div>
+<div class="event" data-label="AI ">
+<p><strong>mcp-server-grist</strong> Accessing Grist API with AI tools</p>
+</div>
+<div class="event" data-label="Questions">
+
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<!--
+# Material
+
+::: {.timeline .progress-timeline .tl-compact}
+::: {.event data-label="Material" .tl-filled}
+:::
+::: {.event data-label="Spreadsheet"}
+:::
+::: {.event data-label="CLI Access"}
+:::
+::: {.event data-label="Python library"}
+:::
+::: {.event data-label="AI"}
+:::
+::: {.event data-label="Questions"}
+:::
+:::
+
+---
+-->
+</section>
+<section id="slide-code" class="slide level2">
+<h2>Slide &amp; Code</h2>
 <!-- Add links and QR codes for the slides, repository, and workshop materials. -->
 <div class="columns follow-along-columns">
 <div class="column follow-along-qr">
-<p><a href="https://github.com/D3f0/py-spreadsheets-2026/slides.html#/title-slide" target="_blank"><img data-src="slides_files/mediabag/aHR0cHM6Ly9naXRodWIuY29tL0QzZjAvcHktc3ByZWFkc2hlZXRzLTIwMjYvc2xpZGVzLmh0bWwyNTUyNTUyNTUwcXJjb2RlNzU0NjYyNTU3NTQ2NjI1NTQuMDEwMA==.svg" id="rrqr1" class="qrcode" width="100"></a></p>
-<p><a href="https://d3f0.github.io/pycon-2026-teaching-spreadhseets-python/slides.html" target="_blank">https://github.com/D3f0/py-spreadsheets-2026/slides.html</a></p>
+<p><a href="https://d3f0.github.io/py-spreadsheets-2026/slides.html#/title-slide" target="_blank"><img data-src="slides_files/mediabag/aHR0cHM6Ly9kM2YwLmdpdGh1Yi5pby9weS1zcHJlYWRzaGVldHMtMjAyNi9zbGlkZXMuaHRtbDI1NTI1NTI1NTBxcmNvZGU3NTQ2NjI1NTc1NDY2MjU1NC4wMTAw.svg" id="rrqr1" class="qrcode" width="100"></a></p>
+<p><a href="https://d3f0.github.io/py-spreadsheets-2026/slides.html" target="_blank">https://d3f0.github.io/py-spreadsheets-2026/slides.html</a></p>
 </div><div class="column">
 <p><strong>👈🏽 Slides</strong></p>
 <p><strong>👇🏽 🐳 &amp; </strong> <a href="https://docs.tilt.dev/install.html" target="_blank"><img data-src="img/tilt-favicon.ico" class="inline-icon nolightbox" style="vertical-align: text-bottom;" width="32"></a> <strong>run the workshop</strong></p>
@@ -263,39 +336,19 @@ Nahuel Defossé
 
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="./img/tilt.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="The workshop code at http://localhost:10350"><img data-src="./img/tilt.png" alt="The workshop code at http://localhost:10350"></a></p>
-<figcaption><a href="http://localhost:10350">The workshop code at http://localhost:10350</a></figcaption>
+<p><a href="./img/tilt.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="The workshop code at http://localhost:10350"><img data-src="./img/tilt.png" alt="The workshop code at http://localhost:10350"></a></p>
+<figcaption><a href="http://localhost:10350" target="_blank">The workshop code at http://localhost:10350</a></figcaption>
 </figure>
 </div>
 </section>
-<section class="slide level2">
-
-<p><a href="./img/562a7a03c4143.jpeg" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="./img/562a7a03c4143.jpeg"></a></p>
-</section>
-<section id="what-will-i-get-from-this-workshop" class="slide level2">
-<h2>What will I get from this workshop</h2>
+<section id="misc." class="slide level2">
+<h2>Misc.</h2>
 <ul>
-<li class="fragment">Build a small Calendar application based on spreadsheets</li>
-<li class="fragment">Define tables and their relationships</li>
-<li class="fragment">Customizing how they present information</li>
-<li class="fragment">Use Python (and Excel functions) in formulas</li>
-<li class="fragment">Accessing data over the API with different levels of access</li>
-<li class="fragment">Accessing data over the CLI</li>
-<li class="fragment">Interacting with the database through MCP in an Agent</li>
+<li class="fragment">🐳 <code>docker</code> and its <code>docker compose</code> plugin are required to run the demo material</li>
+<li class="fragment">🐍 Python tools/cli/etc shoud run with <code>uv run</code> or more permantently <code>uv tool install &lt;nini&gt;</code>.</li>
+<li class="fragment">🛶 You don’t need <code>tilt</code> if you don’t want the fancy webpage with hot reload, just use <code>docker compose up</code> and look at the ports.</li>
+<li class="fragment">🤖 For the AI examples, I’ve used OpenRouter, but you can use any AI provider you’d like.</li>
 </ul>
-<aside class="notes">
-
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
 </section>
 <section class="slide level2">
 
@@ -303,7 +356,26 @@ Nahuel Defossé
 <section>
 <section id="grist" class="title-slide slide level1 center">
 <h1>Grist</h1>
-<p>A relational spreadsheet</p>
+<div class="timeline progress-timeline tl-compact">
+<div class="event" data-label="Material">
+
+</div>
+<div class="event tl-filled" data-label="Spreadsheet">
+
+</div>
+<div class="event" data-label="CLI Access">
+
+</div>
+<div class="event" data-label="Python library">
+
+</div>
+<div class="event" data-label="AI">
+
+</div>
+<div class="event" data-label="Questions">
+
+</div>
+</div>
 </section>
 <section id="what-is-grist" class="slide level2">
 <h2>What is grist?</h2>
@@ -604,14 +676,9 @@ From the author panel (right side on the `Table` tab, on the bottom)
 :::
 
 -->
-</section></section>
-<section>
-<section id="presentation" class="title-slide slide level1 center">
-<h1>Presentation</h1>
-<p>Different ways to present the data</p>
 </section>
-<section class="slide level2">
-
+<section id="presentation" class="slide level2">
+<h2>Presentation</h2>
 <div class="smaller">
 <p>Grist supports a diversity widgets, we will focus on a simple one called Calendar widget <i class="fa-solid fa-calendar" aria-label="calendar"></i></p>
 <div class="columns">
@@ -646,8 +713,14 @@ From the author panel (right side on the `Table` tab, on the bottom)
 </section>
 <section id="calendar-widgets-cont.-1" class="slide level2">
 <h2>Calendar Widgets (cont.)</h2>
-
-<img data-src="./img/full_calendar.png" class="r-stretch"></section>
+<div class="columns">
+<div class="column" style="width:70%;">
+<p><a href="./img/full_calendar.png" class="lightbox" data-gallery="quarto-lightbox-gallery-16"><img data-src="./img/full_calendar.png" class="r-stretch"></a></p>
+</div><div class="column" style="width:30%;">
+<p><i class="fa-solid fa-calendar" aria-label="calendar"></i> <i class="fa-solid fa-arrow-right" aria-label="arrow-right"></i> <i class="fa-solid fa-table" aria-label="table"></i></p>
+<p>The <em>binding</em> is bi-directional, meaning that creating a event in the calendar will automatically reflect in the original table.</p>
+</div></div>
+</section>
 <section id="more-widgets-to-explore" class="slide level2">
 <h2>More widgets to explore</h2>
 
@@ -692,7 +765,26 @@ From the author panel (right side on the `Table` tab, on the bottom)
 <section>
 <section id="api-access" class="title-slide slide level1 center">
 <h1>API Access</h1>
+<div class="timeline progress-timeline tl-compact">
+<div class="event" data-label="Material">
 
+</div>
+<div class="event" data-label="Spreadsheet">
+
+</div>
+<div class="event tl-filled" data-label="CLI Access">
+
+</div>
+<div class="event" data-label="Python library">
+
+</div>
+<div class="event" data-label="AI">
+
+</div>
+<div class="event" data-label="Questions">
+
+</div>
+</div>
 </section>
 <section id="getting-the-accounts-api-key" class="slide level2">
 <h2>Getting the account’s API key</h2>
@@ -717,16 +809,16 @@ From the author panel (right side on the `Table` tab, on the bottom)
 </section>
 <section id="a-cli-client-for-the-api" class="slide level2">
 <h2>A CLI client for the API</h2>
-<p><code>pygrister</code> is a Python library and a CLI for grist.</p>
+<p><code>pygrister</code> is a Python library and a CLI for grist <sup>1</sup></p>
 <p>It requires an URL and an API key, but more configuration can be passed.</p>
-<p>This in example <code>.env</code> we could use in our workshop repo:</p>
+<p>This in example <code>.env</code><sup>2</sup> we could use in our workshop repo:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode numberSource shell number-lines code-with-copy"><code class="sourceCode"><span id="cb8-1"><a aria-label="1"></a>GRIST_API_KEY=22...36</span>
 <span id="cb8-2"><a aria-label="2"></a>GRIST_SELF_MANAGED=Y</span>
 <span id="cb8-3"><a aria-label="3"></a>GRIST_SELF_MANAGED_HOME=http://localhost:8484</span>
 <span id="cb8-4"><a aria-label="4"></a>GRIST_SELF_MANAGED_SINGLE_ORG=N</span>
 <span id="cb8-5"><a aria-label="5"></a>GRIST_SERVER_PROTOCOL=http</span>
 <span id="cb8-6"><a aria-label="6"></a>GRIST_TEAM_SITE=docs</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</section>
+<aside><ol class="aside-footnotes"><li id="fn1"><p>If you cloned the repo is will be available with <code>uv run</code> (or <code>uvx --from pygrister gry</code>)</p></li><li id="fn2"><p>This file needs to be created as the demo data lives in docker volumes</p></li></ol></aside></section>
 <section id="gry---listing-workspaces" class="slide level2">
 <h2>gry - listing workspaces</h2>
 <div class="fragment">
@@ -781,26 +873,35 @@ From the author panel (right side on the `Table` tab, on the bottom)
 ┡━━━━╇━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━┩
 │ 2  │ PyCon    │ 1790920800 │ ["🎙️conference"] │
 └────┴──────────┴────────────┴──────────────────┘</code></pre>
-</section>
-<section id="service-accounts" class="slide level2">
-<h2>Service Accounts</h2>
-<ul>
-<li class="fragment">It’s a bit dangerous to give full access to our documents to any automation with the user API key (GRIST_API_KEY)</li>
-<li class="fragment">Service Accounts are pseudo-users which can be given finer grained access to a a few tables</li>
-<li class="fragment">There’s not UI for creating service accounts, but <code>gry</code> CLI comes handy.</li>
-</ul>
-</section>
-<section id="creating-service-accounts" class="slide level2">
-<h2>Creating service accounts</h2>
-<div class="fragment">
-<pre><code>gry sacc new --label sacc 2026-12-31
-Done. Id: 2 (key: 6a4e9e39ceb0161bbbd5971089e215647191db97)</code></pre>
-</div>
-<div class="fragment">
-<p>👆 that’s the new API key for that service account, and should replace <code>GRIST_API_KEY</code></p>
-</div>
-<div class="fragment service-account-output">
-<pre><code>gry sacc see 2
+<!-- ---
+
+## Service Accounts
+
+::: {.incremental}
+
+- It's a bit dangerous to give full access to our documents to any automation with the user API key (GRIST_API_KEY)
+- Service Accounts are pseudo-users which can be given finer grained access to a a few tables
+- There's not UI for creating service accounts, but `gry` CLI comes handy.
+:::
+
+---
+
+## Creating service accounts
+
+::: {.fragment }
+```
+gry sacc new --label sacc 2026-12-31
+Done. Id: 2 (key: 6a4e9e39ceb0161bbbd5971089e215647191db97)
+```
+:::
+
+::: {.fragment}
+👆 that's the new API key for that service account, and should replace `GRIST_API_KEY`
+:::
+
+::: {.fragment .service-account-output}
+```
+gry sacc see 2
 ┏━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 ┃ key         ┃ value                                                        ┃
 ┡━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
@@ -810,54 +911,87 @@ Done. Id: 2 (key: 6a4e9e39ceb0161bbbd5971089e215647191db97)</code></pre>
 │ description │                                                              │
 │ expires     │ 2026-12-31T00:00:00.000Z                                     │
 │ valid key   │ True                                                         │
-└─────────────┴──────────────────────────────────────────────────────────────┘</code></pre>
-</div>
-</section>
-<section id="key-has-no-access" class="slide level2">
-<h2>Key has no access</h2>
-<pre><code>GRIST_API_KEY=6a4e9e39ceb0161bbbd5971089e215647191db97 gry ws list
+└─────────────┴──────────────────────────────────────────────────────────────┘
+```
+:::
+
+---
+
+## Key has no access
+
+```
+GRIST_API_KEY=6a4e9e39ceb0161bbbd5971089e215647191db97 gry ws list
 Error! Status: 403
-{'error': 'access denied'}</code></pre>
-</section>
-<section id="inviting-the-service-account-to-the-document" class="slide level2">
-<h2>Inviting the service account to the document</h2>
-<p><a href="./img/adding_users.png" class="lightbox" data-gallery="quarto-lightbox-gallery-22"><img data-src="./img/adding_users.png"></a></p>
-</section>
-<section id="using-our-service-account" class="slide level2">
-<h2>Using our service account</h2>
-<p><a href="./img/adding_users_2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-23"><img data-src="./img/adding_users_2.png"></a></p>
-</section>
-<section id="setting-fine-grained-permissions" class="slide level2">
-<h2>Setting fine grained permissions</h2>
-<p><a href="./img/access_rules.png" class="lightbox" data-gallery="quarto-lightbox-gallery-24"><img data-src="./img/access_rules.png"></a></p>
-</section>
-<section id="service-account-now-has-access" class="slide level2">
-<h2>Service account now has access</h2>
-<pre><code>GRIST_API_KEY=6a4e9e39ceb0161bbbd5971089e215647191db97 gry ws list
+{'error': 'access denied'}
+```
+
+---
+
+## Inviting the service account to the document
+
+![](./img/adding_users.png)
+
+---
+
+## Using our service account
+
+![](./img/adding_users_2.png)
+
+
+---
+
+## Setting fine grained permissions
+
+![](./img/access_rules.png)
+
+---
+
+## Service account now has access
+
+```
+GRIST_API_KEY=6a4e9e39ceb0161bbbd5971089e215647191db97 gry ws list
 ┏━━━━┳━━━━━━┳━━━━━━━┳━━━━━━━┳━━━━━━┓
 ┃ id ┃ name ┃ owner ┃ email ┃ docs ┃
 ┡━━━━╇━━━━━━╇━━━━━━━╇━━━━━━━╇━━━━━━┩
 │ 3  │ Home │ Null  │       │ 1    │
-└────┴──────┴───────┴───────┴──────┘</code></pre>
+└────┴──────┴───────┴───────┴──────┘
+``` -->
 </section>
 <section class="slide level2">
 
 </section></section>
 <section>
-<section id="using-notebooks" class="title-slide slide level1 center">
-<h1>Using Notebooks</h1>
-<p>Or scripts</p>
+<section id="using-directly-from-python" class="title-slide slide level1 center">
+<h1>Using directly from Python</h1>
+<div class="timeline progress-timeline tl-compact">
+<div class="event" data-label="Material">
+
+</div>
+<div class="event" data-label="Spreadsheet">
+
+</div>
+<div class="event" data-label="CLI Access">
+
+</div>
+<div class="event tl-filled" data-label="Python library">
+
+</div>
+<div class="event" data-label="AI">
+
+</div>
+<div class="event" data-label="Questions">
+
+</div>
+</div>
 </section>
-<section id="marimo" class="slide level2 smaller">
-<h2>Marimo</h2>
+<section id="python-api" class="slide level2 smaller">
+<h2>Python API</h2>
 <ul>
-<li class="fragment">Marimo is a modern Python notebook centered around the idea of reproducibility</li>
-<li class="fragment">The notebooks are not <code>.ipynb</code> format (JSON) but <code>.py</code></li>
-<li class="fragment">A notebook can also be a script, a test suite and an application.</li>
-<li class="fragment">Takes advantage of modern python packaging like with uv for sandboxing.</li>
+<li class="fragment">The <code>gry</code> commands are available as methods under <code>pygrister.api.GristApi()</code></li>
+<li class="fragment"></li>
 </ul>
 <div class="fragment">
-<p><a href="./img/marimo_1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-25"><img data-src="./img/marimo_1.png"></a></p>
+<p><a href="./img/marimo_1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-22"><img data-src="./img/marimo_1.png"></a></p>
 </div>
 </section>
 <section class="slide level2">
@@ -878,6 +1012,26 @@ Error! Status: 403
 <section id="using-grist-mcp" class="title-slide slide level1 center">
 <h1>Using grist MCP</h1>
 <p>🤖</p>
+<div class="timeline progress-timeline tl-compact">
+<div class="event" data-label="Material">
+
+</div>
+<div class="event" data-label="Spreadsheet">
+
+</div>
+<div class="event" data-label="CLI Access">
+
+</div>
+<div class="event" data-label="Python library">
+
+</div>
+<div class="event tl-filled" data-label="AI">
+
+</div>
+<div class="event" data-label="Questions">
+
+</div>
+</div>
 </section>
 <section id="connecting-through-mcp" class="slide level2">
 <h2>Connecting through MCP</h2>
@@ -898,25 +1052,25 @@ Error! Status: 403
 </section>
 <section id="example-json" class="slide level2 smaller">
 <h2>Example JSON</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode numberSource json number-lines code-with-copy"><code class="sourceCode json"><span id="cb17-1"><a aria-label="1"></a><span class="fu">{</span></span>
-<span id="cb17-2"><a aria-label="2"></a>  <span class="dt">"mcpServers"</span><span class="fu">:</span> <span class="fu">{</span></span>
-<span id="cb17-3"><a aria-label="3"></a>    <span class="dt">"grist-server"</span><span class="fu">:</span> <span class="fu">{</span></span>
-<span id="cb17-4"><a aria-label="4"></a>      <span class="dt">"timeout"</span><span class="fu">:</span> <span class="dv">60</span><span class="fu">,</span></span>
-<span id="cb17-5"><a aria-label="5"></a>      <span class="dt">"type"</span><span class="fu">:</span> <span class="st">"stdio"</span><span class="fu">,</span></span>
-<span id="cb17-6"><a aria-label="6"></a>      <span class="dt">"command"</span><span class="fu">:</span> <span class="st">"uvx"</span><span class="fu">,</span></span>
-<span id="cb17-7"><a aria-label="7"></a>      <span class="dt">"args"</span><span class="fu">:</span> <span class="ot">[</span></span>
-<span id="cb17-8"><a aria-label="8"></a>        <span class="st">"--with"</span><span class="ot">,</span></span>
-<span id="cb17-9"><a aria-label="9"></a>        <span class="st">"fastmcp&lt;3"</span><span class="ot">,</span> <span class="er">#</span> <span class="er">this</span> <span class="er">is</span> <span class="er">important</span> <span class="er">🙈</span> <span class="er">as</span> <span class="er">it's</span> <span class="er">not</span> <span class="er">been</span> <span class="er">updated</span></span>
-<span id="cb17-10"><a aria-label="10"></a>        <span class="st">"mcp-server-grist"</span></span>
-<span id="cb17-11"><a aria-label="11"></a>      <span class="ot">]</span><span class="fu">,</span></span>
-<span id="cb17-12"><a aria-label="12"></a>      <span class="dt">"env"</span><span class="fu">:</span> <span class="fu">{</span></span>
-<span id="cb17-13"><a aria-label="13"></a>        <span class="dt">"GRIST_API_KEY"</span><span class="fu">:</span> <span class="st">"2273b28ebed8ba2aa38c99f788cf9cb314012536"</span><span class="fu">,</span></span>
-<span id="cb17-14"><a aria-label="14"></a>        <span class="dt">"GRIST_API_URL"</span><span class="fu">:</span> <span class="st">"http://localhost:8484/api"</span></span>
-<span id="cb17-15"><a aria-label="15"></a>      <span class="fu">}</span></span>
-<span id="cb17-16"><a aria-label="16"></a>      </span>
-<span id="cb17-17"><a aria-label="17"></a>    <span class="fu">}</span></span>
-<span id="cb17-18"><a aria-label="18"></a>  <span class="fu">}</span></span>
-<span id="cb17-19"><a aria-label="19"></a><span class="fu">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode numberSource json number-lines code-with-copy"><code class="sourceCode json"><span id="cb13-1"><a aria-label="1"></a><span class="fu">{</span></span>
+<span id="cb13-2"><a aria-label="2"></a>  <span class="dt">"mcpServers"</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb13-3"><a aria-label="3"></a>    <span class="dt">"grist-server"</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb13-4"><a aria-label="4"></a>      <span class="dt">"timeout"</span><span class="fu">:</span> <span class="dv">60</span><span class="fu">,</span></span>
+<span id="cb13-5"><a aria-label="5"></a>      <span class="dt">"type"</span><span class="fu">:</span> <span class="st">"stdio"</span><span class="fu">,</span></span>
+<span id="cb13-6"><a aria-label="6"></a>      <span class="dt">"command"</span><span class="fu">:</span> <span class="st">"uvx"</span><span class="fu">,</span></span>
+<span id="cb13-7"><a aria-label="7"></a>      <span class="dt">"args"</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb13-8"><a aria-label="8"></a>        <span class="st">"--with"</span><span class="ot">,</span></span>
+<span id="cb13-9"><a aria-label="9"></a>        <span class="st">"fastmcp&lt;3"</span><span class="ot">,</span> <span class="er">#</span> <span class="er">this</span> <span class="er">is</span> <span class="er">important</span> <span class="er">🙈</span> <span class="er">as</span> <span class="er">it's</span> <span class="er">not</span> <span class="er">been</span> <span class="er">updated</span></span>
+<span id="cb13-10"><a aria-label="10"></a>        <span class="st">"mcp-server-grist"</span></span>
+<span id="cb13-11"><a aria-label="11"></a>      <span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb13-12"><a aria-label="12"></a>      <span class="dt">"env"</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb13-13"><a aria-label="13"></a>        <span class="dt">"GRIST_API_KEY"</span><span class="fu">:</span> <span class="st">"2273b28ebed8ba2aa38c99f788cf9cb314012536"</span><span class="fu">,</span></span>
+<span id="cb13-14"><a aria-label="14"></a>        <span class="dt">"GRIST_API_URL"</span><span class="fu">:</span> <span class="st">"http://localhost:8484/api"</span></span>
+<span id="cb13-15"><a aria-label="15"></a>      <span class="fu">}</span></span>
+<span id="cb13-16"><a aria-label="16"></a></span>
+<span id="cb13-17"><a aria-label="17"></a>    <span class="fu">}</span></span>
+<span id="cb13-18"><a aria-label="18"></a>  <span class="fu">}</span></span>
+<span id="cb13-19"><a aria-label="19"></a><span class="fu">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="callout callout-none no-icon callout-style-simple">
 <div class="callout-body">
 <div class="callout-content">
@@ -927,7 +1081,7 @@ Error! Status: 403
 </section>
 <section id="example-conversation" class="slide level2">
 <h2>Example conversation</h2>
-<p><a href="./img/bob-mcp.png" class="lightbox" data-gallery="quarto-lightbox-gallery-26"><img data-src="./img/bob-mcp.png"></a></p>
+<p><a href="./img/bob-mcp.png" class="lightbox" data-gallery="quarto-lightbox-gallery-23"><img data-src="./img/bob-mcp.png"></a></p>
 </section>
 <section id="using-hermes" class="slide level2">
 <h2>Using Hermes</h2>
@@ -943,12 +1097,34 @@ Error! Status: 403
 </section></section>
 <section id="thank-you" class="title-slide slide level1 center">
 <h1>Thank you</h1>
+<div class="timeline progress-timeline tl-compact">
+<div class="event" data-label="Material">
+
+</div>
+<div class="event" data-label="Spreadsheet">
+
+</div>
+<div class="event" data-label="CLI Access">
+
+</div>
+<div class="event" data-label="Python library">
+
+</div>
+<div class="event" data-label="AI">
+
+</div>
+<div class="event tl-filled" data-label="Questions">
+
+</div>
+</div>
 <div class="fragment">
 <p><strong>Questions?</strong></p>
 </div>
 
 
 </section>
+
+
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">
