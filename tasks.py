@@ -341,5 +341,10 @@ def up(ctx: Context) -> None:
     )
     ctx.run("tilt up", pty=True)
 
+@task()
+def update(ctx: Context):
+    ctx.run('git add -u')
+    ctx.run('git commit -m "Updates"')
+    ctx.run('quarto publish gh-pages --no-prompt')
 
 script()

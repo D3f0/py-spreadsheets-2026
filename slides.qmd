@@ -245,9 +245,8 @@ Talk about the SMVE (check if time allows)
 
 
 
-![Example library](./img/grist-templates.png)
+![[Some examples](https://support.getgrist.com/lightweight-crm/){target=_blank](./img/grist-templates.png)
 
-ABC
 
 
 ---
