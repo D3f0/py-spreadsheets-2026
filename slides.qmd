@@ -104,9 +104,9 @@ gh repo clone \
 
 ---
 
-## What will I get from this workshop
+## Motivation
 
-::: {.incremental}
+<!-- ::: {.incremental}
 - Build a small Calendar application based on spreadsheets
 - Define tables and their relationships
 - Customizing how they present information
@@ -114,62 +114,58 @@ gh repo clone \
 - Accessing data over the API with different levels of access
 - Accessing data over the CLI
 - Interacting with the database through MCP in an Agent
+-->
 
+- In recent times owning your data become more and more relevant.
+- Many people use web based spreadhseets as important part of their lives
+- Python is one of the most popular programming languages but using
+  it in spreadhseets can be challenging.
+-
 
-:::
-
-::: {.notes}
-
-
-:::
 
 ---
 
-::: process
-::: item
-Grist
-:::
-::: item
-CLI
-:::
-::: item
-MCP
-:::
-::: item
-foo
-:::
-:::item
-barss
-:::
+# Motivation (cont.)
 
-:::
+
 
 ---
 
-::: {.smaller}
+## Agenda {.smaller}
 
-::: {.timeline .vertical}
-::: {.event data-label="2020"}
-**Project Started**
-Initial concept and planning phase.
+
+::: {.timeline .vertical }
+::: {.event data-label="Material" .tl-filled}
+**Running the workshop**
+Acess to slides, repo and how to run the code.
 :::
-::: {.event data-label="2021"}
-**First Release**
-Launched version 1.0 to early users.
+::: {.event data-label="Sreadsheet"}
+**Grist**
+Tables, Column Types, Python and Excel functions in formulas.
 :::
-::: {.event data-label="2022"}
-**First Release**
-Launched version 1.0 to early users.
+<!--
+::: {.event data-label="Presentation"}
+**Presnetation**
+Pages, widgets, calendar view.
 :::
-::: {.event data-label="2023"}
-**First Release**
-Launched version 1.0 to early users.
+-->
+::: {.event data-label="CLI Access"}
+**pygrister**
+CLI access using `gry` CLI.
 :::
-::: {.event data-label="2024"}
-**First Release**
-Launched version 1.0 to early users.
+::: {.event data-label="Python library"}
+**pygrister**
+Girster API from Python
 :::
+
+::: {.event data-label="AI "}
+**mcp-server-grist**
+Accessing Grist API with AI tools
 :::
+
+::: {.event data-label="Questions"}
+:::
+
 
 :::
 
