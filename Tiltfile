@@ -40,28 +40,28 @@ cmd_button(
     name='2-open-apiconsole',
     resource='Grist Spreadsheet',
     argv=['open', 'http://127.0.0.1:8484/apiconsole'],
-    text='Open',
+    text='API Console',
     icon_name='api',
 )
 cmd_button(
     name='1-open-grist',
     resource='Grist Spreadsheet',
     argv=['open', 'http://127.0.0.1:8484'],
-    text='Open',
+    text='Grist Spreadsheet',
     icon_name='border_all',
 )
 cmd_button(
     name='open-marimo',
     resource='Marimo Notebook',
     argv=['open', 'http://127.0.0.1:8081'],
-    text='Open',
+    text='Marimo Notebook',
     icon_name='notebook',
 )
 cmd_button(
     name='open-hermes-webui',
     resource='Hermes WebUI',
     argv=['open', 'http://127.0.0.1:4096'],
-    text='Open',
+    text='Open Hermes WebUI',
     icon_name='web',
 )
 
