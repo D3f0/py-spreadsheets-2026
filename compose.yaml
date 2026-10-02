@@ -46,8 +46,12 @@ services:
       start_period: 20s
 
   marimo:
-    image: ghcr.io/marimo-team/marimo:latest-sql
+    build:
+      context: containers/marimo
     command:
+      - uvx
+      - --with
+      - pygrister
       - marimo
       - edit
       - --no-token
@@ -60,6 +64,7 @@ services:
       - "127.0.0.1:8081:8080"
     volumes:
       - .:/workspace
+      - marimo-uv-cache:/uv-cache
     working_dir: /workspace
     healthcheck:
       test:
@@ -73,6 +78,7 @@ services:
       start_period: 10s
     environment:
       GRIST_SELF_MANAGED_HOME: http://grist:8484
+      UV_CACHE_DIR: /uv-cache
     env_file:
       - .env
 
@@ -107,6 +113,7 @@ services:
     image: ghcr.io/nesquena/hermes-webui:latest
     environment:
       OPENROUTER_API_KEY: ${OPENROUTER_API_KEY:?Set OPENROUTER_API_KEY in .env before starting Compose}
+      GRIST_API_KEY: ${GRIST_API_KEY:?Set GRIST_API_KEY in the shell environment before starting Compose}
       HERMES_HOME: /home/hermeswebui/.hermes
       HERMES_API_URL: http://hermes:8642
       HERMES_WEBUI_GATEWAY_BASE_URL: http://hermes:8642
@@ -148,6 +155,8 @@ volumes:
   grist-data:
     name: pycon-2026-teaching-spreadhseets-python_grist-data
     external: true
+  marimo-uv-cache:
+    name: pycon-2026-teaching-spreadhseets-python_marimo-uv-cache
   hermes-data:
     name: pycon-2026-teaching-spreadhseets-python_hermes-data
   hermes-agent-src:

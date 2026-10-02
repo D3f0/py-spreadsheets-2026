@@ -246,7 +246,12 @@ Talk about the SMVE (check if time allows)
 
 ## Example library
 
-![](./img/grist-templates.png){height=50%}
+
+
+![Example library](./img/grist-templates.png)
+
+ABC
+
 
 ---
 
@@ -273,6 +278,7 @@ flowchart TB
         direction LR
         UI["Spreadsheet UI 👈🏽"]
         OfficialMCP["Official MCP"]
+        Webhooks
     end
 
     UI --> Engine["Document engine<br/>(Node.js)"]
@@ -286,16 +292,16 @@ flowchart TB
     API <--> Notebook["Python notebook 👈🏽"]
     API <--> MCP["OSS MCP 👈🏽"]
 
-    classDef ui fill:#e4f1f8,stroke:#24557a,color:#263238,stroke-width:2px,font-size:25px;
+    classDef grist fill:#e4f1f8,stroke:#24557a,color:#263238,stroke-width:2px,font-size:25px;
     classDef python fill:#fff0c9,stroke:#8b4b00,color:#263238,stroke-width:2px,font-size:25px;
     classDef data fill:#edf3df,stroke:#5f6f36,color:#263238,stroke-width:2px,font-size:25px;
     classDef client fill:#dfeecf,stroke:#5f6f36,color:#263238,stroke-width:2px,font-size:25px;
     classDef terminal fill:#263238,stroke:#24557a,color:#fdf6e3,stroke-width:2px,font-family:monospace,font-size:25px;
     classDef mcp fill:#fdf6e3,stroke:#5f6f36,color:#263238,stroke-width:2px, font-size:25px;
-    class UI,Engine,API,OfficialMCP ui;
+    class UI,Engine,API,OfficialMCP,Webhooks grist;
     class Sandbox,Formulas python;
     class Notebook client;
-    class CLI terminal;
+    class CLI client;
     class DB data;
     class MCP client;
     style TopRow fill:none,stroke:none;
@@ -318,7 +324,7 @@ The UI is organized around a tree/breadcrumb structure:
 
 <!-- Source: https://www.youtube.com/watch?v=X7BnmstKnAQ  -->
 
-## The welcome screen
+## The workspace view
 
 ![Main Spreadsheets View](./img/main-grist-screen.png){.r-stretch}
 
@@ -979,26 +985,39 @@ GRIST_API_KEY=6a4e9e39ceb0161bbbd5971089e215647191db97 gry ws list
 
 ---
 
-## Python API {.smaller}
+## Python API
 
 ::: {.incremental}
-- The `gry` commands are available as methods under `pygrister.api.GristApi()`
--
-:::
-
-::: {.fragment}
-![](./img/marimo_1.png)
+- We're going to use the second service from the stack, the `Marimo Notebook`
+- To access programatically to grist through `pygrister` we use `pygrister.api.GristApi()`
+- The `.env` is the same, but we can also look for other methods to provide the
+  configuration.
+- The api always respond with `status_code`, `data`
 :::
 
 ---
 
-### Grist access from Marimo
+## The list workspace method
 
-- We can import `GristApi` from `pygrister.api`.
+![](./img/marimo.png)
+
 
 ---
 
-TBD
+### Listing records
+
+![](./img/marimo_records.png)
+
+---
+
+### Running SQL Queries
+
+![](./img/marimo_sql.png)
+
+::: {.callout}
+All the functions are SQLite dialect {{<fa feather >}}
+:::
+
 
 ---
 
@@ -1023,10 +1042,12 @@ TBD
 
 ---
 
-## Connecting through MCP
+## Model Context Protocol
 
 <!-- MCP server options, official, Python and JavaScript one -->
 
+
+::: {.fragment}
 [`mcp-server-grist`](https://github.com/nic01asFr/mcp-server-grist){target=blank_} is a MCP server written in Python. It allows AI applications like Claude, IBM Bob, Codex, pi, OpenClaw, Hermes, etc. to connect to the Grist API.
 
 ::: callout
@@ -1034,10 +1055,15 @@ This is not the official MCP that lives in `https://<yoursite>.getgrist.com/mcp`
 commercial version, so authentication will use the same API KEYs instead of OAauth2.
 :::
 
+:::
+
+
+::: {.fragment}
 To run `mcp-server-grist` with `uv` we need these two environment variables:
 
 - `GRIST_API_KEY` (user or Service Account)
 - `GRIST_API_URL` (this will be where Grist is running + `/api`)
+:::
 
 ---
 
@@ -1080,19 +1106,34 @@ To run `mcp-server-grist` with `uv` we need these two environment variables:
 
 ## Using Hermes
 
-Hermes is a popular agent that build its own memory. Has connectors for many
-messaging platforms {{< fa brands whatsapp >}} {{< fa brands telegram >}} {{< fa brands discord >}}
+::: {.incremental}
+- Hermes is a popular personal agent. Comes with memory by default.
+- Comes with some connectors/providers for some messaging platforms
+  {{< fa brands whatsapp >}} {{< fa brands telegram >}} {{< fa brands discord >}}
 
-But for our demo, we will use an extension called [WebUI extension {{< fa brands github >}}]()
-
+- We will try this extension called [WebUI extension {{< fa brands github >}}]()
+:::
 
 ---
 
-TBD
+## Hermes (cont)
+
+::: {.columns}
+::: {.column}
+![](./img/hermes_ui_girst_list.png)
+:::
+::: {.column}
+Listing our MCP tools after configuration.
+:::
+:::
 
 ---
 
 # Thank you
+
+---
+
+# Questions
 
 ::: {.timeline .progress-timeline .tl-compact}
 ::: {.event data-label="Material"}
@@ -1109,6 +1150,5 @@ TBD
 :::
 :::
 
-::: {.fragment}
-**Questions?**
-:::
+
+---

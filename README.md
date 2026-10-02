@@ -27,13 +27,16 @@ The workshop services run together with Docker Compose. Install Docker Desktop o
 docker compose up -d --build
 ```
 
-Compose reads `OPENROUTER_API_KEY` from the ignored project-root `.env` and passes it unchanged to both Hermes containers. Add the key to `.env` before starting Compose:
+Compose expands `OPENROUTER_API_KEY` and `GRIST_API_KEY` from the launching shell and injects them into both the Hermes gateway and Hermes WebUI containers. The WebUI is a separate container and needs `GRIST_API_KEY` in its own process environment when it launches MCP processes. The keys do not need to be copied into the persisted Hermes `.env`.
 
-```dotenv
-OPENROUTER_API_KEY=replace-with-your-openrouter-api-key
+Export the keys before starting Compose. Docker Compose also reads an ignored project-root `.env` automatically when that is preferable:
+
+```bash
+export OPENROUTER_API_KEY=replace-with-your-openrouter-api-key
+export GRIST_API_KEY=replace-with-your-grist-api-key
 ```
 
-Docker Compose reads `.env` automatically. For shell tasks, `.envrc` loads the same file when direnv is available:
+For shell tasks, `.envrc` loads the same values when direnv is available:
 
 ```bash
 direnv allow
@@ -42,13 +45,13 @@ docker compose up -d
 
 The Hermes WebUI uses the configured Hermes Agent gateway and provides model selection in its settings. Authentication is intentionally disabled because this is a loopback-only demo; keep the published port local. WebUI and Hermes state, including the Grist MCP definition in `/opt/data/config.yaml`, is persisted in the explicitly named `pycon-2026-teaching-spreadhseets-python_hermes-data` volume. The explicit name keeps the same profile when containers are rebuilt or recreated and when Compose is invoked with a different project name.
 
-With `OPENROUTER_API_KEY` set in `.env`, configure Hermes without the interactive wizard:
+With `OPENROUTER_API_KEY` and `GRIST_API_KEY` in the shell environment, configure Hermes without the interactive wizard:
 
 ```bash
 direnv exec . uv run tasks.py setup-hermes
 ```
 
-This stops the Hermes services, writes the OpenRouter provider and model into the persisted Hermes configuration, adds the Grist MCP stdio server, and starts the services again. The MCP subprocess runs inside the Hermes container with `uvx`; it reaches Grist at `http://grist:8484/api` and receives `GRIST_API_KEY` from the ignored host `.env` through the Hermes container environment. Run this task once to initialize a new volume; ordinary restarts, rebuilds, and container recreation retain the MCP definition. The default model is `deepseek/deepseek-v4.1-flash`. To choose another model:
+This stops the Hermes services, writes the OpenRouter provider and model into the persisted Hermes configuration, adds the Grist MCP stdio server, and starts the services again. MCP subprocesses reach Grist at `http://grist:8484/api`; `${GRIST_API_KEY}` resolves from the environment of whichever container launches them. Compose therefore injects the key independently into both `hermes` and `webui`. Run this task once to initialize a new volume; ordinary restarts, rebuilds, and container recreation retain the MCP definition. The default model is `deepseek/deepseek-v4.1-flash`. To choose another model:
 
 ```bash
 direnv exec . uv run tasks.py setup-hermes --model cohere/north-mini-code:free

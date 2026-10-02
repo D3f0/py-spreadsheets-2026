@@ -136,6 +136,7 @@ $code-block-font-size: 0.72em;
   width: min(92%, 900px);
   margin: 2.2rem auto 0;
   padding: 2.4rem 0.5rem 0.25rem;
+  justify-content: center;
 }
 
 .reveal .slides section:has(> .progress-timeline) > .progress-timeline .event {
