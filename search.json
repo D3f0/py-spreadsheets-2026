@@ -11,28 +11,28 @@
     "href": "slides.html#motivation",
     "title": "Teaching Some Python to Your Spreadsheets",
     "section": "Motivation",
-    "text": "Motivation\n\n\nIn recent times owning your data become more and more relevant.\nMany people use web based spreadhseets as important part of their lives\nPython is one of the most popular programming languages but using it in spreadhseets hasn’t been really viable yet.\nCreating very bespoke software, or ‘hyperpersonalized’ can be done both for personal use but also for multi-user environments."
+    "text": "Motivation\n\n\nIn recent times, owning your data has become more and more relevant.\nMany people use web-based spreadsheets as an important part of their lives.\nPython is one of the most popular programming languages, but using it in spreadsheets hasn’t been really viable yet.\nCreating very bespoke or ‘hyperpersonalized’ software can be done both for personal use and for multi-user environments."
   },
   {
     "objectID": "slides.html#agenda",
     "href": "slides.html#agenda",
     "title": "Teaching Some Python to Your Spreadsheets",
     "section": "Agenda",
-    "text": "Agenda\n\n\nRunning the workshop Acess to slides, repo and how to run the code.\n\n\nGrist Tables, Column Types, Python and Excel functions in formulas.\n\n\npygrister CLI access using gry CLI.\n\n\npygrister Girster API from Python\n\n\nmcp-server-grist Accessing Grist API with AI tools"
+    "text": "Agenda\n\n\nRunning the workshop Access to the slides, repo, and instructions on how to run the code.\n\n\nGrist Tables, Column Types, Python and Excel functions in formulas.\n\n\npygrister CLI access using gry CLI.\n\n\npygrister Pygrister API from Python\n\n\nmcp-server-grist Accessing Grist API with AI tools"
   },
   {
     "objectID": "slides.html#slide-code",
     "href": "slides.html#slide-code",
     "title": "Teaching Some Python to Your Spreadsheets",
     "section": "Slide & Code",
-    "text": "Slide & Code\n\n\n\n\nhttps://d3f0.github.io/py-spreadsheets-2026/slides.html\n\n👈🏽 Slides\n👇🏽 🐳 &   run the workshop\ngh repo clone \\\n  D3f0/py-spreadhseets-2026 \\\n  && uv run tasks.py up"
+    "text": "Slide & Code\n\n\n\n\nhttps://d3f0.github.io/py-spreadsheets-2026/slides.html\n\n👈🏽 Slides\n👇🏽 🐳 &   run the workshop\ngh repo clone \\\n  D3f0/py-spreadsheets-2026 \\\n  && uv run tasks.py up"
   },
   {
     "objectID": "slides.html#misc.",
     "href": "slides.html#misc.",
     "title": "Teaching Some Python to Your Spreadsheets",
     "section": "Misc.",
-    "text": "Misc.\n\n🐳 docker and its docker compose plugin are required to run the demo material\n🐍 Python tools/cli/etc shoud run with uv run or more permantently uv tool install &lt;nini&gt;.\n🛶 You don’t need tilt if you don’t want the fancy webpage with hot reload, just use docker compose up and look at the ports.\n🤖 For the AI examples, I’ve used OpenRouter, but you can use any AI provider you’d like."
+    "text": "Misc.\n\n🐳 docker and its docker compose plugin are required to run the demo material\n🐍 Python tools/CLI/etc. should run with uv run or, more permanently, uv tool install &lt;name&gt;.\n🛶 You don’t need tilt if you don’t want the fancy webpage with hot reload, just use docker compose up and look at the ports.\n🤖 For the AI examples, I’ve used OpenRouter, but you can use any AI provider you’d like."
   },
   {
     "objectID": "slides.html#what-is-grist",
@@ -42,32 +42,39 @@
     "text": "What is grist?\n\n\nGrist is a modern relational spreadsheet. It combines the flexibility of a spreadsheet with the robustness of a database.\nIt can run:\n\nlocally (docker or desktop)\nin the cloud or homelab\nlike Google Docs at https://getgrist.com\n\n\n\n\n\nIt stores everything as a SQLite database that is easy to share and backup\n\n\n\nTalk about the SMVE (check if time allows)"
   },
   {
+    "objectID": "slides.html#example-library",
+    "href": "slides.html#example-library",
+    "title": "Teaching Some Python to Your Spreadsheets",
+    "section": "Example library",
+    "text": "Example library\n\n\n\nExample library\n\n\nABC"
+  },
+  {
     "objectID": "slides.html#grist-architecture",
     "href": "slides.html#grist-architecture",
     "title": "Teaching Some Python to Your Spreadsheets",
     "section": "Grist Architecture",
-    "text": "Grist Architecture\n\n\n\n\n\n%%{init: {\n  \"theme\": \"base\",\n  \"flowchart\": {\"curve\": \"linear\", \"htmlLabels\": true, \"nodeSpacing\": 40, \"rankSpacing\": 40, \"diagramPadding\": 6},\n  \"themeVariables\": {\n    \"background\": \"#fdf6e3\",\n    \"primaryColor\": \"#e4f1f8\",\n    \"primaryTextColor\": \"#263238\",\n    \"primaryBorderColor\": \"#24557a\",\n    \"lineColor\": \"#607d8b\",\n    \"clusterBkg\": \"#f8f1df\",\n    \"clusterBorder\": \"#9aadaf\",\n    \"fontFamily\": \"system-ui, sans-serif\",\n    \"fontSize\": \"25px\"\n  }\n}}%%\nflowchart TB\n    subgraph TopRow[\" \"]\n        direction LR\n        UI[\"Spreadsheet UI 👈🏽\"]\n        OfficialMCP[\"Official MCP\"]\n    end\n\n    UI --&gt; Engine[\"Document engine&lt;br/&gt;(Node.js)\"]\n    OfficialMCP &lt;-.-&gt; Engine\n    Engine &lt;--&gt; DB[(\"SQLite\")]\n    Engine --&gt; Sandbox[\"🐍 Sandboxed Python\"] --&gt; Formulas[\"Formulas\"]\n    Formulas --&gt; Engine\n    Engine &lt;--&gt; API[\"Grist REST API\"]\n\n    API &lt;--&gt; CLI[\"gry (cli) 👈🏽\"]\n    API &lt;--&gt; Notebook[\"Python notebook 👈🏽\"]\n    API &lt;--&gt; MCP[\"OSS MCP 👈🏽\"]\n\n    classDef ui fill:#e4f1f8,stroke:#24557a,color:#263238,stroke-width:2px,font-size:25px;\n    classDef python fill:#fff0c9,stroke:#8b4b00,color:#263238,stroke-width:2px,font-size:25px;\n    classDef data fill:#edf3df,stroke:#5f6f36,color:#263238,stroke-width:2px,font-size:25px;\n    classDef client fill:#dfeecf,stroke:#5f6f36,color:#263238,stroke-width:2px,font-size:25px;\n    classDef terminal fill:#263238,stroke:#24557a,color:#fdf6e3,stroke-width:2px,font-family:monospace,font-size:25px;\n    classDef mcp fill:#fdf6e3,stroke:#5f6f36,color:#263238,stroke-width:2px, font-size:25px;\n    class UI,Engine,API,OfficialMCP ui;\n    class Sandbox,Formulas python;\n    class Notebook client;\n    class CLI terminal;\n    class DB data;\n    class MCP client;\n    style TopRow fill:none,stroke:none;\n    linkStyle default stroke:#607d8b,stroke-width:2px;"
+    "text": "Grist Architecture\n\n\n\n\n\n%%{init: {\n  \"theme\": \"base\",\n  \"flowchart\": {\"curve\": \"linear\", \"htmlLabels\": true, \"nodeSpacing\": 40, \"rankSpacing\": 40, \"diagramPadding\": 6},\n  \"themeVariables\": {\n    \"background\": \"#fdf6e3\",\n    \"primaryColor\": \"#e4f1f8\",\n    \"primaryTextColor\": \"#263238\",\n    \"primaryBorderColor\": \"#24557a\",\n    \"lineColor\": \"#607d8b\",\n    \"clusterBkg\": \"#f8f1df\",\n    \"clusterBorder\": \"#9aadaf\",\n    \"fontFamily\": \"system-ui, sans-serif\",\n    \"fontSize\": \"25px\"\n  }\n}}%%\nflowchart TB\n    subgraph TopRow[\" \"]\n        direction LR\n        UI[\"Spreadsheet UI 👈🏽\"]\n        OfficialMCP[\"Official MCP\"]\n        Webhooks\n    end\n\n    UI --&gt; Engine[\"Document engine&lt;br/&gt;(Node.js)\"]\n    OfficialMCP &lt;-.-&gt; Engine\n    Engine &lt;--&gt; DB[(\"SQLite\")]\n    Engine --&gt; Sandbox[\"🐍 Sandboxed Python\"] --&gt; Formulas[\"Formulas\"]\n    Formulas --&gt; Engine\n    Engine &lt;--&gt; API[\"Grist REST API\"]\n\n    API &lt;--&gt; CLI[\"gry (cli) 👈🏽\"]\n    API &lt;--&gt; Notebook[\"Python notebook 👈🏽\"]\n    API &lt;--&gt; MCP[\"OSS MCP 👈🏽\"]\n\n    classDef grist fill:#e4f1f8,stroke:#24557a,color:#263238,stroke-width:2px,font-size:25px;\n    classDef python fill:#fff0c9,stroke:#8b4b00,color:#263238,stroke-width:2px,font-size:25px;\n    classDef data fill:#edf3df,stroke:#5f6f36,color:#263238,stroke-width:2px,font-size:25px;\n    classDef client fill:#dfeecf,stroke:#5f6f36,color:#263238,stroke-width:2px,font-size:25px;\n    classDef terminal fill:#263238,stroke:#24557a,color:#fdf6e3,stroke-width:2px,font-family:monospace,font-size:25px;\n    classDef mcp fill:#fdf6e3,stroke:#5f6f36,color:#263238,stroke-width:2px, font-size:25px;\n    class UI,Engine,API,OfficialMCP,Webhooks grist;\n    class Sandbox,Formulas python;\n    class Notebook client;\n    class CLI client;\n    class DB data;\n    class MCP client;\n    style TopRow fill:none,stroke:none;\n    linkStyle default stroke:#607d8b,stroke-width:2px;"
   },
   {
     "objectID": "slides.html#ui-structure",
     "href": "slides.html#ui-structure",
     "title": "Teaching Some Python to Your Spreadsheets",
     "section": "UI Structure",
-    "text": "UI Structure\nThe UI is organized around a tree/breadcrumb structure:\n\n A site (each user has his/hers)\n\n A workspace, this is like folders and contain documents\n\n Documents\n\n Database\n Pages (tabs), views, widgets, 🐍 formulas"
+    "text": "UI Structure\nThe UI is organized around a tree/breadcrumb structure:\n\n A site (each user has their own)\n\n A workspace, which is like a folder that contains documents\n\n Documents\n\n Database\n Pages (tabs), views, widgets, 🐍 formulas"
   },
   {
-    "objectID": "slides.html#the-welcome-screen",
-    "href": "slides.html#the-welcome-screen",
+    "objectID": "slides.html#the-workspace-view",
+    "href": "slides.html#the-workspace-view",
     "title": "Teaching Some Python to Your Spreadsheets",
-    "section": "The welcome screen",
-    "text": "The welcome screen\n\nMain Spreadsheets View"
+    "section": "The workspace view",
+    "text": "The workspace view\n\nMain Spreadsheets View"
   },
   {
     "objectID": "slides.html#creating-a-calendar-style-application",
     "href": "slides.html#creating-a-calendar-style-application",
     "title": "Teaching Some Python to Your Spreadsheets",
-    "section": "Creating a calendar style application",
-    "text": "Creating a calendar style application\n For this we will create a few columns in a table\n\nActivity\n Start\n End\n All day\n Category"
+    "section": "Creating a calendar-style application",
+    "text": "Creating a calendar-style application\n For this we will create a few columns in a table\n\nActivity\n Start\n End\n All day\n Category"
   },
   {
     "objectID": "slides.html#first-table",
@@ -84,18 +91,18 @@
     "text": "Code View\n\n\n\nThe code view for that table"
   },
   {
-    "objectID": "slides.html#first-python-formula",
-    "href": "slides.html#first-python-formula",
+    "objectID": "slides.html#writing-python-formula",
+    "href": "slides.html#writing-python-formula",
     "title": "Teaching Some Python to Your Spreadsheets",
-    "section": "First Python formula",
-    "text": "First Python formula\n\nLet’s create a our first formula to compute how many days we have before the column $Start\n\n\n\n\n$Start - TODAY()\n\ndatetime.timedelta(days=-3, seconds=45245, microseconds=577301)\n\n\n\n\nfrom datetime import timedelta as td\nreturn (\n  $Start - NOW()\n) / td(days=1)\n\n2.458484637708333\n\n\n\n\n\n\nfrom datetime import timedelta as td\nreturn int(\n  $Start - NOW()\n) / td(days=1)\n\n2\n\n\n\n\n\nDATEDIF($Start, NOW(), 'D')\n\n3"
+    "section": "Writing Python formula",
+    "text": "Writing Python formula\n\nLet’s create our first formula to compute how many days we have before the $Start column.\n\n\n\n\n$Start - NOW()\n\ndatetime.timedelta(days=-3, seconds=45245, microseconds=577301)\n\n\n\n\nfrom datetime import timedelta\nreturn (\n  $Start - NOW()\n) / timedelta(days=1)\n\n2.458484637708333\n\n\n\n\n\n\nfrom datetime import timedelta\nreturn int(\n  $Start - NOW()\n) / timedelta(days=1)\n\n2\n\n\n\n\n\nDATEDIF($Start, NOW(), 'D')\n\n3"
   },
   {
     "objectID": "slides.html#adding-a-second-table",
     "href": "slides.html#adding-a-second-table",
     "title": "Teaching Some Python to Your Spreadsheets",
     "section": "Adding a second table",
-    "text": "Adding a second table\nLet’s use a second sheet table, and link have a Foreign Key to our main table."
+    "text": "Adding a second table\nLet’s use a second sheet table and link it with a foreign key to our main table."
   },
   {
     "objectID": "slides.html#setting-up-some-column-types",
@@ -116,7 +123,7 @@
     "href": "slides.html#and-lookups",
     "title": "Teaching Some Python to Your Spreadsheets",
     "section": "And lookups",
-    "text": "And lookups\n\n Events   Attachments\nAttachments.lookupRecords(Event=$id)\n\n\nPlaying with the string repetitions\ncount = len(Attachments.lookupRecords(Event=$id))\n\nreturn \"📦\" * count"
+    "text": "And lookups\n\n Events   Attachments\nAttachments.lookupRecords(Event=$id)\n\n\nPlaying with string repetition\ncount = len(Attachments.lookupRecords(Event=$id))\n\nreturn \"📦\" * count"
   },
   {
     "objectID": "slides.html#putting-together-views",
@@ -130,7 +137,7 @@
     "href": "slides.html#presentation",
     "title": "Teaching Some Python to Your Spreadsheets",
     "section": "Presentation",
-    "text": "Presentation\n\nGrist supports a diversity widgets, we will focus on a simple one called Calendar widget \n\n\n\n\n\n\n\n\nVisualizations are done also through widgets"
+    "text": "Presentation\n\nGrist supports a diverse range of widgets. We will focus on a simple one called the Calendar widget .\n\n\n\n\n\n\n\n\nVisualizations are done also through widgets"
   },
   {
     "objectID": "slides.html#calendar-widgets-cont.",
@@ -144,7 +151,7 @@
     "href": "slides.html#calendar-widgets-cont.-1",
     "title": "Teaching Some Python to Your Spreadsheets",
     "section": "Calendar Widgets (cont.)",
-    "text": "Calendar Widgets (cont.)\n\n\n\n\n  \nThe binding is bi-directional, meaning that creating a event in the calendar will automatically reflect in the original table."
+    "text": "Calendar Widgets (cont.)\n\n\n\n\n  \nThe binding is bidirectional, meaning that creating an event in the calendar will automatically be reflected in the original table."
   },
   {
     "objectID": "slides.html#more-widgets-to-explore",
@@ -158,14 +165,14 @@
     "href": "slides.html#custom-widgets",
     "title": "Teaching Some Python to Your Spreadsheets",
     "section": "Custom widgets",
-    "text": "Custom widgets\n\nCustoms CSS, HTML and JS can be stored in Grist itself.\nIf they are mean to be re-used in many documents, it’s recommended to host these resources in a common place.\nA coding AI agent/harness with good planning can create engaging UIs"
+    "text": "Custom widgets\n\nCustom CSS, HTML, and JS can be stored in Grist itself.\nIf they are meant to be re-used in many documents, it’s recommended to host these resources in a common place.\nA coding AI agent/harness with good planning can create engaging UIs"
   },
   {
     "objectID": "slides.html#getting-the-accounts-api-key",
     "href": "slides.html#getting-the-accounts-api-key",
     "title": "Teaching Some Python to Your Spreadsheets",
     "section": "Getting the account’s API key",
-    "text": "Getting the account’s API key\nTo get the user’s API key, this is in the user settings."
+    "text": "Getting the account’s API key\nTo get the user’s API key, you can find it in the user settings."
   },
   {
     "objectID": "slides.html#the-document-identifier",
@@ -179,7 +186,7 @@
     "href": "slides.html#a-cli-client-for-the-api",
     "title": "Teaching Some Python to Your Spreadsheets",
     "section": "A CLI client for the API",
-    "text": "A CLI client for the API\npygrister is a Python library and a CLI for grist 1\nIt requires an URL and an API key, but more configuration can be passed.\nThis in example .env2 we could use in our workshop repo:\nGRIST_API_KEY=22...36\nGRIST_SELF_MANAGED=Y\nGRIST_SELF_MANAGED_HOME=http://localhost:8484\nGRIST_SELF_MANAGED_SINGLE_ORG=N\nGRIST_SERVER_PROTOCOL=http\nGRIST_TEAM_SITE=docs\nIf you cloned the repo is will be available with uv run (or uvx --from pygrister gry)This file needs to be created as the demo data lives in docker volumes"
+    "text": "A CLI client for the API\npygrister is a Python library and a CLI for grist 1\nIt requires a URL and an API key, but additional configuration can be passed.\nIn this example, .env2 is the file we could use in our workshop repo:\nGRIST_API_KEY=&lt;your user api key&gt;\nGRIST_SELF_MANAGED=Y\nGRIST_SELF_MANAGED_HOME=http://localhost:8484\nGRIST_SELF_MANAGED_SINGLE_ORG=N\nGRIST_SERVER_PROTOCOL=http\nGRIST_TEAM_SITE=docs\nIf you cloned the repo, it will be available with uv run (or uvx --from pygrister gry).This file needs to be created as the demo data lives in docker volumes"
   },
   {
     "objectID": "slides.html#gry---listing-workspaces",
@@ -200,28 +207,35 @@
     "href": "slides.html#gry---running-sql",
     "title": "Teaching Some Python to Your Spreadsheets",
     "section": "gry - running SQL",
-    "text": "gry - running SQL\ngry sql 'select id, Activity, Start, Category from Events' -d q5aBBVtSotFo\n┏━━━━┳━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━┓\n┃ id ┃ Activity ┃ Start      ┃ Category         ┃\n┡━━━━╇━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━┩\n│ 2  │ PyCon    │ 1790920800 │ [\"🎙️conference\"] │\n└────┴──────────┴────────────┴──────────────────┘"
+    "text": "gry - running SQL\ngry sql \\\n    'select id, Activity, Start, Category from Events' \\\n    -d q5aBBVtSotFo\n\n┏━━━━┳━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━┓\n┃ id ┃ Activity ┃ Start      ┃ Category         ┃\n┡━━━━╇━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━┩\n│ 2  │ PyCon    │ 1790920800 │ [\"🎙️conference\"] │\n└────┴──────────┴────────────┴──────────────────┘\n\n\n\nWe also have JSON output if emojis are breaking the width calculation 🤭"
   },
   {
     "objectID": "slides.html#python-api",
     "href": "slides.html#python-api",
     "title": "Teaching Some Python to Your Spreadsheets",
     "section": "Python API",
-    "text": "Python API\n\nThe gry commands are available as methods under pygrister.api.GristApi()"
+    "text": "Python API\n\nWe’re going to use the second service from the stack, the Marimo Notebook\nTo access Grist programmatically through pygrister, we use pygrister.api.GristApi()\nThe .env is the same, but we can also look for other methods to provide the configuration.\nThe API always responds with status_code and data"
   },
   {
-    "objectID": "slides.html#connecting-through-mcp",
-    "href": "slides.html#connecting-through-mcp",
+    "objectID": "slides.html#the-list-workspace-method",
+    "href": "slides.html#the-list-workspace-method",
     "title": "Teaching Some Python to Your Spreadsheets",
-    "section": "Connecting through MCP",
-    "text": "Connecting through MCP\n\nmcp-server-grist is a MCP server written in Python. It allows AI applications like Claude, IBM Bob, Codex, pi, OpenClaw, Hermes, etc. to connect to the Grist API.\n\n\n\nThis is not the official MCP that lives in https://&lt;yoursite&gt;.getgrist.com/mcp for the commercial version, so authentication will use the same API KEYs instead of OAauth2.\n\n\n\nTo run mcp-server-grist with uv we need these two environment variables:\n\nGRIST_API_KEY (user or Service Account)\nGRIST_API_URL (this will be where Grist is running + /api)"
+    "section": "The list workspace method",
+    "text": "The list workspace method"
+  },
+  {
+    "objectID": "slides.html#model-context-protocol",
+    "href": "slides.html#model-context-protocol",
+    "title": "Teaching Some Python to Your Spreadsheets",
+    "section": "Model Context Protocol",
+    "text": "Model Context Protocol\n\n\nmcp-server-grist is an MCP server written in Python. It allows AI applications like Claude, IBM Bob, Codex, pi, OpenClaw, Hermes, etc. to connect to the Grist API.\n\n\n\nThis is not the official MCP that lives in https://&lt;yoursite&gt;.getgrist.com/mcp for the commercial version, so authentication will use the same API keys instead of OAuth2.\n\n\n\n\n\nTo run mcp-server-grist with uv we need these two environment variables:\n\nGRIST_API_KEY (user or Service Account)\nGRIST_API_URL (this will be where Grist is running + /api)"
   },
   {
     "objectID": "slides.html#example-json",
     "href": "slides.html#example-json",
     "title": "Teaching Some Python to Your Spreadsheets",
     "section": "Example JSON",
-    "text": "Example JSON\n{\n  \"mcpServers\": {\n    \"grist-server\": {\n      \"timeout\": 60,\n      \"type\": \"stdio\",\n      \"command\": \"uvx\",\n      \"args\": [\n        \"--with\",\n        \"fastmcp&lt;3\", # this is important 🙈 as it's not been updated\n        \"mcp-server-grist\"\n      ],\n      \"env\": {\n        \"GRIST_API_KEY\": \"2273b28ebed8ba2aa38c99f788cf9cb314012536\",\n        \"GRIST_API_URL\": \"http://localhost:8484/api\"\n      }\n\n    }\n  }\n}\n\n\n\n👆 I’m going to use this in IBM Bob, but should work the same to any other harness"
+    "text": "Example JSON\n{\n  \"mcpServers\": {\n    \"grist-server\": {\n      \"timeout\": 60,\n      \"type\": \"stdio\",\n      \"command\": \"uvx\",\n      \"args\": [\n        \"--with\",\n        \"fastmcp&lt;3\", # this is important 🙈 as it's not been updated\n        \"mcp-server-grist\"\n      ],\n      \"env\": {\n        \"GRIST_API_KEY\": \"2273b28ebed8ba2aa38c99f788cf9cb314012536\",\n        \"GRIST_API_URL\": \"http://localhost:8484/api\"\n      }\n\n    }\n  }\n}\n\n\n\n👆 I’m going to use this in IBM Bob, but it should work the same way with any other harness"
   },
   {
     "objectID": "slides.html#example-conversation",
@@ -235,6 +249,27 @@
     "href": "slides.html#using-hermes",
     "title": "Teaching Some Python to Your Spreadsheets",
     "section": "Using Hermes",
-    "text": "Using Hermes\nHermes is a popular agent that build its own memory. Has connectors for many messaging platforms   \nBut for our demo, we will use an extension called WebUI extension"
+    "text": "Using Hermes\n\nHermes is a popular personal agent that comes with memory by default.\nComes with some connectors/providers for some messaging platforms   \nWe will try this extension called WebUI extension"
+  },
+  {
+    "objectID": "slides.html#hermes-cont",
+    "href": "slides.html#hermes-cont",
+    "title": "Teaching Some Python to Your Spreadsheets",
+    "section": "Hermes (cont)",
+    "text": "Hermes (cont)\n\n\n\n\nListing our MCP tools after configuration."
+  },
+  {
+    "objectID": "slides.html#hermes-cont-1",
+    "href": "slides.html#hermes-cont-1",
+    "title": "Teaching Some Python to Your Spreadsheets",
+    "section": "Hermes (cont)",
+    "text": "Hermes (cont)\nWhen asked to query the same table, it reasons about the output."
+  },
+  {
+    "objectID": "slides.html#safer-use-of-ai",
+    "href": "slides.html#safer-use-of-ai",
+    "title": "Teaching Some Python to Your Spreadsheets",
+    "section": "Safer use of AI",
+    "text": "Safer use of AI\n\nHermes will learn over time, this is a helpful feature.\nLLMs can be too smart and try to achieve a goal in unintended ways, so using a Grist service account key instead of a user key can reduce the things it can break.\nAdditionally, we can make different types of copies (templates, structure-only copies) to prevent Hermes from breaking things."
   }
 ]
