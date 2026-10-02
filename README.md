@@ -134,7 +134,7 @@ docker compose ps
 docker compose logs -f grist       # or marimo / webui / caddy
 ```
 
-Grist documents and Hermes configuration, credentials, and application data are stored in named volumes. The explicitly named Hermes volume also survives a Compose project-name change. A normal shutdown, rebuild, or container recreation preserves them:
+Grist documents, Hermes configuration, credentials, application data, and marimo's `uvx` package cache are stored in named volumes. The explicitly named Hermes and marimo cache volumes also survive a Compose project-name change. A normal shutdown, rebuild, or container recreation preserves them:
 
 ```bash
 docker compose down
