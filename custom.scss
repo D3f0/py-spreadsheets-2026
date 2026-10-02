@@ -13,6 +13,19 @@ $code-block-font-size: 0.72em;
   text-align: left;
 }
 
+/* Keep the event logo in the presentation chrome, alongside navigation. */
+.reveal::after {
+  position: fixed;
+  top: 0.7em;
+  right: 0.85em;
+  z-index: 20;
+  width: 6.8em;
+  height: 4.6em;
+  background: url("./img/pyconke-logo.png") center / contain no-repeat;
+  content: "";
+  pointer-events: none;
+}
+
 .reveal .slides section {
   overflow-wrap: anywhere;
 }
@@ -117,6 +130,47 @@ $code-block-font-size: 0.72em;
   font-size: 0.45em;
   line-height: 1.2;
   overflow-wrap: anywhere;
+}
+
+.reveal .slides section:has(> .progress-timeline) > .progress-timeline {
+  width: min(92%, 900px);
+  margin: 2.2rem auto 0;
+  padding: 2.4rem 0.5rem 0.25rem;
+}
+
+.reveal .slides section:has(> .progress-timeline) > .progress-timeline .event {
+  min-width: 0;
+  padding: 0 0.15rem;
+  color: #607d8b;
+  text-align: center;
+}
+
+.reveal .slides section:has(> .progress-timeline) > .progress-timeline .event::before {
+  color: #607d8b;
+  font-size: 0.62em;
+}
+
+.reveal .slides section:has(> .progress-timeline) > .progress-timeline .event.tl-filled::before {
+  color: #24557a;
+}
+
+.reveal .slides section.agenda {
+  --tl-gap: 0.6rem;
+  --tl-content-size: 0.72em;
+  --tl-label-size: 0.68em;
+}
+
+.reveal .slides section.agenda .timeline.vertical {
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+
+.reveal .slides section.agenda .timeline.vertical .event {
+  padding-bottom: var(--tl-gap);
+}
+
+.reveal .slides section.agenda .timeline.vertical .event::before {
+  color: var(--tl-color-label);
 }
 
 .reveal .slides section.about-me {

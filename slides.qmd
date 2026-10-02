@@ -23,7 +23,10 @@ format:
     theme:
       - solarized
       - custom.scss
+    css: brand.css
     footer: "Teaching Some Python to Your Spreadsheets"
+resources:
+  - img/pyconke-logo.png
 execute:
   enabled: false
 filters:
@@ -67,39 +70,6 @@ lightbox:
 
 ---
 
-## Follow along
-
-<!-- Add links and QR codes for the slides, repository, and workshop materials. -->
-
-::: {.columns .follow-along-columns}
-::: {.column .follow-along-qr}
-
-[{{< rrqr https://github.com/D3f0/py-spreadsheets-2026/slides.html size=500 >}}](https://github.com/D3f0/py-spreadsheets-2026/slides.html#/title-slide){target="_blank"}
-
-[https://github.com/D3f0/py-spreadsheets-2026/slides.html](https://d3f0.github.io/pycon-2026-teaching-spreadhseets-python/slides.html){target="_blank"}
-
-:::
-::: {.column}
-**👈🏽 Slides**
-
-**👇🏽 🐳 & ** [![](img/tilt-favicon.ico){.inline-icon .nolightbox width=32 style="vertical-align: text-bottom;"}](https://docs.tilt.dev/install.html){target="_blank"} **run the workshop**
-
-```{.shell code-line-numbers="false"}
-gh repo clone \
-  D3f0/py-spreadhseets-2026 \
-  && uv run tasks.py up
-```
-
-
-:::
-:::
-
----
-
-![[The workshop code at http://localhost:10350](http://localhost:10350)](./img/tilt.png)
-
----
-
 ![](./img/562a7a03c4143.jpeg)
 
 ---
@@ -119,19 +89,14 @@ gh repo clone \
 - In recent times owning your data become more and more relevant.
 - Many people use web based spreadhseets as important part of their lives
 - Python is one of the most popular programming languages but using
-  it in spreadhseets can be challenging.
--
+  it in spreadhseets hasn't been really viable yet.
+- Creating very bespoke software, or 'hyperpersonalized' can be done
+  both for personal use but also for multi-user environments.
 
 
 ---
 
-# Motivation (cont.)
-
-
-
----
-
-## Agenda {.smaller}
+## Agenda {.agenda .smaller}
 
 
 ::: {.timeline .vertical }
@@ -143,12 +108,6 @@ Acess to slides, repo and how to run the code.
 **Grist**
 Tables, Column Types, Python and Excel functions in formulas.
 :::
-<!--
-::: {.event data-label="Presentation"}
-**Presnetation**
-Pages, widgets, calendar view.
-:::
--->
 ::: {.event data-label="CLI Access"}
 **pygrister**
 CLI access using `gry` CLI.
@@ -171,8 +130,93 @@ Accessing Grist API with AI tools
 
 ---
 
+<!--
+# Material
+
+::: {.timeline .progress-timeline .tl-compact}
+::: {.event data-label="Material" .tl-filled}
+:::
+::: {.event data-label="Spreadsheet"}
+:::
+::: {.event data-label="CLI Access"}
+:::
+::: {.event data-label="Python library"}
+:::
+::: {.event data-label="AI"}
+:::
+::: {.event data-label="Questions"}
+:::
+:::
+
+---
+-->
+
+## Slide & Code
+<!-- Add links and QR codes for the slides, repository, and workshop materials. -->
+
+::: {.columns .follow-along-columns}
+::: {.column .follow-along-qr}
+
+[{{< rrqr https://d3f0.github.io/py-spreadsheets-2026/slides.html size=500 >}}](https://d3f0.github.io/py-spreadsheets-2026/slides.html#/title-slide){target="_blank"}
+
+[https://d3f0.github.io/py-spreadsheets-2026/slides.html](https://d3f0.github.io/py-spreadsheets-2026/slides.html){target="_blank"}
+
+:::
+::: {.column}
+**👈🏽 Slides**
+
+**👇🏽 🐳 & ** [![](img/tilt-favicon.ico){.inline-icon .nolightbox width=32 style="vertical-align: text-bottom;"}](https://docs.tilt.dev/install.html){target="_blank"} **run the workshop**
+
+```{.shell code-line-numbers="false"}
+gh repo clone \
+  D3f0/py-spreadhseets-2026 \
+  && uv run tasks.py up
+```
+
+
+:::
+:::
+
+---
+
+
+![[The workshop code at http://localhost:10350](http://localhost:10350){target=_blank}](./img/tilt.png)
+
+
+---
+
+## Misc.
+
+::: {.incremental  }
+
+- 🐳 `docker` and its `docker compose` plugin are required to run the demo material
+- 🐍 Python tools/cli/etc shoud run with `uv run` or more permantently `uv tool install <nini>`.
+- 🛶 You don't need `tilt` if you don't want the fancy webpage with hot reload, just
+  use `docker compose up` and look at the ports.
+- 🤖 For the AI examples, I've used OpenRouter, but you can use any AI provider
+  you'd like.
+:::
+
+---
+
 # Grist
-A relational spreadsheet
+
+
+
+::: {.timeline .progress-timeline .tl-compact}
+::: {.event data-label="Material"}
+:::
+::: {.event data-label="Spreadsheet" .tl-filled}
+:::
+::: {.event data-label="CLI Access"}
+:::
+::: {.event data-label="Python library"}
+:::
+::: {.event data-label="AI"}
+:::
+::: {.event data-label="Questions"}
+:::
+:::
 
 ---
 
@@ -197,6 +241,12 @@ A relational spreadsheet
 Talk about the SMVE (check if time allows)
 
 :::
+
+---
+
+## Example library
+
+![](./img/grist-templates.png){height=50%}
 
 ---
 
@@ -300,7 +350,7 @@ The UI is organized around a tree/breadcrumb structure:
 
 ---
 
-## First Python formula {.smaller}
+## Writing Python formula {.smaller}
 
 ::: {.fragment .bigger }
 Let's create a our first formula to compute how many days we have before the column `$Start`
@@ -311,7 +361,7 @@ Let's create a our first formula to compute how many days we have before the col
 ::: {.columns}
 ::: {.column}
 ```{.python}
-$Start - TODAY()
+$Start - NOW()
 ```
 :::
 ::: {.column}
@@ -324,10 +374,10 @@ datetime.timedelta(days=-3, seconds=45245, microseconds=577301)
 ::: {.columns}
 ::: {.column}
 ```{.python}
-from datetime import timedelta as td
+from datetime import timedelta
 return (
   $Start - NOW()
-) / td(days=1)
+) / timedelta(days=1)
 ```
 :::
 ::: {.column}
@@ -341,10 +391,10 @@ return (
 ::: {.columns}
 ::: {.column}
 ```{.python}
-from datetime import timedelta as td
+from datetime import timedelta
 return int(
   $Start - NOW()
-) / td(days=1)
+) / timedelta(days=1)
 ```
 :::
 ::: {.column}
@@ -551,11 +601,7 @@ From the author panel (right side on the `Table` tab, on the bottom)
 -->
 
 
-
-# Presentation
-Different ways to present the data
-
----
+## Presentation
 
 ::: {.smaller}
 
@@ -563,12 +609,11 @@ Grist supports a diversity widgets, we will focus on a simple one
 called Calendar widget {{< fa calendar >}}
 
 
-
 ::: {.columns}
 
 ::: {.column}
 
-![](./img/add-new.png)
+![](./img/add-new.png){}
 
 
 :::
@@ -614,7 +659,20 @@ This configuration can be modified later in the creator panel.
 
 ## Calendar Widgets (cont.)
 
+::: {.columns}
+::: {.column width=70%}
 ![](./img/full_calendar.png){.r-stretch}
+:::
+
+::: {.column width=30%}
+
+{{< fa calendar >}} {{< fa arrow-right >}} {{< fa table >}}
+
+The *binding* is bi-directional, meaning that creating a event in
+the calendar will automatically reflect in the original table.
+
+:::
+:::
 
 ---
 
@@ -663,6 +721,21 @@ This configuration can be modified later in the creator panel.
 
 # API Access
 
+::: {.timeline .progress-timeline .tl-compact}
+::: {.event data-label="Material"}
+:::
+::: {.event data-label="Spreadsheet"}
+:::
+::: {.event data-label="CLI Access" .tl-filled}
+:::
+::: {.event data-label="Python library"}
+:::
+::: {.event data-label="AI"}
+:::
+::: {.event data-label="Questions"}
+:::
+:::
+
 ---
 
 ## Getting the account's API key
@@ -702,20 +775,23 @@ To get the user's API key, this is in the [user settings](http://localhost:8484/
 
 ## A CLI client for the API
 
-`pygrister` is a Python library and a CLI for grist.
+`pygrister` is a Python library and a CLI for grist [^1]
 
 It requires an URL and an API key, but more configuration can be passed.
 
-This in example `.env` we could use in our workshop repo:
+This in example `.env`[^2] we could use in our workshop repo:
 
 ```shell
-GRIST_API_KEY=22...36
+GRIST_API_KEY=<your user api key>
 GRIST_SELF_MANAGED=Y
 GRIST_SELF_MANAGED_HOME=http://localhost:8484
 GRIST_SELF_MANAGED_SINGLE_ORG=N
 GRIST_SERVER_PROTOCOL=http
 GRIST_TEAM_SITE=docs
 ```
+
+[^1]: If you cloned the repo is will be available with `uv run` (or `uvx --from pygrister gry`)
+[^2]: This file needs to be created as the demo data lives in docker volumes
 
 ---
 
@@ -784,7 +860,10 @@ gry table list -d q5aBBVtSotFo
 ## gry - running SQL
 
 ```
-gry sql 'select id, Activity, Start, Category from Events' -d q5aBBVtSotFo
+gry sql \
+    'select id, Activity, Start, Category from Events' \
+    -d q5aBBVtSotFo
+
 ┏━━━━┳━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━┓
 ┃ id ┃ Activity ┃ Start      ┃ Category         ┃
 ┡━━━━╇━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━┩
@@ -792,6 +871,9 @@ gry sql 'select id, Activity, Start, Category from Events' -d q5aBBVtSotFo
 └────┴──────────┴────────────┴──────────────────┘
 ```
 
+::: {.callout}
+We also have JSON output if your emojis are breaking the with calculation 🤭
+:::
 <!-- ---
 
 ## Service Accounts
@@ -880,6 +962,20 @@ GRIST_API_KEY=6a4e9e39ceb0161bbbd5971089e215647191db97 gry ws list
 
 # Using directly from Python
 
+::: {.timeline .progress-timeline .tl-compact}
+::: {.event data-label="Material"}
+:::
+::: {.event data-label="Spreadsheet"}
+:::
+::: {.event data-label="CLI Access"}
+:::
+::: {.event data-label="Python library" .tl-filled}
+:::
+::: {.event data-label="AI"}
+:::
+::: {.event data-label="Questions"}
+:::
+:::
 
 ---
 
@@ -909,6 +1005,21 @@ TBD
 
 # Using grist MCP
 🤖
+
+::: {.timeline .progress-timeline .tl-compact}
+::: {.event data-label="Material"}
+:::
+::: {.event data-label="Spreadsheet"}
+:::
+::: {.event data-label="CLI Access"}
+:::
+::: {.event data-label="Python library"}
+:::
+::: {.event data-label="AI" .tl-filled}
+:::
+::: {.event data-label="Questions"}
+:::
+:::
 
 ---
 
@@ -982,6 +1093,21 @@ TBD
 ---
 
 # Thank you
+
+::: {.timeline .progress-timeline .tl-compact}
+::: {.event data-label="Material"}
+:::
+::: {.event data-label="Spreadsheet"}
+:::
+::: {.event data-label="CLI Access"}
+:::
+::: {.event data-label="Python library"}
+:::
+::: {.event data-label="AI"}
+:::
+::: {.event data-label="Questions" .tl-filled}
+:::
+:::
 
 ::: {.fragment}
 **Questions?**
