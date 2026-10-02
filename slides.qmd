@@ -182,7 +182,7 @@ gh repo clone \
 
 ---
 
-## Misc.
+## Before you try the repo code
 
 ::: {.incremental  }
 
