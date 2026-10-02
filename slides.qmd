@@ -1,7 +1,17 @@
 ---
 title: "Teaching Some Python to Your Spreadsheets"
 subtitle: "A hands-on journey through Grist, SQLite, APIs, and AI agents"
-author: "Nahuel Defossé"
+# author: "Nahuel Defossé"
+
+author:
+  - name: Nahuel Defossé
+    #id: jc
+    #orcid: 0000-0002-1825-0097
+    email:
+      - nahuel.defosse@{ibm,protonmail}.com
+    affiliation:
+      - name: IBM Software Innovation Lab
+
 format:
   revealjs:
     toc: false
@@ -18,15 +28,13 @@ execute:
   enabled: false
 filters:
   - diagrams
+  - timeline
 lightbox:
   match: auto
   effect: zoom
   loop: false
 ---
 
-## Welcome {.center}
-
-<!-- Add the event, date, and a one-sentence promise for the workshop. -->
 
 ---
 
@@ -41,7 +49,7 @@ lightbox:
   - Co-organized SciPy Latin America
   - PyCon Argentina and EuroPython speaker
 - 🚜 Former CTO at [Hello Tractor](https://hellotractor.com/)
-- 🧪 Software Engineer at IBM ~~Research~~ Software Innovation Lab
+- 🧪 Software Engineer at IBM Software Innovation Lab
 - 🛰️ Worked on [foundational models for geospatial applications](https://www.earthdata.nasa.gov/news/nasa-ibm-openly-release-geospatial-ai-foundation-model-nasa-earth-observation-data)
 - 💬 Worked on [Flowpilot](https://research.ibm.com/projects/flowpilot), providing core features to different products and divisions
 - 💬 Currently working on [Datascape], a data harness for insight generation, enterprise data scale.
@@ -112,6 +120,56 @@ gh repo clone \
 
 ::: {.notes}
 
+
+:::
+
+---
+
+::: process
+::: item
+Grist
+:::
+::: item
+CLI
+:::
+::: item
+MCP
+:::
+::: item
+foo
+:::
+:::item
+barss
+:::
+
+:::
+
+---
+
+::: {.smaller}
+
+::: {.timeline .vertical}
+::: {.event data-label="2020"}
+**Project Started**
+Initial concept and planning phase.
+:::
+::: {.event data-label="2021"}
+**First Release**
+Launched version 1.0 to early users.
+:::
+::: {.event data-label="2022"}
+**First Release**
+Launched version 1.0 to early users.
+:::
+::: {.event data-label="2023"}
+**First Release**
+Launched version 1.0 to early users.
+:::
+::: {.event data-label="2024"}
+**First Release**
+Launched version 1.0 to early users.
+:::
+:::
 
 :::
 
@@ -362,7 +420,7 @@ Let's use a second ~~sheet~~ table, and ~~link~~ have a Foreign Key to our main 
 
 ---
 
-## Adding a reference column 
+## Adding a reference column
 
 
 
@@ -498,10 +556,10 @@ From the author panel (right side on the `Table` tab, on the bottom)
 
 
 
-# Presentation 
+# Presentation
 Different ways to present the data
 
---- 
+---
 
 ::: {.smaller}
 
@@ -564,7 +622,7 @@ This configuration can be modified later in the creator panel.
 
 ---
 
-## More widgets to explore 
+## More widgets to explore
 
 ![](./img/more-widgets.png){.r-stretch}
 
@@ -573,10 +631,10 @@ This configuration can be modified later in the creator panel.
 ## Custom widgets
 
 - Customs CSS, HTML and JS can be stored in Grist itself.
-- If they are mean to be re-used in many documents, it's recommended to 
+- If they are mean to be re-used in many documents, it's recommended to
   host these resources in a common place.
 - A coding AI agent/harness with good planning can create engaging UIs
-  
+
 ---
 
 <!--
@@ -665,7 +723,7 @@ GRIST_TEAM_SITE=docs
 
 ---
 
-## gry - listing workspaces 
+## gry - listing workspaces
 
 ::: {.fragment}
 
@@ -725,7 +783,7 @@ gry table list -d q5aBBVtSotFo
 ```
 :::
 
---- 
+---
 
 ## gry - running SQL
 
@@ -738,7 +796,7 @@ gry sql 'select id, Activity, Start, Category from Events' -d q5aBBVtSotFo
 └────┴──────────┴────────────┴──────────────────┘
 ```
 
----
+<!-- ---
 
 ## Service Accounts
 
@@ -796,7 +854,7 @@ Error! Status: 403
 
 ![](./img/adding_users.png)
 
---- 
+---
 
 ## Using our service account
 
@@ -820,22 +878,20 @@ GRIST_API_KEY=6a4e9e39ceb0161bbbd5971089e215647191db97 gry ws list
 ┡━━━━╇━━━━━━╇━━━━━━━╇━━━━━━━╇━━━━━━┩
 │ 3  │ Home │ Null  │       │ 1    │
 └────┴──────┴───────┴───────┴──────┘
-```
+``` -->
 
 ---
 
-# Using Notebooks
-Or scripts
+# Using directly from Python
+
 
 ---
 
-## Marimo {.smaller}
+## Python API {.smaller}
 
 ::: {.incremental}
-- Marimo is a modern Python notebook centered around the idea of reproducibility
-- The notebooks are not `.ipynb` format (JSON) but `.py`
-- A notebook can also be a script, a test suite and an application.
-- Takes advantage of modern python packaging like with uv for sandboxing.
+- The `gry` commands are available as methods under `pygrister.api.GristApi()`
+-
 :::
 
 ::: {.fragment}
@@ -875,7 +931,7 @@ To run `mcp-server-grist` with `uv` we need these two environment variables:
 
 - `GRIST_API_KEY` (user or Service Account)
 - `GRIST_API_URL` (this will be where Grist is running + `/api`)
-  
+
 ---
 
 ## Example JSON {.smaller}
@@ -896,14 +952,14 @@ To run `mcp-server-grist` with `uv` we need these two environment variables:
         "GRIST_API_KEY": "2273b28ebed8ba2aa38c99f788cf9cb314012536",
         "GRIST_API_URL": "http://localhost:8484/api"
       }
-      
+
     }
   }
 }
 
 ```
 
-::: callout 
+::: callout
 👆 I'm going to use this in IBM Bob, but should work the same to any other harness
 :::
 
@@ -918,7 +974,7 @@ To run `mcp-server-grist` with `uv` we need these two environment variables:
 ## Using Hermes
 
 Hermes is a popular agent that build its own memory. Has connectors for many
-messaging platforms {{< fa brands whatsapp >}} {{< fa brands telegram >}} {{< fa brands discord >}} 
+messaging platforms {{< fa brands whatsapp >}} {{< fa brands telegram >}} {{< fa brands discord >}}
 
 But for our demo, we will use an extension called [WebUI extension {{< fa brands github >}}]()
 
