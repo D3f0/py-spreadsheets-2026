@@ -68,9 +68,6 @@ lightbox:
 
 :::
 
----
-
-![](./img/562a7a03c4143.jpeg)
 
 ---
 
@@ -86,12 +83,12 @@ lightbox:
 - Interacting with the database through MCP in an Agent
 -->
 
-- In recent times owning your data become more and more relevant.
-- Many people use web based spreadhseets as important part of their lives
-- Python is one of the most popular programming languages but using
-  it in spreadhseets hasn't been really viable yet.
-- Creating very bespoke software, or 'hyperpersonalized' can be done
-  both for personal use but also for multi-user environments.
+- In recent times, owning your data has become more and more relevant.
+- Many people use web-based spreadsheets as an important part of their lives.
+- Python is one of the most popular programming languages, but using
+  it in spreadsheets hasn't been really viable yet.
+- Creating very bespoke or 'hyperpersonalized' software can be done
+  both for personal use and for multi-user environments.
 
 
 ---
@@ -102,9 +99,9 @@ lightbox:
 ::: {.timeline .vertical }
 ::: {.event data-label="Material" .tl-filled}
 **Running the workshop**
-Acess to slides, repo and how to run the code.
+Access to the slides, repo, and instructions on how to run the code.
 :::
-::: {.event data-label="Sreadsheet"}
+::: {.event data-label="Spreadsheet"}
 **Grist**
 Tables, Column Types, Python and Excel functions in formulas.
 :::
@@ -114,7 +111,7 @@ CLI access using `gry` CLI.
 :::
 ::: {.event data-label="Python library"}
 **pygrister**
-Girster API from Python
+Pygrister API from Python
 :::
 
 ::: {.event data-label="AI "}
@@ -169,7 +166,7 @@ Accessing Grist API with AI tools
 
 ```{.shell code-line-numbers="false"}
 gh repo clone \
-  D3f0/py-spreadhseets-2026 \
+  D3f0/py-spreadsheets-2026 \
   && uv run tasks.py up
 ```
 
@@ -190,7 +187,7 @@ gh repo clone \
 ::: {.incremental  }
 
 - 🐳 `docker` and its `docker compose` plugin are required to run the demo material
-- 🐍 Python tools/cli/etc shoud run with `uv run` or more permantently `uv tool install <nini>`.
+- 🐍 Python tools/CLI/etc. should run with `uv run` or, more permanently, `uv tool install <name>`.
 - 🛶 You don't need `tilt` if you don't want the fancy webpage with hot reload, just
   use `docker compose up` and look at the ports.
 - 🤖 For the AI examples, I've used OpenRouter, but you can use any AI provider
@@ -313,8 +310,8 @@ flowchart TB
 The UI is organized around a tree/breadcrumb structure:
 
 ::: {.incremental}
-- {{< fa globe >}} A site (each user has his/hers)
-  - {{< fa folder-open >}} A workspace, this is like folders and contain documents
+- {{< fa globe >}} A site (each user has their own)
+  - {{< fa folder-open >}} A workspace, which is like a folder that contains documents
     - {{< fa file-lines >}} Documents
       - {{< fa database >}} Database
       - {{< fa table-columns >}} Pages (tabs), views, widgets, 🐍 formulas
@@ -330,7 +327,7 @@ The UI is organized around a tree/breadcrumb structure:
 
 ---
 
-## Creating a calendar style application
+## Creating a calendar-style application
 
 {{< fa table >}} For this we will create a few columns in a table
 
@@ -359,7 +356,7 @@ The UI is organized around a tree/breadcrumb structure:
 ## Writing Python formula {.smaller}
 
 ::: {.fragment .bigger }
-Let's create a our first formula to compute how many days we have before the column `$Start`
+Let's create our first formula to compute how many days we have before the `$Start` column.
 :::
 
 
@@ -428,7 +425,7 @@ DATEDIF($Start, NOW(), 'D')
 
 ## Adding a second table
 
-Let's use a second ~~sheet~~ table, and ~~link~~ have a Foreign Key to our main table.
+Let's use a second ~~sheet~~ table and ~~link~~ it with a foreign key to our main table.
 
 
 ::: {.columns}
@@ -528,7 +525,7 @@ Attachments.lookupRecords(Event=$id)
 
 ::: {.fragment}
 
-Playing with the string repetitions
+Playing with string repetition
 ```python
 count = len(Attachments.lookupRecords(Event=$id))
 
@@ -611,8 +608,8 @@ From the author panel (right side on the `Table` tab, on the bottom)
 
 ::: {.smaller}
 
-Grist supports a diversity widgets, we will focus on a simple one
-called Calendar widget {{< fa calendar >}}
+Grist supports a diverse range of widgets. We will focus on a simple one
+called the Calendar widget {{< fa calendar >}}.
 
 
 ::: {.columns}
@@ -674,8 +671,8 @@ This configuration can be modified later in the creator panel.
 
 {{< fa calendar >}} {{< fa arrow-right >}} {{< fa table >}}
 
-The *binding* is bi-directional, meaning that creating a event in
-the calendar will automatically reflect in the original table.
+The *binding* is bidirectional, meaning that creating an event in
+the calendar will automatically be reflected in the original table.
 
 :::
 :::
@@ -690,8 +687,8 @@ the calendar will automatically reflect in the original table.
 
 ## Custom widgets
 
-- Customs CSS, HTML and JS can be stored in Grist itself.
-- If they are mean to be re-used in many documents, it's recommended to
+- Custom CSS, HTML, and JS can be stored in Grist itself.
+- If they are meant to be re-used in many documents, it's recommended to
   host these resources in a common place.
 - A coding AI agent/harness with good planning can create engaging UIs
 
@@ -746,7 +743,7 @@ the calendar will automatically reflect in the original table.
 
 ## Getting the account's API key
 
-To get the user's API key, this is in the [user settings](http://localhost:8484/account/developer){target=_blank}.
+To get the user's API key, you can find it in the [user settings](http://localhost:8484/account/developer){target=_blank}.
 
 ![](./img/api_key.png)
 
@@ -783,9 +780,9 @@ To get the user's API key, this is in the [user settings](http://localhost:8484/
 
 `pygrister` is a Python library and a CLI for grist [^1]
 
-It requires an URL and an API key, but more configuration can be passed.
+It requires a URL and an API key, but additional configuration can be passed.
 
-This in example `.env`[^2] we could use in our workshop repo:
+In this example, `.env`[^2] is the file we could use in our workshop repo:
 
 ```shell
 GRIST_API_KEY=<your user api key>
@@ -796,7 +793,7 @@ GRIST_SERVER_PROTOCOL=http
 GRIST_TEAM_SITE=docs
 ```
 
-[^1]: If you cloned the repo is will be available with `uv run` (or `uvx --from pygrister gry`)
+[^1]: If you cloned the repo, it will be available with `uv run` (or `uvx --from pygrister gry`).
 [^2]: This file needs to be created as the demo data lives in docker volumes
 
 ---
@@ -878,7 +875,7 @@ gry sql \
 ```
 
 ::: {.callout}
-We also have JSON output if your emojis are breaking the with calculation 🤭
+We also have JSON output if emojis are breaking the width calculation 🤭
 :::
 <!-- ---
 
@@ -989,10 +986,10 @@ GRIST_API_KEY=6a4e9e39ceb0161bbbd5971089e215647191db97 gry ws list
 
 ::: {.incremental}
 - We're going to use the second service from the stack, the `Marimo Notebook`
-- To access programatically to grist through `pygrister` we use `pygrister.api.GristApi()`
+- To access Grist programmatically through `pygrister`, we use `pygrister.api.GristApi()`
 - The `.env` is the same, but we can also look for other methods to provide the
   configuration.
-- The api always respond with `status_code`, `data`
+- The API always responds with `status_code` and `data`
 :::
 
 ---
@@ -1015,7 +1012,7 @@ GRIST_API_KEY=6a4e9e39ceb0161bbbd5971089e215647191db97 gry ws list
 ![](./img/marimo_sql.png)
 
 ::: {.callout}
-All the functions are SQLite dialect {{<fa feather >}}
+All the functions use the SQLite dialect {{<fa feather >}}
 :::
 
 
@@ -1048,11 +1045,11 @@ All the functions are SQLite dialect {{<fa feather >}}
 
 
 ::: {.fragment}
-[`mcp-server-grist`](https://github.com/nic01asFr/mcp-server-grist){target=blank_} is a MCP server written in Python. It allows AI applications like Claude, IBM Bob, Codex, pi, OpenClaw, Hermes, etc. to connect to the Grist API.
+[`mcp-server-grist`](https://github.com/nic01asFr/mcp-server-grist){target=blank_} is an MCP server written in Python. It allows AI applications like Claude, IBM Bob, Codex, pi, OpenClaw, Hermes, etc. to connect to the Grist API.
 
 ::: callout
 This is not the official MCP that lives in `https://<yoursite>.getgrist.com/mcp` for the
-commercial version, so authentication will use the same API KEYs instead of OAauth2.
+commercial version, so authentication will use the same API keys instead of OAuth2.
 :::
 
 :::
@@ -1093,7 +1090,7 @@ To run `mcp-server-grist` with `uv` we need these two environment variables:
 ```
 
 ::: callout
-👆 I'm going to use this in IBM Bob, but should work the same to any other harness
+👆 I'm going to use this in IBM Bob, but it should work the same way with any other harness
 :::
 
 ---
@@ -1107,7 +1104,7 @@ To run `mcp-server-grist` with `uv` we need these two environment variables:
 ## Using Hermes
 
 ::: {.incremental}
-- Hermes is a popular personal agent. Comes with memory by default.
+- Hermes is a popular personal agent that comes with memory by default.
 - Comes with some connectors/providers for some messaging platforms
   {{< fa brands whatsapp >}} {{< fa brands telegram >}} {{< fa brands discord >}}
 
@@ -1126,6 +1123,33 @@ To run `mcp-server-grist` with `uv` we need these two environment variables:
 Listing our MCP tools after configuration.
 :::
 :::
+
+---
+
+## Hermes (cont)
+
+When asked to query the same table, it reasons about the output.
+
+![](./img/hermes_2.png)
+
+---
+
+## Safer use of AI
+
+::: {.incremental}
+- Hermes will learn over time, this is a helpful feature.
+- LLMs can be *too smart* and try to achieve a goal in unintended ways, so
+  using a Grist service account key instead of a user key can reduce the things
+  it can break.
+- Additionally, we can make different types of copies (templates, structure-only copies) to
+  prevent Hermes from breaking things.
+:::
+
+
+---
+
+<!-- Meme -->
+![](./img/562a7a03c4143.jpeg)
 
 ---
 
