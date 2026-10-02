@@ -28,11 +28,11 @@
     "text": "Slide & Code\n\n\n\n\nhttps://d3f0.github.io/py-spreadsheets-2026/slides.html\n\n👈🏽 Slides\n👇🏽 🐳 &   run the workshop\ngh repo clone \\\n  D3f0/py-spreadsheets-2026 \\\n  && uv run tasks.py up"
   },
   {
-    "objectID": "slides.html#misc.",
-    "href": "slides.html#misc.",
+    "objectID": "slides.html#before-you-try-the-repo-code",
+    "href": "slides.html#before-you-try-the-repo-code",
     "title": "Teaching Some Python to Your Spreadsheets",
-    "section": "Misc.",
-    "text": "Misc.\n\n🐳 docker and its docker compose plugin are required to run the demo material\n🐍 Python tools/CLI/etc. should run with uv run or, more permanently, uv tool install &lt;name&gt;.\n🛶 You don’t need tilt if you don’t want the fancy webpage with hot reload, just use docker compose up and look at the ports.\n🤖 For the AI examples, I’ve used OpenRouter, but you can use any AI provider you’d like."
+    "section": "Before you try the repo code",
+    "text": "Before you try the repo code\n\n🐳 docker and its docker compose plugin are required to run the demo material\n🐍 Python tools/CLI/etc. should run with uv run or, more permanently, uv tool install &lt;name&gt;.\n🛶 You don’t need tilt if you don’t want the fancy webpage with hot reload, just use docker compose up and look at the ports.\n🤖 For the AI examples, I’ve used OpenRouter, but you can use any AI provider you’d like."
   },
   {
     "objectID": "slides.html#what-is-grist",
