@@ -83,13 +83,14 @@ lightbox:
 - Interacting with the database through MCP in an Agent
 -->
 
+::: {.incremental}
 - In recent times, owning your data has become more and more relevant.
 - Many people use web-based spreadsheets as an important part of their lives.
 - Python is one of the most popular programming languages, but using
   it in spreadsheets hasn't been really viable yet.
 - Creating very bespoke or 'hyperpersonalized' software can be done
   both for personal use and for multi-user environments.
-
+:::
 
 ---
 
