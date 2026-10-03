@@ -13,7 +13,7 @@
   content: "";
   pointer-events: none;
   transform-origin: center;
-  animation: pyconke-logo-spin 5s linear infinite;
+  /*animation: pyconke-logo-spin 5s linear infinite;*/
 }
 
 @keyframes pyconke-logo-spin {
