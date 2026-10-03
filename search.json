@@ -11,7 +11,7 @@
     "href": "slides.html#motivation",
     "title": "Teaching Some Python to Your Spreadsheets",
     "section": "Motivation",
-    "text": "Motivation\n\n\nIn recent times, owning your data has become more and more relevant.\nMany people use web-based spreadsheets as an important part of their lives.\nPython is one of the most popular programming languages, but using it in spreadsheets hasn’t been really viable yet.\nCreating very bespoke or ‘hyperpersonalized’ software can be done both for personal use and for multi-user environments."
+    "text": "Motivation\n\n\nIn recent times, owning your data has become more and more relevant.\nMany people use web-based spreadsheets as an important part of their lives.\nPython is one of the most popular programming languages, but using it in spreadsheets hasn’t been really viable yet.\nCreating very bespoke or ‘hyperpersonalized’1 software (either for self consumption or teams)\n\nIf you cloned the repo, it will be available with uv run (or uvx --from pygrister gry)."
   },
   {
     "objectID": "slides.html#agenda",
